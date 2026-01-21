@@ -1,5 +1,7 @@
 A colorful midi input visualizer
 
+Grab the latest release here => ![Releases](https://github.com/ien646/midi-viewer/releases/latest)
+
 ![2026-01-2117-21-22-ezgif com-optimize](https://github.com/user-attachments/assets/a28677ac-5eba-4b0b-93ee-ac72cebfffa1)
 
 
