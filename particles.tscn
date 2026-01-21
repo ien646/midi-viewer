@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://cg58j2vg07ucn"]
+
+[ext_resource type="Material" uid="uid://cljy8o8h8iei8" path="res://material_blocks.tres" id="1_xnif8"]
+
+[sub_resource type="Curve" id="Curve_xnif8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1nvrg"]
+curve = SubResource("Curve_xnif8")
+
+[sub_resource type="Curve" id="Curve_1nvrg"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.278691, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_i1ypt"]
+curve = SubResource("Curve_1nvrg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1nvrg"]
+particle_flag_rotate_y = true
+emission_shape_scale = Vector3(2, 2, 2)
+emission_shape = 3
+emission_box_extents = Vector3(1, 0.1, 1)
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 60.0
+angular_velocity_min = -900.0
+angular_velocity_max = 899.99994
+gravity = Vector3(0, -80, 0)
+tangential_accel_min = -25.000002
+tangential_accel_max = 24.999998
+scale_curve = SubResource("CurveTexture_i1ypt")
+alpha_curve = SubResource("CurveTexture_1nvrg")
+hue_variation_min = -1.0
+hue_variation_max = 0.99999994
+turbulence_enabled = true
+turbulence_noise_scale = 4.0
+turbulence_noise_speed_random = 0.1
+turbulence_initial_displacement_min = -0.09999851
+turbulence_initial_displacement_max = 0.10000149
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_i1ypt"]
+material = ExtResource("1_xnif8")
+size = Vector2(0.2, 0.2)
+orientation = 0
+
+[node name="Particles" type="GPUParticles3D"]
+emitting = false
+amount = 12
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_1nvrg")
+draw_pass_1 = SubResource("PlaneMesh_i1ypt")
