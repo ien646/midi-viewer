@@ -31,7 +31,6 @@ extends MultiMeshInstance3D
 # --
 
 @export_group("Midi")
-@export var midi_channel = 16;
 @export var midi_velocity_scale = 1.25;
 @export var midi_first_note = 21;
 @export var midi_last_note = 108;
@@ -61,7 +60,7 @@ var quit_requested = false;
 
 func _poll_midi_events_linux():
 	# aseqdump will write a line with every midi event received
-	var midi_process = OS.execute_with_pipe("aseqdump", ["-p", str(midi_channel)]);
+	var midi_process = OS.execute_with_pipe("aseqdump", ["-p", str(midi_port)]);
 	midi_poll_process_stdio = midi_process["stdio"];
 	midi_poll_process_pid = midi_process["pid"];
 	
@@ -206,3 +205,6 @@ func _process_commandline_args():
 			print("Using user provided background color: [", background_color, "]");
 		if(arg == "--noparticles"):
 			particles_disabled = true
+		if(arg.begins_with("--midiport")):
+			var port = int(arg.split("=")[1]);
+			midi_port = port;
