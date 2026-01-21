@@ -38,7 +38,7 @@ max_y_scale = 15
 gravity = 20
 material = ExtResource("3_gyfs4")
 color_gravity = 1.0
-min_color_value = 0.135
+min_color_value = 0.0
 gradient_hue_shift_speed = 0.0
 particles_instance = NodePath("../Particles")
 max_particle_systems = 48
@@ -55,7 +55,7 @@ max_y_scale = 10
 gravity = 10
 material = ExtResource("3_gyfs4")
 color_gravity = 1.0
-min_color_value = 0.135
+min_color_value = 0.0
 particles_instance = NodePath("../Particles")
 max_particle_systems = 48
 
@@ -70,7 +70,7 @@ row_separation = 1.0
 max_y_scale = 4
 material = ExtResource("3_gyfs4")
 color_gravity = 1.0
-min_color_value = 0.135
+min_color_value = 0.0
 particles_instance = NodePath("../Particles")
 max_particle_systems = 48
 
