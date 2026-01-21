@@ -3,4 +3,8 @@
 /android/
 *.exe
 *.pck
-*.x86-64
+*.x86_64
+*.tar.gz
+*.zip
+*.sh
+*.cfg
