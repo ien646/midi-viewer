@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cvt0cgi1d1uyo"]
+[gd_scene load_steps=11 format=3 uid="uid://cvt0cgi1d1uyo"]
 
 [ext_resource type="Script" uid="uid://cpn4jpqqo0gml" path="res://grid.gd" id="1_0f027"]
 [ext_resource type="Gradient" uid="uid://cayadgco6tonn" path="res://color_gradient.tres" id="2_2c62f"]
@@ -7,13 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cg58j2vg07ucn" path="res://particles.tscn" id="5_8mm7a"]
 [ext_resource type="Environment" uid="uid://dhxkm5byb35vx" path="res://Environment.tres" id="5_nfk4m"]
 [ext_resource type="Script" uid="uid://bs7srkf53a7cu" path="res://background.gd" id="7_nfk4m"]
-
-[sub_resource type="Environment" id="Environment_66tet"]
-background_mode = 1
-background_color = Color(0.04755766, 0.047557645, 0.047557645, 1)
-glow_enabled = true
-glow_bloom = 1.0
-glow_blend_mode = 0
+[ext_resource type="Script" uid="uid://cmyiii3xcn7l8" path="res://world_environment.gd" id="8_66tet"]
+[ext_resource type="Script" uid="uid://cu3mqqnd5yckh" path="res://main_camera.gd" id="9_7ycvg"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hq1ik"]
 viewport_path = NodePath("SubViewport")
@@ -27,35 +22,37 @@ oversampling = false
 size = Vector2i(1920, 1080)
 
 [node name="BlocksMultiMesh-Far" type="MultiMeshInstance3D" parent="SubViewport" node_paths=PackedStringArray("particles_instance")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -44.313)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -44)
 script = ExtResource("1_0f027")
+config_tag = "Far"
 block_mesh = ExtResource("2_hq1ik")
-gradient = ExtResource("2_2c62f")
 row_size = 88
 col_separation = 1.0
 row_separation = 1.0
 max_y_scale = 15
 gravity = 20
 material = ExtResource("3_gyfs4")
+gradient = ExtResource("2_2c62f")
 color_gravity = 1.0
-min_color_value = 0.0
+min_color_value = 0.1
 gradient_hue_shift_speed = 0.0
 particles_instance = NodePath("../Particles")
 max_particle_systems = 48
 
-[node name="BlocksMultiMesh-Med" type="MultiMeshInstance3D" parent="SubViewport" node_paths=PackedStringArray("particles_instance")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.429)
+[node name="BlocksMultiMesh-Middle" type="MultiMeshInstance3D" parent="SubViewport" node_paths=PackedStringArray("particles_instance")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.5)
 script = ExtResource("1_0f027")
+config_tag = "Middle"
 block_mesh = ExtResource("2_hq1ik")
-gradient = ExtResource("2_2c62f")
 row_size = 44
 col_separation = 1.0
 row_separation = 1.0
 max_y_scale = 10
 gravity = 10
 material = ExtResource("3_gyfs4")
+gradient = ExtResource("2_2c62f")
 color_gravity = 1.0
-min_color_value = 0.0
+min_color_value = 0.1
 particles_instance = NodePath("../Particles")
 max_particle_systems = 48
 
@@ -63,23 +60,17 @@ max_particle_systems = 48
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16.71)
 script = ExtResource("1_0f027")
 block_mesh = ExtResource("2_hq1ik")
-gradient = ExtResource("2_2c62f")
 row_size = 22
 col_separation = 1.0
 row_separation = 1.0
 max_y_scale = 4
 material = ExtResource("3_gyfs4")
+gradient = ExtResource("2_2c62f")
 color_gravity = 1.0
-min_color_value = 0.0
+min_color_value = 0.1
+gradient_hue_shift_speed = 0.3
 particles_instance = NodePath("../Particles")
 max_particle_systems = 48
-
-[node name="Camera3D" type="Camera3D" parent="SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 0.95051575, -0.31067643, 0, 0.31067643, 0.95051575, 0, 2.033, 32.44)
-environment = SubResource("Environment_66tet")
-current = true
-fov = 90.0
-size = 17.695
 
 [node name="Particles" parent="SubViewport" instance=ExtResource("5_8mm7a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04838085, 0, 0.08194113)
@@ -95,9 +86,12 @@ texture = SubResource("ViewportTexture_hq1ik")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("5_nfk4m")
+script = ExtResource("8_66tet")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9519425, 0.3062769, 0, -0.3062769, 0.9519425, 0, 22.155233, 51.879234)
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 0.9519425, 0.3062769, 0, -0.3062769, 0.9519425, 0, 22, 55)
 current = true
-fov = 54.8
+fov = 55.0
 size = 80.0
+script = ExtResource("9_7ycvg")
