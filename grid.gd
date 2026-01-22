@@ -61,6 +61,13 @@ var particles_pool_index = 0;
 
 var quit_requested = false;
 
+var alive_particle_systems = 0;
+signal alive_particle_systems_changed(int);
+
+func handle_particle_system_finished():
+	alive_particle_systems -= 1;
+	emit_signal("alive_particle_systems_changed", alive_particle_systems);
+
 func get_config_value(section: String, key: String) -> Variant:
 	return Config.get_tagged_value(section, key, config_tag);
 	
@@ -149,6 +156,7 @@ func _ready() -> void:
 	if (!particles_disabled):
 		for i in range(0, max_particle_systems):
 			var copy = particles_instance.duplicate();
+			copy.connect("finished", handle_particle_system_finished);
 			particles_pool.push_back(copy);
 			add_child(copy);
 	
@@ -166,7 +174,7 @@ func _ready() -> void:
 		positions.push_back(Vector3(x_pos, 0, y_pos));
 		rotations.push_back(Vector3.ZERO);
 		scales.push_back(Vector3(1, min_y_scale, 1));
-		colors.push_back(Color.BLACK);
+		colors.push_back(Color(0, 0, 0, 0));
 	
 	poll_midi_events();
 	
@@ -219,6 +227,8 @@ func _process_midi_event(note: int, vel: int) -> void:
 		particles_pool_index = particles_pool_index % max_particle_systems;
 		particles.position = positions[i] + Vector3(0, y_position*2, 0);
 		particles.emitting = true;
+		alive_particle_systems += 1;
+		emit_signal("alive_particle_systems_changed", alive_particle_systems);
 
 # Windows only
 func _input(event: InputEvent):
