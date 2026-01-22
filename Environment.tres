@@ -2,13 +2,12 @@
 
 [resource]
 background_mode = 1
-background_color = Color(0.09366939, 0.09366938, 0.09366938, 1)
 ambient_light_source = 1
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.01
 reflected_light_source = 1
 glow_enabled = true
-glow_bloom = 0.25
+glow_bloom = 0.2
 glow_blend_mode = 0
 fog_mode = 1
 fog_light_color = Color(0, 0, 0, 1)

@@ -25,3 +25,7 @@ window/stretch/aspect="ignore"
 [dotnet]
 
 project/assembly_name="midi-viewer"
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://cvt0cgi1d1uyo"]
+[gd_scene load_steps=17 format=3 uid="uid://cvt0cgi1d1uyo"]
 
 [ext_resource type="Script" uid="uid://cpn4jpqqo0gml" path="res://grid.gd" id="1_0f027"]
+[ext_resource type="Script" uid="uid://8op24g3mtwsf" path="res://sub_viewport.gd" id="1_671wp"]
 [ext_resource type="Gradient" uid="uid://cayadgco6tonn" path="res://color_gradient.tres" id="2_2c62f"]
 [ext_resource type="ArrayMesh" uid="uid://c1nj0vog8y2d3" path="res://block.obj" id="2_hq1ik"]
 [ext_resource type="Material" uid="uid://cljy8o8h8iei8" path="res://material_blocks.tres" id="3_gyfs4"]
@@ -9,8 +10,15 @@
 [ext_resource type="Script" uid="uid://bs7srkf53a7cu" path="res://background.gd" id="7_nfk4m"]
 [ext_resource type="Script" uid="uid://cmyiii3xcn7l8" path="res://world_environment.gd" id="8_66tet"]
 [ext_resource type="Script" uid="uid://cu3mqqnd5yckh" path="res://main_camera.gd" id="9_7ycvg"]
+[ext_resource type="Script" uid="uid://bchqlp2vhvvr" path="res://foreground.gd" id="9_mo76n"]
 [ext_resource type="Script" uid="uid://b0b8e3bwr7n0x" path="res://sub_viewport_input_delegator.gd" id="10_wr18j"]
 [ext_resource type="Script" uid="uid://cmwaamldk4nsd" path="res://controls.gd" id="11_qwutr"]
+
+[sub_resource type="World3D" id="World3D_mo76n"]
+environment = ExtResource("5_nfk4m")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mo76n"]
+blend_mode = 1
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hq1ik"]
 viewport_path = NodePath("SubViewport")
@@ -18,10 +26,12 @@ viewport_path = NodePath("SubViewport")
 [node name="Root" type="Node3D"]
 
 [node name="SubViewport" type="SubViewport" parent="."]
-transparent_bg = true
-use_hdr_2d = true
-oversampling = false
+own_world_3d = true
+world_3d = SubResource("World3D_mo76n")
+scaling_3d_mode = 3
 size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+script = ExtResource("1_671wp")
 
 [node name="BlocksMultiMesh-Far" type="MultiMeshInstance3D" parent="SubViewport" node_paths=PackedStringArray("particles_instance")]
 process_mode = 3
@@ -81,28 +91,35 @@ max_particle_systems = 48
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04838085, 0, 0.08194113)
 visible = false
 
-[node name="Background" type="Sprite3D" parent="."]
-transform = Transform3D(0.26075745, 0, 0, 0, 0.21830276, 0, 0, 0, 0, 960, 540, 0)
-script = ExtResource("7_nfk4m")
-
-[node name="Foreground" type="Sprite3D" parent="."]
-transform = Transform3D(1.01, 0, 0, 0, 1.01, 0, 0, 0, 0, 960, 540, 0)
-texture = SubResource("ViewportTexture_hq1ik")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("5_nfk4m")
-script = ExtResource("8_66tet")
-
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
 process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 0.9519425, 0.3062769, 0, -0.3062769, 0.9519425, 0, 22, 55)
+environment = ExtResource("5_nfk4m")
 current = true
 fov = 55.0
 size = 80.0
 script = ExtResource("9_7ycvg")
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0.35406289, 0.35406289, 0.3540628, 1)
+script = ExtResource("7_nfk4m")
+
+[node name="Foreground" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_mo76n")
+position = Vector2(960, 540)
+scale = Vector2(1.01, 1.01)
+texture = SubResource("ViewportTexture_hq1ik")
+script = ExtResource("9_mo76n")
 
 [node name="SubViewportInputDelegator" type="Node" parent="."]
 script = ExtResource("10_wr18j")
 
 [node name="Controls" type="Node" parent="."]
 script = ExtResource("11_qwutr")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("5_nfk4m")
+script = ExtResource("8_66tet")
