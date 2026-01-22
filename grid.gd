@@ -40,6 +40,7 @@ extends MultiMeshInstance3D
 @export var midi_port = 16;
 
 const CONFIG_FILE = "config.cfg";
+const SKIP_CONFIG = false;
 
 var positions: Array[Vector3] = [];
 var rotations: Array[Vector3] = [];
@@ -140,7 +141,8 @@ func poll_midi_events() -> void:
 		
 func _ready() -> void:	
 	set_process_input(true);
-	init_config_values();
+	if(!SKIP_CONFIG):
+		init_config_values();
 	
 	multimesh = MultiMesh.new();
 	multimesh.transform_format = MultiMesh.TRANSFORM_3D;
