@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://br1rf3qpmi3bg"
-path="res://.godot/imported/Good Old DOS.ttf-63ab2e0fc37fdaa7d1e8f0f9cfa49eb7.fontdata"
+path="res://.godot/imported/Good Old DOS.ttf-143d3faf5438aa6ef116b3f481c1887b.fontdata"
 
 [deps]
 
-source_file="res://Good Old DOS.ttf"
-dest_files=["res://.godot/imported/Good Old DOS.ttf-63ab2e0fc37fdaa7d1e8f0f9cfa49eb7.fontdata"]
+source_file="res://fonts/Good Old DOS.ttf"
+dest_files=["res://.godot/imported/Good Old DOS.ttf-143d3faf5438aa6ef116b3f481c1887b.fontdata"]
 
 [params]
 
