@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cvt0cgi1d1uyo"]
+[gd_scene load_steps=13 format=3 uid="uid://cvt0cgi1d1uyo"]
 
 [ext_resource type="Script" uid="uid://cpn4jpqqo0gml" path="res://grid.gd" id="1_0f027"]
 [ext_resource type="Gradient" uid="uid://cayadgco6tonn" path="res://color_gradient.tres" id="2_2c62f"]
@@ -9,11 +9,13 @@
 [ext_resource type="Script" uid="uid://bs7srkf53a7cu" path="res://background.gd" id="7_nfk4m"]
 [ext_resource type="Script" uid="uid://cmyiii3xcn7l8" path="res://world_environment.gd" id="8_66tet"]
 [ext_resource type="Script" uid="uid://cu3mqqnd5yckh" path="res://main_camera.gd" id="9_7ycvg"]
+[ext_resource type="Script" uid="uid://b0b8e3bwr7n0x" path="res://sub_viewport_input_delegator.gd" id="10_wr18j"]
+[ext_resource type="Script" uid="uid://cmwaamldk4nsd" path="res://controls.gd" id="11_qwutr"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hq1ik"]
 viewport_path = NodePath("SubViewport")
 
-[node name="Node3D" type="Node3D"]
+[node name="Root" type="Node3D"]
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
@@ -22,6 +24,7 @@ oversampling = false
 size = Vector2i(1920, 1080)
 
 [node name="BlocksMultiMesh-Far" type="MultiMeshInstance3D" parent="SubViewport" node_paths=PackedStringArray("particles_instance")]
+process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -44)
 script = ExtResource("1_0f027")
 config_tag = "Far"
@@ -40,6 +43,7 @@ particles_instance = NodePath("../Particles")
 max_particle_systems = 48
 
 [node name="BlocksMultiMesh-Middle" type="MultiMeshInstance3D" parent="SubViewport" node_paths=PackedStringArray("particles_instance")]
+process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.5)
 script = ExtResource("1_0f027")
 config_tag = "Middle"
@@ -57,6 +61,7 @@ particles_instance = NodePath("../Particles")
 max_particle_systems = 48
 
 [node name="BlocksMultiMesh-Near" type="MultiMeshInstance3D" parent="SubViewport" node_paths=PackedStringArray("particles_instance")]
+process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16.71)
 script = ExtResource("1_0f027")
 block_mesh = ExtResource("2_hq1ik")
@@ -95,3 +100,9 @@ current = true
 fov = 55.0
 size = 80.0
 script = ExtResource("9_7ycvg")
+
+[node name="SubViewportInputDelegator" type="Node" parent="."]
+script = ExtResource("10_wr18j")
+
+[node name="Controls" type="Node" parent="."]
+script = ExtResource("11_qwutr")

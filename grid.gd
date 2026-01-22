@@ -125,14 +125,14 @@ func linux_poll_midi_events():
 	linux_midi_poll_thread = Thread.new();
 	linux_midi_poll_thread.start(linux_midi_poll_thread_routine);
 
-func poll_midi_events() -> void:	
+func poll_midi_events() -> void:
 	if (OS.get_name() == "Linux"):
 		linux_poll_midi_events();
-		
 	elif (OS.get_name() == "Windows"):
-		OS.open_midi_inputs();
+		MIDI.init_midi();
 		
-func _ready() -> void:
+func _ready() -> void:	
+	set_process_input(true);
 	init_config_values();
 	
 	multimesh = MultiMesh.new();
@@ -218,9 +218,15 @@ func _process_midi_event(note: int, vel: int) -> void:
 		particles.emitting = true;
 
 # Windows only
-func _input(event: InputEvent) -> void:
+func _input(event: InputEvent):
 	if (event is InputEventMIDI):
-		_process_midi_event(event.pitch, event.velocity);
+		if(event.message == MIDI_MESSAGE_NOTE_ON):
+			_process_midi_event(event.pitch, event.velocity);
+		
+func _unhandled_input(event: InputEvent):
+	if (event is InputEventMIDI):
+		if(event.message == MIDI_MESSAGE_NOTE_ON):
+			_process_midi_event(event.pitch, event.velocity);
 
 func _print_midi_info(midi_event: InputEventMIDI):
 	if midi_event.message == MIDIMessage.MIDI_MESSAGE_NOTE_ON || midi_event.message == MIDIMessage.MIDI_MESSAGE_NOTE_OFF:
@@ -234,5 +240,6 @@ func _notification(what):
 			linux_midi_poll_thread.wait_to_finish();
 			OS.kill(linux_midi_poll_process_pid);
 			OS.execute("killall", ["aseqdump"]);
+			OS.close_midi_inputs();
 		
 		get_tree().quit();
