@@ -19,6 +19,9 @@ static var _DEFAULT_GRADIENT_COLORS: Array[Color] = [
 ];
 
 static func _init_config_default_values(config: ConfigFile):
+	config.set_value("Graphics", "FXAA", false);
+	config.set_value("Graphics", "SMAA", true);
+	
 	config.set_value("Background", "color", Color(0.02, 0.02, 0.02));
 	config.set_value("Background", "image", "");
 	config.set_value("Background", "image-darken", 0.5);
@@ -97,20 +100,19 @@ static func _init_config_default_values(config: ConfigFile):
 	config.set_value("Particles-Far", "velocity-curve-pow", 2);
 	config.set_value("Particles-Far", "pool-size", 50);
 	
+	config.set_value("Midi", "port", 16);
+	
 	config.set_value("Midi-Near", "velocity-scale", 1.0);
 	config.set_value("Midi-Near", "first-note", 21);
 	config.set_value("Midi-Near", "last-note", 108);
-	config.set_value("Midi-Near", "port", 16);
 	
 	config.set_value("Midi-Middle", "velocity-scale", 1.0);
 	config.set_value("Midi-Middle", "first-note", 21);
 	config.set_value("Midi-Middle", "last-note", 108);
-	config.set_value("Midi-Middle", "port", 16);
 	
 	config.set_value("Midi-Far", "velocity-scale", 1.0);
 	config.set_value("Midi-Far", "first-note", 21);
 	config.set_value("Midi-Far", "last-note", 108);
-	config.set_value("Midi-Far", "port", 16);
 
 static func _init_config():
 	_config_mutex.lock();
