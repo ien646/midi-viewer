@@ -129,7 +129,7 @@ func poll_midi_events() -> void:
 	if (OS.get_name() == "Linux"):
 		linux_poll_midi_events();
 	elif (OS.get_name() == "Windows"):
-		MIDI.init_midi();
+		Win32Midi.init_midi();
 		
 func _ready() -> void:	
 	set_process_input(true);
@@ -193,6 +193,9 @@ func _process(delta: float) -> void:
 	note_queue_mutex.unlock();
 
 func _process_midi_event(note: int, vel: int) -> void:
+	if(note < midi_first_note || note > midi_last_note):
+		return;
+		
 	var i = note - midi_first_note;
 	var v = vel * midi_velocity_scale;
 	

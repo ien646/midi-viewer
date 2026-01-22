@@ -1,4 +1,4 @@
-class_name MIDI
+class_name Win32Midi
 
 static var midi_initialized = false;
 
