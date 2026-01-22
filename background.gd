@@ -10,8 +10,8 @@ func _ready() -> void:
 		modulate = Color(1.0 - bgimage_darken, 1.0 - bgimage_darken, 1.0 - bgimage_darken);
 		
 func _process(_delta):
-	var vp_size = get_viewport_rect().size
-	var tex_size = texture.get_size();
-	
-	scale = vp_size / tex_size;
-	position = vp_size / 2;
+	if(texture != null):
+		var vp_size = get_viewport_rect().size
+		var tex_size = texture.get_size();	
+		scale = vp_size / tex_size;
+		position = vp_size / 2;
