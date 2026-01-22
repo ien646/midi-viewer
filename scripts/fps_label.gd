@@ -1,8 +1,12 @@
 extends Label
 
-func _process(delta: float) -> void:
-	var fps = int(1.0 / delta);
+var fps = 0;
+
+func _physics_process(_delta: float) -> void:	
 	text = "FPS: " + str(fps);
+
+func _process(delta: float) -> void:
+	fps = int(1.0 / delta);
 
 func _input(event: InputEvent):
 	if(event is InputEventKey):

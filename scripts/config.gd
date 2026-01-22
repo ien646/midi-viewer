@@ -83,19 +83,19 @@ static func _init_config_default_values(config: ConfigFile):
 	config.set_value("Particles-Near", "min", 2);
 	config.set_value("Particles-Near", "max", 15);
 	config.set_value("Particles-Near", "velocity-curve-pow", 2);
-	config.set_value("Particles-Near", "pool-size", 64);
+	config.set_value("Particles-Near", "pool-size", 50);
 	
 	config.set_value("Particles-Middle", "enabled", true);
 	config.set_value("Particles-Middle", "min", 2);
 	config.set_value("Particles-Middle", "max", 15);
 	config.set_value("Particles-Middle", "velocity-curve-pow", 2);
-	config.set_value("Particles-Middle", "pool-size", 64);
+	config.set_value("Particles-Middle", "pool-size", 50);
 	
 	config.set_value("Particles-Far", "enabled", true);
 	config.set_value("Particles-Far", "min", 2);
 	config.set_value("Particles-Far", "max", 15);
 	config.set_value("Particles-Far", "velocity-curve-pow", 2);
-	config.set_value("Particles-Far", "pool-size", 64);
+	config.set_value("Particles-Far", "pool-size", 50);
 	
 	config.set_value("Midi-Near", "velocity-scale", 1.0);
 	config.set_value("Midi-Near", "first-note", 21);

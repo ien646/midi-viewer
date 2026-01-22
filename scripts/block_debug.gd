@@ -13,7 +13,7 @@ func handle_alive_changed(count: int):
 func _ready() -> void:
 	node.connect("alive_particle_systems_changed", handle_alive_changed);
 
-func _process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if(visible):
 		clear();
 		push_font(font);

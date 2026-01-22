@@ -1,7 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://cvt0cgi1d1uyo"]
+[gd_scene load_steps=23 format=3 uid="uid://cvt0cgi1d1uyo"]
 
 [ext_resource type="Script" uid="uid://cpn4jpqqo0gml" path="res://scripts/grid.gd" id="1_0f027"]
-[ext_resource type="Script" uid="uid://8op24g3mtwsf" path="res://scripts/sub_viewport.gd" id="1_671wp"]
+[ext_resource type="Script" uid="uid://8op24g3mtwsf" path="res://scripts/subviewport.gd" id="1_671wp"]
 [ext_resource type="Gradient" uid="uid://cayadgco6tonn" path="res://gradient_templates/color_gradient.tres" id="2_2c62f"]
 [ext_resource type="ArrayMesh" uid="uid://c1nj0vog8y2d3" path="res://meshes/block.obj" id="2_hq1ik"]
 [ext_resource type="Material" uid="uid://cljy8o8h8iei8" path="res://materials/material_blocks.tres" id="3_gyfs4"]
@@ -11,11 +11,12 @@
 [ext_resource type="Script" uid="uid://cmyiii3xcn7l8" path="res://scripts/world_environment.gd" id="8_66tet"]
 [ext_resource type="Script" uid="uid://cu3mqqnd5yckh" path="res://scripts/main_camera.gd" id="9_7ycvg"]
 [ext_resource type="Script" uid="uid://bchqlp2vhvvr" path="res://scripts/foreground.gd" id="9_mo76n"]
-[ext_resource type="Script" uid="uid://b0b8e3bwr7n0x" path="res://scripts/sub_viewport_input_delegator.gd" id="10_wr18j"]
+[ext_resource type="Script" uid="uid://b0b8e3bwr7n0x" path="res://scripts/subviewport_input_delegator.gd" id="10_wr18j"]
 [ext_resource type="Script" uid="uid://cmwaamldk4nsd" path="res://scripts/controls.gd" id="11_qwutr"]
 [ext_resource type="FontFile" uid="uid://br1rf3qpmi3bg" path="res://fonts/Good Old DOS.ttf" id="14_2jcla"]
 [ext_resource type="Script" uid="uid://ciqqiwtnb1p3q" path="res://scripts/fps_label.gd" id="15_m35m6"]
 [ext_resource type="Script" uid="uid://bxdeg1i2t0ig3" path="res://scripts/block_debug.gd" id="16_m35m6"]
+[ext_resource type="Script" uid="uid://byueotyvmxtk0" path="res://scenes/midi.gd" id="17_6u1mn"]
 
 [sub_resource type="World3D" id="World3D_mo76n"]
 environment = ExtResource("5_nfk4m")
@@ -37,12 +38,11 @@ font = ExtResource("14_2jcla")
 [node name="SubViewport" type="SubViewport" parent="."]
 own_world_3d = true
 world_3d = SubResource("World3D_mo76n")
-scaling_3d_mode = 3
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 script = ExtResource("1_671wp")
 
-[node name="BlocksMultiMesh-Far" type="MultiMeshInstance3D" parent="SubViewport" node_paths=PackedStringArray("particles_instance")]
+[node name="BlocksMultiMesh-Far" type="MultiMeshInstance3D" parent="SubViewport" node_paths=PackedStringArray("particles_instance", "midi_control_node")]
 process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -44)
 script = ExtResource("1_0f027")
@@ -60,8 +60,9 @@ min_color_value = 0.1
 gradient_hue_shift_speed = 0.0
 particles_instance = NodePath("../Particles")
 max_particle_systems = 48
+midi_control_node = NodePath("../../Midi")
 
-[node name="BlocksMultiMesh-Middle" type="MultiMeshInstance3D" parent="SubViewport" node_paths=PackedStringArray("particles_instance")]
+[node name="BlocksMultiMesh-Middle" type="MultiMeshInstance3D" parent="SubViewport" node_paths=PackedStringArray("particles_instance", "midi_control_node")]
 process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.5)
 script = ExtResource("1_0f027")
@@ -78,8 +79,9 @@ color_gravity = 1.0
 min_color_value = 0.1
 particles_instance = NodePath("../Particles")
 max_particle_systems = 48
+midi_control_node = NodePath("../../Midi")
 
-[node name="BlocksMultiMesh-Near" type="MultiMeshInstance3D" parent="SubViewport" node_paths=PackedStringArray("particles_instance")]
+[node name="BlocksMultiMesh-Near" type="MultiMeshInstance3D" parent="SubViewport" node_paths=PackedStringArray("particles_instance", "midi_control_node")]
 process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16.71)
 script = ExtResource("1_0f027")
@@ -95,6 +97,7 @@ min_color_value = 0.1
 gradient_hue_shift_speed = 0.3
 particles_instance = NodePath("../Particles")
 max_particle_systems = 48
+midi_control_node = NodePath("../../Midi")
 
 [node name="Particles" parent="SubViewport" instance=ExtResource("5_8mm7a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04838085, 0, 0.08194113)
@@ -150,6 +153,7 @@ label_settings = SubResource("LabelSettings_u0ygc")
 script = ExtResource("15_m35m6")
 
 [node name="BlockDebug-Near" type="RichTextLabel" parent="Debug" node_paths=PackedStringArray("node")]
+texture_filter = 1
 layout_mode = 0
 offset_left = 3.0
 offset_top = 56.0
@@ -163,6 +167,7 @@ tag = "N"
 font = ExtResource("14_2jcla")
 
 [node name="BlockDebug-Middle" type="RichTextLabel" parent="Debug" node_paths=PackedStringArray("node")]
+texture_filter = 1
 layout_mode = 0
 offset_left = 3.0
 offset_top = 104.0
@@ -176,6 +181,7 @@ tag = "M"
 font = ExtResource("14_2jcla")
 
 [node name="BlockDebug-Far" type="RichTextLabel" parent="Debug" node_paths=PackedStringArray("node")]
+texture_filter = 1
 layout_mode = 0
 offset_left = 3.0
 offset_top = 152.0
@@ -196,3 +202,6 @@ offset_right = 41.0
 offset_bottom = 27.0
 text = "Press 'D' To Hide"
 label_settings = SubResource("LabelSettings_m35m6")
+
+[node name="Midi" type="Node" parent="."]
+script = ExtResource("17_6u1mn")
