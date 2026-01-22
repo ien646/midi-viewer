@@ -200,7 +200,7 @@ offset_left = 1.0
 offset_top = 4.0
 offset_right = 41.0
 offset_bottom = 27.0
-text = "Press 'D' To Hide"
+text = "Press 'D' to hide"
 label_settings = SubResource("LabelSettings_m35m6")
 
 [node name="Midi" type="Node" parent="."]

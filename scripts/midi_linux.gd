@@ -43,6 +43,7 @@ func init(midi_port: int):
 func push_events():
 	for n in note_queue:
 		emit_signal("note_on_received", n[0], n[1]);
+	note_queue.clear();
 	
 func shutdown():
 	quit_requested = true;
