@@ -1,5 +1,7 @@
 extends OptionButton
 
+@export var config_node: Node;
+
 const INDEX_NONE = 0;
 const INDEX_FXAA = 1;
 const INDEX_SMAA = 2;
@@ -7,14 +9,14 @@ const INDEX_SMAA = 2;
 func handle_item_selection(index: int):
 	match index:
 		0:
-			Config.set_value(Config.SECTION_GRAPHICS, Config.KEY_FXAA, false);
-			Config.set_value(Config.SECTION_GRAPHICS, Config.KEY_SMAA, false);
+			config_node.update_config_value(Config.SECTION_GRAPHICS, Config.KEY_FXAA, false);
+			config_node.update_config_value(Config.SECTION_GRAPHICS, Config.KEY_SMAA, false);
 		1:
-			Config.set_value(Config.SECTION_GRAPHICS, Config.KEY_FXAA, true);
-			Config.set_value(Config.SECTION_GRAPHICS, Config.KEY_SMAA, false);
+			config_node.update_config_value(Config.SECTION_GRAPHICS, Config.KEY_FXAA, true);
+			config_node.update_config_value(Config.SECTION_GRAPHICS, Config.KEY_SMAA, false);
 		2:
-			Config.set_value(Config.SECTION_GRAPHICS, Config.KEY_FXAA, false);
-			Config.set_value(Config.SECTION_GRAPHICS, Config.KEY_SMAA, true);
+			config_node.update_config_value(Config.SECTION_GRAPHICS, Config.KEY_FXAA, false);
+			config_node.update_config_value(Config.SECTION_GRAPHICS, Config.KEY_SMAA, true);
 
 func _ready():
 	var fxaa = Config.get_value(Config.SECTION_GRAPHICS, Config.KEY_FXAA);

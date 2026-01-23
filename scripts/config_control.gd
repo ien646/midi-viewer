@@ -8,3 +8,4 @@ func update_config_value(section: String, key: String, value: Variant):
 
 func update_config_value_tagged(section: String, tag: String, key: String, value: Variant):
 	Config.set_tagged_value(section, key, tag, value);
+	emit_signal("config_value_changed", section + Config.TAG_SEPARATOR + tag, key, value);

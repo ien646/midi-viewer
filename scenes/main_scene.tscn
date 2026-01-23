@@ -695,7 +695,7 @@ layout_mode = 2
 layout_mode = 2
 text = "Antialiasing"
 
-[node name="AntiAliasingCombo" type="OptionButton" parent="UI/Appearance"]
+[node name="AntiAliasingCombo" type="OptionButton" parent="UI/Appearance" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("23_u0fll")
 selected = 2
@@ -707,6 +707,7 @@ popup/item_1/id = 1
 popup/item_2/text = "SMAA"
 popup/item_2/id = 2
 script = ExtResource("24_6p3nn")
+config_node = NodePath("../../../ConfigControl")
 
 [node name="Generation-Behaviour" type="VBoxContainer" parent="UI"]
 layout_mode = 0
