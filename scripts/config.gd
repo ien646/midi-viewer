@@ -134,3 +134,8 @@ static func get_tagged_value(section: String, key: String, tag: String) -> Varia
 static func get_value(section: String, key: String) -> Variant:
 	_init_config();
 	return _config_file.get_value(section, key);
+
+static func set_value(section: String, key: String, value: Variant):
+	_init_config();
+	_config_file.set_value(section, key, value);
+	_config_file.save(CONFIG_FILE);

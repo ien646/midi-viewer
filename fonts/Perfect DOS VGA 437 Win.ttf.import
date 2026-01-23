@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://br1rf3qpmi3bg"
-path="res://.godot/imported/Good Old DOS.ttf-143d3faf5438aa6ef116b3f481c1887b.fontdata"
+uid="uid://thgiu4bfjbj8"
+path="res://.godot/imported/Perfect DOS VGA 437 Win.ttf-7268c4643f3da693774fc83a22e45238.fontdata"
 
 [deps]
 
-source_file="res://fonts/Good Old DOS.ttf"
-dest_files=["res://.godot/imported/Good Old DOS.ttf-143d3faf5438aa6ef116b3f481c1887b.fontdata"]
+source_file="res://fonts/Perfect DOS VGA 437 Win.ttf"
+dest_files=["res://.godot/imported/Perfect DOS VGA 437 Win.ttf-7268c4643f3da693774fc83a22e45238.fontdata"]
 
 [params]
 

@@ -31,7 +31,5 @@ func _physics_process(delta: float) -> void:
 	
 func _input(event: InputEvent):
 	if(event is InputEventKey):
-		if(event.is_pressed() && event.as_text_keycode() == "D"):
-			visible = !visible;
 		if(event.is_pressed() && event.as_text_keycode() == "G"):
 			gradient_view = !gradient_view;

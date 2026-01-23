@@ -1,7 +1,7 @@
 extends MultiMeshInstance3D
 
-# Near / Middle / Far
 @export var config_tag = "Near";
+@export var config_node: Node;
 
 @export_group("Generation")
 @export var block_mesh: Mesh;
@@ -101,10 +101,18 @@ func init_config_values():
 	max_particles_hit = get_config_value("Particles", "max") as int;
 	particle_count_curve = get_config_value("Particles", "velocity-curve-pow") as float;
 	max_particle_systems = get_config_value("Particles", "pool-size") as int
+	
+func handle_config_value_changed(section: String, key: String, value: Variant):
+	if(section.begins_with("Block-Generation") && section.ends_with(config_tag)):
+		match key:
+			"enabled":
+				visible = value as bool;
 		
 func _ready() -> void:
 	if(!SKIP_CONFIG):
 		init_config_values();
+		
+	config_node.connect("config_value_changed", handle_config_value_changed);
 		
 	if(midi_control_node == null):
 		print("No midi control node assigned to: ", name);
