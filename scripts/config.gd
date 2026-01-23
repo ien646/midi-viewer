@@ -40,6 +40,7 @@ static func _init_config_default_values(config: ConfigFile):
 	config.set_value("Gradient-Far", "colors", _DEFAULT_GRADIENT_COLORS);
 	config.set_value("Gradient-Far", "interpolate", true);
 	
+	config.set_value("Block-Generation-Near", "enabled", true);
 	config.set_value("Block-Generation-Near", "position", Vector3(0, 0, 16.7));
 	config.set_value("Block-Generation-Near", "column-separation", 1.0);
 	config.set_value("Block-Generation-Near", "row-separation", 1.0);
@@ -47,6 +48,7 @@ static func _init_config_default_values(config: ConfigFile):
 	config.set_value("Block-Generation-Near", "min-y-scale", 0.1);
 	config.set_value("Block-Generation-Near", "max-y-scale", 4);
 	
+	config.set_value("Block-Generation-Middle", "enabled", true);
 	config.set_value("Block-Generation-Middle", "position", Vector3(0, 0, -5.5));
 	config.set_value("Block-Generation-Middle", "column-separation", 1.0);
 	config.set_value("Block-Generation-Middle", "row-separation", 1.0);
@@ -54,6 +56,7 @@ static func _init_config_default_values(config: ConfigFile):
 	config.set_value("Block-Generation-Middle", "min-y-scale", 0.1);
 	config.set_value("Block-Generation-Middle", "max-y-scale", 10);
 		
+	config.set_value("Block-Generation-Far", "enabled", true);
 	config.set_value("Block-Generation-Far", "position", Vector3(0, 0, -44));
 	config.set_value("Block-Generation-Far", "column-separation", 1.0);
 	config.set_value("Block-Generation-Far", "row-separation", 1.0);

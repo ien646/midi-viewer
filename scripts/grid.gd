@@ -76,6 +76,9 @@ func init_config_values():
 	self.gradient = imported_gradient;
 	
 	# -- Block Generation --
+	if(!get_config_value("Block-Generation", "enabled") as bool):
+		visible = false;
+		
 	position = get_config_value("Block-Generation", "position") as Vector3;
 	col_separation = get_config_value("Block-Generation", "column-separation") as float;
 	row_separation = get_config_value("Block-Generation", "row-separation") as float;
