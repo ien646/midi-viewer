@@ -2,6 +2,7 @@ class_name Config extends RefCounted
 
 static var _config_mutex: Mutex = Mutex.new();
 static var _config_file: ConfigFile = null;
+static var _batching = false;
 
 const CONFIG_FILE = "config.cfg"
 
@@ -18,104 +19,163 @@ static var _DEFAULT_GRADIENT_COLORS: Array[Color] = [
 	Color.from_rgba8(200, 0, 145)
 ];
 
+const SECTION_BACKGROUND = "Background";
+const SECTION_CAMERA = "Camera";
+const SECTION_GRADIENT = "Gradient";
+const SECTION_GRAPHICS = "Graphics";
+const SECTION_BLOCK_APPEARANCE = "Block-Appearance";
+const SECTION_BLOCK_BEHAVIOUR = "Block-Behaviour";
+const SECTION_BLOCK_GENERATION = "Block-Generation";
+const SECTION_PARTICLES = "Particles";
+const SECTION_MIDI = "Midi";
+
+const KEY_COLOR = "color";
+const KEY_IMAGE = "image";
+const KEY_IMAGE_DARKEN = "image-darken";
+const KEY_FXAA = "FXAA";
+const KEY_SMAA = "SMAA";
+const KEY_OFFSETS = "offsets";
+const KEY_COLORS = "colors";
+const KEY_INTERPOLATE = "interpolate";
+const KEY_POSITION = "position";
+const KEY_ENABLED = "enabled";
+const KEY_COLUMN_SEPARATION = "column-separation";
+const KEY_ROW_SEPARATION = "row-separation";
+const KEY_NOTES_PER_ROW = "notes-per-row";
+const KEY_MIN_Y_SCALE = "min-y-scale";
+const KEY_MAX_Y_SCALE = "max-y-scale";
+const KEY_COLOR_GRAVITY = "color-gravity";
+const KEY_MIN_COLOR_VALUE = "min-color-value";
+const KEY_GRADIENT_HUE_SHIFT_SPEED = "gradient-hue-shift-speed";
+const KEY_GRAVITY = "gravity";
+const KEY_ROTATION_SPEED = "rotation-speed";
+const KEY_MIN = "min";
+const KEY_MAX = "max";
+const KEY_VELOCITY_CURVE_POW = "velocity-curve-pow";
+const KEY_POOL_SIZE = "pool-size";
+const KEY_PORT = "port";
+const KEY_VELOCITY_SCALE = "velocity-scale";
+const KEY_FIRST_NOTE = "first-note";
+const KEY_LAST_NOTE = "last-note";
+
+const TAG_NEAR = "Near";
+const TAG_MIDDLE = "Middle";
+const TAG_FAR = "Far";
+
+const TAG_SEPARATOR = "-";
+
+static func tagged(k:String, tag:String):
+	return k + TAG_SEPARATOR + tag;
+
 static func _init_config_default_values(config: ConfigFile):
-	config.set_value("Graphics", "FXAA", false);
-	config.set_value("Graphics", "SMAA", true);
+	begin_batch();
+	config.set_value(SECTION_GRAPHICS, KEY_FXAA, false);
+	config.set_value(SECTION_GRAPHICS, KEY_SMAA, true);
 	
-	config.set_value("Background", "color", Color(0.02, 0.02, 0.02));
-	config.set_value("Background", "image", "");
-	config.set_value("Background", "image-darken", 0.5);
+	config.set_value(SECTION_BACKGROUND, KEY_COLOR, Color(0.02, 0.02, 0.02));
+	config.set_value(SECTION_BACKGROUND, KEY_IMAGE, "");
+	config.set_value(SECTION_BACKGROUND, KEY_IMAGE_DARKEN, 0.5);
 	
-	config.set_value("Camera", "position", Vector3(0, 22, 55));
+	config.set_value(SECTION_CAMERA, KEY_POSITION, Vector3(0, 22, 55));
 	
-	config.set_value("Gradient-Near", "offsets", _DEFAULT_GRADIENT_OFFSETS);
-	config.set_value("Gradient-Near", "colors", _DEFAULT_GRADIENT_COLORS);
-	config.set_value("Gradient-Near", "interpolate", true);
+	config.set_value(tagged(SECTION_GRADIENT, TAG_NEAR), KEY_OFFSETS, _DEFAULT_GRADIENT_OFFSETS);
+	config.set_value(tagged(SECTION_GRADIENT, TAG_NEAR), KEY_COLORS, _DEFAULT_GRADIENT_COLORS);
+	config.set_value(tagged(SECTION_GRADIENT, TAG_NEAR), KEY_INTERPOLATE, true);
 	
-	config.set_value("Gradient-Middle", "offsets", _DEFAULT_GRADIENT_OFFSETS);
-	config.set_value("Gradient-Middle", "colors", _DEFAULT_GRADIENT_COLORS);
-	config.set_value("Gradient-Middle", "interpolate", true);
+	config.set_value(tagged(SECTION_GRADIENT, TAG_MIDDLE), KEY_OFFSETS, _DEFAULT_GRADIENT_OFFSETS);
+	config.set_value(tagged(SECTION_GRADIENT, TAG_MIDDLE), KEY_COLORS, _DEFAULT_GRADIENT_COLORS);
+	config.set_value(tagged(SECTION_GRADIENT, TAG_MIDDLE), KEY_INTERPOLATE, true);
 	
-	config.set_value("Gradient-Far", "offsets", _DEFAULT_GRADIENT_OFFSETS);
-	config.set_value("Gradient-Far", "colors", _DEFAULT_GRADIENT_COLORS);
-	config.set_value("Gradient-Far", "interpolate", true);
+	config.set_value(tagged(SECTION_GRADIENT, TAG_FAR), KEY_OFFSETS, _DEFAULT_GRADIENT_OFFSETS);
+	config.set_value(tagged(SECTION_GRADIENT, TAG_FAR), KEY_COLORS, _DEFAULT_GRADIENT_COLORS);
+	config.set_value(tagged(SECTION_GRADIENT, TAG_FAR), KEY_INTERPOLATE, true);
 	
-	config.set_value("Block-Generation-Near", "enabled", true);
-	config.set_value("Block-Generation-Near", "position", Vector3(0, 0, 16.7));
-	config.set_value("Block-Generation-Near", "column-separation", 1.0);
-	config.set_value("Block-Generation-Near", "row-separation", 1.0);
-	config.set_value("Block-Generation-Near", "notes-per-row", 22);
-	config.set_value("Block-Generation-Near", "min-y-scale", 0.1);
-	config.set_value("Block-Generation-Near", "max-y-scale", 4);
+	config.set_value(tagged(SECTION_BLOCK_GENERATION, TAG_NEAR), KEY_ENABLED, true);
+	config.set_value(tagged(SECTION_BLOCK_GENERATION, TAG_NEAR), KEY_POSITION, Vector3(0, 0, 16.7));
+	config.set_value(tagged(SECTION_BLOCK_GENERATION, TAG_NEAR), KEY_COLUMN_SEPARATION, 1.0);
+	config.set_value(tagged(SECTION_BLOCK_GENERATION, TAG_NEAR), KEY_ROW_SEPARATION, 1.0);
+	config.set_value(tagged(SECTION_BLOCK_GENERATION, TAG_NEAR), KEY_NOTES_PER_ROW, 22);
+	config.set_value(tagged(SECTION_BLOCK_GENERATION, TAG_NEAR), KEY_MIN_Y_SCALE, 0.1);
+	config.set_value(tagged(SECTION_BLOCK_GENERATION, TAG_NEAR), KEY_MAX_Y_SCALE, 4);
 	
-	config.set_value("Block-Generation-Middle", "enabled", true);
-	config.set_value("Block-Generation-Middle", "position", Vector3(0, 0, -5.5));
-	config.set_value("Block-Generation-Middle", "column-separation", 1.0);
-	config.set_value("Block-Generation-Middle", "row-separation", 1.0);
-	config.set_value("Block-Generation-Middle", "notes-per-row", 44);
-	config.set_value("Block-Generation-Middle", "min-y-scale", 0.1);
-	config.set_value("Block-Generation-Middle", "max-y-scale", 10);
+	config.set_value(tagged(SECTION_BLOCK_GENERATION, TAG_MIDDLE), KEY_ENABLED, true);
+	config.set_value(tagged(SECTION_BLOCK_GENERATION, TAG_MIDDLE), KEY_POSITION, Vector3(0, 0, -5.5));
+	config.set_value(tagged(SECTION_BLOCK_GENERATION, TAG_MIDDLE), KEY_COLUMN_SEPARATION, 1.0);
+	config.set_value(tagged(SECTION_BLOCK_GENERATION, TAG_MIDDLE), KEY_ROW_SEPARATION, 1.0);
+	config.set_value(tagged(SECTION_BLOCK_GENERATION, TAG_MIDDLE), KEY_NOTES_PER_ROW, 44);
+	config.set_value(tagged(SECTION_BLOCK_GENERATION, TAG_MIDDLE), KEY_MIN_Y_SCALE, 0.1);
+	config.set_value(tagged(SECTION_BLOCK_GENERATION, TAG_MIDDLE), KEY_MAX_Y_SCALE, 10);
 		
-	config.set_value("Block-Generation-Far", "enabled", true);
-	config.set_value("Block-Generation-Far", "position", Vector3(0, 0, -44));
-	config.set_value("Block-Generation-Far", "column-separation", 1.0);
-	config.set_value("Block-Generation-Far", "row-separation", 1.0);
-	config.set_value("Block-Generation-Far", "notes-per-row", 88);
-	config.set_value("Block-Generation-Far", "min-y-scale", 0.1);
-	config.set_value("Block-Generation-Far", "max-y-scale", 15);
+	config.set_value(tagged(SECTION_BLOCK_GENERATION, TAG_FAR), KEY_ENABLED, true);
+	config.set_value(tagged(SECTION_BLOCK_GENERATION, TAG_FAR), KEY_POSITION, Vector3(0, 0, -44));
+	config.set_value(tagged(SECTION_BLOCK_GENERATION, TAG_FAR), KEY_COLUMN_SEPARATION, 1.0);
+	config.set_value(tagged(SECTION_BLOCK_GENERATION, TAG_FAR), KEY_ROW_SEPARATION, 1.0);
+	config.set_value(tagged(SECTION_BLOCK_GENERATION, TAG_FAR), KEY_NOTES_PER_ROW, 88);
+	config.set_value(tagged(SECTION_BLOCK_GENERATION, TAG_FAR), KEY_MIN_Y_SCALE, 0.1);
+	config.set_value(tagged(SECTION_BLOCK_GENERATION, TAG_FAR), KEY_MAX_Y_SCALE, 15);
 	
-	config.set_value("Block-Appearance-Near", "color-gravity", 1.0);
-	config.set_value("Block-Appearance-Near", "min-color-value", 0.0);
-	config.set_value("Block-Appearance-Near", "gradient-hue-shift-speed", 0.3);
+	config.set_value(tagged(SECTION_BLOCK_APPEARANCE, TAG_NEAR), KEY_COLOR_GRAVITY, 1.0);
+	config.set_value(tagged(SECTION_BLOCK_APPEARANCE, TAG_NEAR), KEY_MIN_COLOR_VALUE, 0.0);
+	config.set_value(tagged(SECTION_BLOCK_APPEARANCE, TAG_NEAR), KEY_GRADIENT_HUE_SHIFT_SPEED, 0.3);
 	
-	config.set_value("Block-Appearance-Middle", "color-gravity", 1.0);
-	config.set_value("Block-Appearance-Middle", "min-color-value", 0.0);
-	config.set_value("Block-Appearance-Middle", "gradient-hue-shift-speed", 0.2);
+	config.set_value(tagged(SECTION_BLOCK_APPEARANCE, TAG_MIDDLE), KEY_COLOR_GRAVITY, 1.0);
+	config.set_value(tagged(SECTION_BLOCK_APPEARANCE, TAG_MIDDLE), KEY_MIN_COLOR_VALUE, 0.0);
+	config.set_value(tagged(SECTION_BLOCK_APPEARANCE, TAG_MIDDLE), KEY_GRADIENT_HUE_SHIFT_SPEED, 0.2);
 	
-	config.set_value("Block-Appearance-Far", "color-gravity", 1.0);
-	config.set_value("Block-Appearance-Far", "min-color-value", 0.0);
-	config.set_value("Block-Appearance-Far", "gradient-hue-shift-speed", 0.0);
+	config.set_value(tagged(SECTION_BLOCK_APPEARANCE, TAG_FAR), KEY_COLOR_GRAVITY, 1.0);
+	config.set_value(tagged(SECTION_BLOCK_APPEARANCE, TAG_FAR), KEY_MIN_COLOR_VALUE, 0.0);
+	config.set_value(tagged(SECTION_BLOCK_APPEARANCE, TAG_FAR), KEY_GRADIENT_HUE_SHIFT_SPEED, 0.0);
 	
-	config.set_value("Block-Behaviour-Near", "gravity", 5);
-	config.set_value("Block-Behaviour-Near", "rotation-speed", 0);
+	config.set_value(tagged(SECTION_BLOCK_BEHAVIOUR, TAG_NEAR), KEY_GRAVITY, 5);
+	config.set_value(tagged(SECTION_BLOCK_BEHAVIOUR, TAG_NEAR), KEY_ROTATION_SPEED, 0);
 	
-	config.set_value("Block-Behaviour-Middle", "gravity", 10);
-	config.set_value("Block-Behaviour-Middle", "rotation-speed", 0);
+	config.set_value(tagged(SECTION_BLOCK_BEHAVIOUR, TAG_MIDDLE), KEY_GRAVITY, 10);
+	config.set_value(tagged(SECTION_BLOCK_BEHAVIOUR, TAG_MIDDLE), KEY_ROTATION_SPEED, 0);
 	
-	config.set_value("Block-Behaviour-Far", "gravity", 20);
-	config.set_value("Block-Behaviour-Far", "rotation-speed", 0);
+	config.set_value(tagged(SECTION_BLOCK_BEHAVIOUR, TAG_FAR), KEY_GRAVITY, 20);
+	config.set_value(tagged(SECTION_BLOCK_BEHAVIOUR, TAG_FAR), KEY_ROTATION_SPEED, 0);
 	
-	config.set_value("Particles-Near", "enabled", true);
-	config.set_value("Particles-Near", "min", 2);
-	config.set_value("Particles-Near", "max", 15);
-	config.set_value("Particles-Near", "velocity-curve-pow", 2);
-	config.set_value("Particles-Near", "pool-size", 50);
+	config.set_value(tagged(SECTION_PARTICLES, TAG_NEAR), KEY_ENABLED, true);
+	config.set_value(tagged(SECTION_PARTICLES, TAG_NEAR), KEY_MIN, 2);
+	config.set_value(tagged(SECTION_PARTICLES, TAG_NEAR), KEY_MAX, 15);
+	config.set_value(tagged(SECTION_PARTICLES, TAG_NEAR), KEY_VELOCITY_CURVE_POW, 2);
+	config.set_value(tagged(SECTION_PARTICLES, TAG_NEAR), KEY_POOL_SIZE, 50);
 	
-	config.set_value("Particles-Middle", "enabled", true);
-	config.set_value("Particles-Middle", "min", 2);
-	config.set_value("Particles-Middle", "max", 15);
-	config.set_value("Particles-Middle", "velocity-curve-pow", 2);
-	config.set_value("Particles-Middle", "pool-size", 50);
+	config.set_value(tagged(SECTION_PARTICLES, TAG_MIDDLE), KEY_ENABLED, true);
+	config.set_value(tagged(SECTION_PARTICLES, TAG_MIDDLE), KEY_MIN, 2);
+	config.set_value(tagged(SECTION_PARTICLES, TAG_MIDDLE), KEY_MAX, 15);
+	config.set_value(tagged(SECTION_PARTICLES, TAG_MIDDLE), KEY_VELOCITY_CURVE_POW, 2);
+	config.set_value(tagged(SECTION_PARTICLES, TAG_MIDDLE), KEY_POOL_SIZE, 50);
 	
-	config.set_value("Particles-Far", "enabled", true);
-	config.set_value("Particles-Far", "min", 2);
-	config.set_value("Particles-Far", "max", 15);
-	config.set_value("Particles-Far", "velocity-curve-pow", 2);
-	config.set_value("Particles-Far", "pool-size", 50);
+	config.set_value(tagged(SECTION_PARTICLES, TAG_FAR), KEY_ENABLED, true);
+	config.set_value(tagged(SECTION_PARTICLES, TAG_FAR), KEY_MIN, 2);
+	config.set_value(tagged(SECTION_PARTICLES, TAG_FAR), KEY_MAX, 15);
+	config.set_value(tagged(SECTION_PARTICLES, TAG_FAR), KEY_VELOCITY_CURVE_POW, 2);
+	config.set_value(tagged(SECTION_PARTICLES, TAG_FAR), KEY_POOL_SIZE, 50);
 	
-	config.set_value("Midi", "port", 16);
+	config.set_value(SECTION_MIDI, KEY_PORT, 16);
 	
-	config.set_value("Midi-Near", "velocity-scale", 1.0);
-	config.set_value("Midi-Near", "first-note", 21);
-	config.set_value("Midi-Near", "last-note", 108);
+	config.set_value(tagged(SECTION_MIDI, TAG_NEAR), KEY_VELOCITY_SCALE, 1.0);
+	config.set_value(tagged(SECTION_MIDI, TAG_NEAR), KEY_FIRST_NOTE, 21);
+	config.set_value(tagged(SECTION_MIDI, TAG_NEAR), KEY_LAST_NOTE, 108);
 	
-	config.set_value("Midi-Middle", "velocity-scale", 1.0);
-	config.set_value("Midi-Middle", "first-note", 21);
-	config.set_value("Midi-Middle", "last-note", 108);
+	config.set_value(tagged(SECTION_MIDI, TAG_MIDDLE), KEY_VELOCITY_SCALE, 1.0);
+	config.set_value(tagged(SECTION_MIDI, TAG_MIDDLE), KEY_FIRST_NOTE, 21);
+	config.set_value(tagged(SECTION_MIDI, TAG_MIDDLE), KEY_LAST_NOTE, 108);
 	
-	config.set_value("Midi-Far", "velocity-scale", 1.0);
-	config.set_value("Midi-Far", "first-note", 21);
-	config.set_value("Midi-Far", "last-note", 108);
+	config.set_value(tagged(SECTION_MIDI, TAG_FAR), KEY_VELOCITY_SCALE, 1.0);
+	config.set_value(tagged(SECTION_MIDI, TAG_FAR), KEY_FIRST_NOTE, 21);
+	config.set_value(tagged(SECTION_MIDI, TAG_FAR), KEY_LAST_NOTE, 108);
+	
+	end_batch();
+
+static func begin_batch():
+	assert(!_batching);
+	_batching = true;
+
+static func end_batch():
+	_batching = false;
+	_config_file.save(CONFIG_FILE);
 
 static func _init_config():
 	_config_mutex.lock();
@@ -138,4 +198,9 @@ static func get_value(section: String, key: String) -> Variant:
 static func set_value(section: String, key: String, value: Variant):
 	_init_config();
 	_config_file.set_value(section, key, value);
+	_config_file.save(CONFIG_FILE);
+
+static func set_tagged_value(section: String, key: String, tag: String, value: Variant):
+	_init_config();
+	_config_file.set_value(section + "-" + tag, key, value);
 	_config_file.save(CONFIG_FILE);

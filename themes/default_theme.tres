@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cfbptf6c0qfbj"]
+
+[ext_resource type="FontFile" uid="uid://thgiu4bfjbj8" path="res://fonts/Perfect DOS VGA 437 Win.ttf" id="1_mlkpy"]
+
+[resource]
+default_font = ExtResource("1_mlkpy")

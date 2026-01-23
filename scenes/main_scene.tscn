@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://cvt0cgi1d1uyo"]
+[gd_scene load_steps=38 format=4 uid="uid://cvt0cgi1d1uyo"]
 
 [ext_resource type="Script" uid="uid://cpn4jpqqo0gml" path="res://scripts/grid.gd" id="1_0f027"]
 [ext_resource type="Script" uid="uid://8op24g3mtwsf" path="res://scripts/subviewport.gd" id="1_671wp"]
@@ -18,14 +18,17 @@
 [ext_resource type="Script" uid="uid://bxdeg1i2t0ig3" path="res://scripts/block_debug.gd" id="16_m35m6"]
 [ext_resource type="Script" uid="uid://byueotyvmxtk0" path="res://scripts/midi.gd" id="17_6u1mn"]
 [ext_resource type="Script" uid="uid://xrx3jjbnoptb" path="res://scripts/ui.gd" id="18_58gk3"]
+[ext_resource type="Theme" uid="uid://cfbptf6c0qfbj" path="res://themes/default_theme.tres" id="18_k67gn"]
 [ext_resource type="LabelSettings" uid="uid://boximwnph3wgp" path="res://fonts/ui_label_settings.tres" id="19_7nt27"]
-[ext_resource type="Script" uid="uid://b0es23ep2i3v6" path="res://scripts/ui/check_button_vis_near.gd" id="19_xdqt8"]
-[ext_resource type="Script" uid="uid://c5ddbygkx2s1s" path="res://scripts/ui/check_button_vis_middle.gd" id="20_adb74"]
-[ext_resource type="Script" uid="uid://brj3tgjwptx7i" path="res://scripts/ui/check_button_vis_far.gd" id="21_58gk3"]
+[ext_resource type="Script" uid="uid://brj3tgjwptx7i" path="res://scripts/ui/check_button_vis.gd" id="21_58gk3"]
 [ext_resource type="Script" uid="uid://btpsx7oi6vdcg" path="res://scripts/config_control.gd" id="22_adb74"]
 [ext_resource type="FontFile" uid="uid://thgiu4bfjbj8" path="res://fonts/Perfect DOS VGA 437 Win.ttf" id="23_u0fll"]
 [ext_resource type="Script" uid="uid://dvv7k4xq17o0i" path="res://scripts/ui/anti_aliasing_combo.gd" id="24_6p3nn"]
+[ext_resource type="Script" uid="uid://cyftyoqhjg86u" path="res://scripts/ui/particles_check.gd" id="24_k67gn"]
 [ext_resource type="Script" uid="uid://di2c4whrcw0ky" path="res://scripts/hint.gd" id="24_to7gp"]
+[ext_resource type="Script" uid="uid://dno5v84ewkrl2" path="res://scripts/ui/group_setting_spinbox.gd" id="25_pgk25"]
+[ext_resource type="Texture2D" uid="uid://buxp70d6n2lmt" path="res://groups.png" id="27_4bgka"]
+[ext_resource type="Script" uid="uid://xt2lgjewdgcv" path="res://scripts/ui/midi_port.gd" id="28_02d50"]
 
 [sub_resource type="World3D" id="World3D_mo76n"]
 environment = ExtResource("5_nfk4m")
@@ -260,12 +263,13 @@ font = SubResource("FontFile_k6f3i")
 
 [node name="Root" type="Node3D"]
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="." node_paths=PackedStringArray("config_node")]
 own_world_3d = true
 world_3d = SubResource("World3D_mo76n")
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 script = ExtResource("1_671wp")
+config_node = NodePath("../ConfigControl")
 
 [node name="BlocksMultiMesh-Far" type="MultiMeshInstance3D" parent="SubViewport" node_paths=PackedStringArray("config_node", "particles_instance", "midi_control_node")]
 process_mode = 3
@@ -282,7 +286,7 @@ gravity = 20
 material = ExtResource("3_gyfs4")
 gradient = ExtResource("2_2c62f")
 color_gravity = 1.0
-min_color_value = 0.12
+min_color_value = 0.165
 gradient_hue_shift_speed = 0.0
 particles_instance = NodePath("../Particles")
 max_particle_systems = 48
@@ -303,7 +307,7 @@ gravity = 10
 material = ExtResource("3_gyfs4")
 gradient = ExtResource("2_2c62f")
 color_gravity = 1.0
-min_color_value = 0.12
+min_color_value = 0.165
 particles_instance = NodePath("../Particles")
 max_particle_systems = 48
 midi_control_node = NodePath("../../Midi")
@@ -321,7 +325,7 @@ max_y_scale = 4
 material = ExtResource("3_gyfs4")
 gradient = ExtResource("2_2c62f")
 color_gravity = 1.0
-min_color_value = 0.12
+min_color_value = 0.165
 gradient_hue_shift_speed = 0.3
 particles_instance = NodePath("../Particles")
 max_particle_systems = 48
@@ -441,6 +445,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1921.0
 offset_bottom = 1084.0
+theme = ExtResource("18_k67gn")
 script = ExtResource("18_58gk3")
 
 [node name="Background" type="ColorRect" parent="UI"]
@@ -449,79 +454,248 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(1, 1, 1, 0.19607843)
 
-[node name="OptionsList" type="VBoxContainer" parent="UI"]
+[node name="RestartInfo" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 40.0
+offset_right = 546.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(0.6, 0.6, 1, 1)
+text = "Settings marked with (*) will (for now) take effect after restarting the application.
+Not all configuration settings are exposed via UI. Edit config.cfg for more."
+
+[node name="Appearance" type="VBoxContainer" parent="UI"]
 layout_mode = 0
 offset_left = 52.0
-offset_top = 43.0
-offset_right = 115.0
-offset_bottom = 99.0
+offset_top = 84.0
+offset_right = 268.0
+offset_bottom = 297.0
 
-[node name="HSeparator2" type="HSeparator" parent="UI/OptionsList"]
+[node name="Label" type="Label" parent="UI/Appearance"]
+layout_mode = 2
+text = "APPEARANCE"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="UI/Appearance"]
 layout_mode = 2
 
-[node name="Group visibility" type="Label" parent="UI/OptionsList"]
+[node name="Label3" type="Label" parent="UI/Appearance"]
 layout_mode = 2
 text = "Group visibility"
-label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="Near" type="Label" parent="UI/OptionsList"]
+[node name="GroupVisibility" type="GridContainer" parent="UI/Appearance"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="UI/Appearance/GroupVisibility"]
 layout_mode = 2
 text = "  Near"
-label_settings = ExtResource("19_7nt27")
-vertical_alignment = 1
 
-[node name="CheckButton-Near" type="CheckButton" parent="UI/OptionsList/Near" node_paths=PackedStringArray("config_node")]
-layout_mode = 0
-offset_left = 106.0
-offset_top = -4.0
-offset_right = 150.0
-offset_bottom = 20.0
-button_pressed = true
-script = ExtResource("19_xdqt8")
-config_node = NodePath("../../../../ConfigControl")
-
-[node name="Middle" type="Label" parent="UI/OptionsList"]
+[node name="N" type="CheckButton" parent="UI/Appearance/GroupVisibility" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
-text = "  Middle"
-label_settings = ExtResource("19_7nt27")
-vertical_alignment = 1
-
-[node name="CheckButton-Middle" type="CheckButton" parent="UI/OptionsList/Middle" node_paths=PackedStringArray("config_node")]
-layout_mode = 0
-offset_left = 106.0
-offset_top = -4.0
-offset_right = 150.0
-offset_bottom = 20.0
-button_pressed = true
-script = ExtResource("20_adb74")
-config_node = NodePath("../../../../ConfigControl")
-
-[node name="Far" type="Label" parent="UI/OptionsList"]
-layout_mode = 2
-text = "  Far"
-label_settings = ExtResource("19_7nt27")
-vertical_alignment = 1
-
-[node name="CheckButton-Far" type="CheckButton" parent="UI/OptionsList/Far" node_paths=PackedStringArray("config_node")]
-layout_mode = 0
-offset_left = 106.0
-offset_top = -4.0
-offset_right = 150.0
-offset_bottom = 20.0
 button_pressed = true
 script = ExtResource("21_58gk3")
 config_node = NodePath("../../../../ConfigControl")
 
-[node name="HSeparator" type="HSeparator" parent="UI/OptionsList"]
+[node name="Label2" type="Label" parent="UI/Appearance/GroupVisibility"]
+layout_mode = 2
+text = "  Middle  "
+
+[node name="M" type="CheckButton" parent="UI/Appearance/GroupVisibility" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+button_pressed = true
+script = ExtResource("21_58gk3")
+group = 1
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label3" type="Label" parent="UI/Appearance/GroupVisibility"]
+layout_mode = 2
+text = "  Far"
+
+[node name="F" type="CheckButton" parent="UI/Appearance/GroupVisibility" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+button_pressed = true
+script = ExtResource("21_58gk3")
+group = 2
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="HSeparator4" type="HSeparator" parent="UI/Appearance"]
 layout_mode = 2
 
-[node name="AntiAliasing" type="Label" parent="UI/OptionsList"]
+[node name="Label5" type="Label" parent="UI/Appearance"]
+layout_mode = 2
+text = "Color gravity (*)"
+
+[node name="ColorGravity" type="GridContainer" parent="UI/Appearance"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="UI/Appearance/ColorGravity"]
+layout_mode = 2
+text = "  Near"
+vertical_alignment = 1
+
+[node name="N" type="SpinBox" parent="UI/Appearance/ColorGravity" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+step = 0.1
+value = 1.0
+script = ExtResource("25_pgk25")
+section = "Block-Appearance"
+key = "color-gravity"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label2" type="Label" parent="UI/Appearance/ColorGravity"]
+layout_mode = 2
+text = "  Middle  "
+vertical_alignment = 1
+
+[node name="M" type="SpinBox" parent="UI/Appearance/ColorGravity" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+step = 0.1
+value = 1.0
+script = ExtResource("25_pgk25")
+group = 1
+section = "Block-Appearance"
+key = "color-gravity"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label3" type="Label" parent="UI/Appearance/ColorGravity"]
+layout_mode = 2
+text = "  Far"
+vertical_alignment = 1
+
+[node name="F" type="SpinBox" parent="UI/Appearance/ColorGravity" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+step = 0.1
+value = 1.0
+script = ExtResource("25_pgk25")
+group = 2
+section = "Block-Appearance"
+key = "color-gravity"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="HSeparator5" type="HSeparator" parent="UI/Appearance"]
+layout_mode = 2
+
+[node name="Label6" type="Label" parent="UI/Appearance"]
+layout_mode = 2
+text = "Min color value (*)"
+
+[node name="MinColorValue" type="GridContainer" parent="UI/Appearance"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="UI/Appearance/MinColorValue"]
+layout_mode = 2
+text = "  Near"
+vertical_alignment = 1
+
+[node name="N" type="SpinBox" parent="UI/Appearance/MinColorValue" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+script = ExtResource("25_pgk25")
+section = "Block-Appearance"
+key = "min-color-value"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label2" type="Label" parent="UI/Appearance/MinColorValue"]
+layout_mode = 2
+text = "  Middle  "
+vertical_alignment = 1
+
+[node name="M" type="SpinBox" parent="UI/Appearance/MinColorValue" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+script = ExtResource("25_pgk25")
+group = 1
+section = "Block-Appearance"
+key = "min-color-value"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label3" type="Label" parent="UI/Appearance/MinColorValue"]
+layout_mode = 2
+text = "  Far"
+vertical_alignment = 1
+
+[node name="F" type="SpinBox" parent="UI/Appearance/MinColorValue" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+script = ExtResource("25_pgk25")
+group = 2
+section = "Block-Appearance"
+key = "min-color-value"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="HSeparator6" type="HSeparator" parent="UI/Appearance"]
+layout_mode = 2
+
+[node name="Label7" type="Label" parent="UI/Appearance"]
+layout_mode = 2
+text = "Gradient shift speed (*)"
+
+[node name="GradientShiftSpeed" type="GridContainer" parent="UI/Appearance"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="UI/Appearance/GradientShiftSpeed"]
+layout_mode = 2
+text = "  Near"
+vertical_alignment = 1
+
+[node name="N" type="SpinBox" parent="UI/Appearance/GradientShiftSpeed" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+step = 0.01
+script = ExtResource("25_pgk25")
+section = "Block-Appearance"
+key = "gradient-hue-shift-speed"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label2" type="Label" parent="UI/Appearance/GradientShiftSpeed"]
+layout_mode = 2
+text = "  Middle  "
+vertical_alignment = 1
+
+[node name="M" type="SpinBox" parent="UI/Appearance/GradientShiftSpeed" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+step = 0.01
+script = ExtResource("25_pgk25")
+group = 1
+section = "Block-Appearance"
+key = "gradient-hue-shift-speed"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label3" type="Label" parent="UI/Appearance/GradientShiftSpeed"]
+layout_mode = 2
+text = "  Far"
+vertical_alignment = 1
+
+[node name="F" type="SpinBox" parent="UI/Appearance/GradientShiftSpeed" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+step = 0.01
+script = ExtResource("25_pgk25")
+group = 2
+section = "Block-Appearance"
+key = "gradient-hue-shift-speed"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="HSeparator" type="HSeparator" parent="UI/Appearance"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="UI/Appearance"]
 layout_mode = 2
 text = "Antialiasing"
-label_settings = ExtResource("19_7nt27")
 
-[node name="AntiAliasingCombo" type="OptionButton" parent="UI/OptionsList"]
+[node name="AntiAliasingCombo" type="OptionButton" parent="UI/Appearance"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("23_u0fll")
 selected = 2
@@ -534,16 +708,855 @@ popup/item_2/text = "SMAA"
 popup/item_2/id = 2
 script = ExtResource("24_6p3nn")
 
-[node name="HSeparator3" type="HSeparator" parent="UI/OptionsList"]
+[node name="Generation-Behaviour" type="VBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 84.0
+offset_right = 516.0
+offset_bottom = 696.0
+
+[node name="Label" type="Label" parent="UI/Generation-Behaviour"]
 layout_mode = 2
+text = "GENERATION/BEHAVIOUR"
+horizontal_alignment = 1
+
+[node name="HSeparator3" type="HSeparator" parent="UI/Generation-Behaviour"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="UI/Generation-Behaviour"]
+layout_mode = 2
+text = "Notes per row (*)"
+
+[node name="NotesPerRow" type="GridContainer" parent="UI/Generation-Behaviour"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="UI/Generation-Behaviour/NotesPerRow"]
+layout_mode = 2
+text = "  Near"
+vertical_alignment = 1
+
+[node name="N" type="SpinBox" parent="UI/Generation-Behaviour/NotesPerRow" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+min_value = 1.0
+max_value = 128.0
+value = 1.0
+rounded = true
+script = ExtResource("25_pgk25")
+section = "Block-Generation"
+key = "notes-per-row"
+config_node = NodePath("../../../../ConfigControl")
+integral = true
+
+[node name="Label2" type="Label" parent="UI/Generation-Behaviour/NotesPerRow"]
+layout_mode = 2
+text = "  Middle  "
+vertical_alignment = 1
+
+[node name="M" type="SpinBox" parent="UI/Generation-Behaviour/NotesPerRow" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+min_value = 1.0
+max_value = 128.0
+value = 1.0
+rounded = true
+script = ExtResource("25_pgk25")
+group = 1
+section = "Block-Generation"
+key = "notes-per-row"
+config_node = NodePath("../../../../ConfigControl")
+integral = true
+
+[node name="Label3" type="Label" parent="UI/Generation-Behaviour/NotesPerRow"]
+layout_mode = 2
+text = "  Far"
+vertical_alignment = 1
+
+[node name="F" type="SpinBox" parent="UI/Generation-Behaviour/NotesPerRow" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+min_value = 1.0
+max_value = 128.0
+value = 1.0
+rounded = true
+script = ExtResource("25_pgk25")
+group = 2
+section = "Block-Generation"
+key = "notes-per-row"
+config_node = NodePath("../../../../ConfigControl")
+integral = true
+
+[node name="HSeparator4" type="HSeparator" parent="UI/Generation-Behaviour"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="UI/Generation-Behaviour"]
+layout_mode = 2
+text = "Row separation (*)"
+
+[node name="RowSeparation" type="GridContainer" parent="UI/Generation-Behaviour"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="UI/Generation-Behaviour/RowSeparation"]
+layout_mode = 2
+text = "  Near"
+vertical_alignment = 1
+
+[node name="N" type="SpinBox" parent="UI/Generation-Behaviour/RowSeparation" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+step = 0.01
+value = 1.0
+script = ExtResource("25_pgk25")
+section = "Block-Generation"
+key = "row-separation"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label2" type="Label" parent="UI/Generation-Behaviour/RowSeparation"]
+layout_mode = 2
+text = "  Middle  "
+vertical_alignment = 1
+
+[node name="M" type="SpinBox" parent="UI/Generation-Behaviour/RowSeparation" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+step = 0.01
+value = 1.0
+script = ExtResource("25_pgk25")
+group = 1
+section = "Block-Generation"
+key = "row-separation"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label3" type="Label" parent="UI/Generation-Behaviour/RowSeparation"]
+layout_mode = 2
+text = "  Far"
+vertical_alignment = 1
+
+[node name="F" type="SpinBox" parent="UI/Generation-Behaviour/RowSeparation" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+step = 0.01
+value = 1.0
+script = ExtResource("25_pgk25")
+group = 2
+section = "Block-Generation"
+key = "row-separation"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="HSeparator5" type="HSeparator" parent="UI/Generation-Behaviour"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="UI/Generation-Behaviour"]
+layout_mode = 2
+text = "Column separation (*)"
+
+[node name="ColumnSeparation" type="GridContainer" parent="UI/Generation-Behaviour"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="UI/Generation-Behaviour/ColumnSeparation"]
+layout_mode = 2
+text = "  Near"
+vertical_alignment = 1
+
+[node name="N" type="SpinBox" parent="UI/Generation-Behaviour/ColumnSeparation" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+step = 0.01
+value = 1.0
+script = ExtResource("25_pgk25")
+section = "Block-Generation"
+key = "column-separation"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label2" type="Label" parent="UI/Generation-Behaviour/ColumnSeparation"]
+layout_mode = 2
+text = "  Middle  "
+vertical_alignment = 1
+
+[node name="M" type="SpinBox" parent="UI/Generation-Behaviour/ColumnSeparation" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+step = 0.01
+value = 1.0
+script = ExtResource("25_pgk25")
+group = 1
+section = "Block-Generation"
+key = "column-separation"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label3" type="Label" parent="UI/Generation-Behaviour/ColumnSeparation"]
+layout_mode = 2
+text = "  Far"
+vertical_alignment = 1
+
+[node name="F" type="SpinBox" parent="UI/Generation-Behaviour/ColumnSeparation" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+step = 0.01
+value = 1.0
+script = ExtResource("25_pgk25")
+group = 2
+section = "Block-Generation"
+key = "column-separation"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="HSeparator6" type="HSeparator" parent="UI/Generation-Behaviour"]
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="UI/Generation-Behaviour"]
+layout_mode = 2
+text = "Minimum height scale (*)"
+
+[node name="MinYScale" type="GridContainer" parent="UI/Generation-Behaviour"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="UI/Generation-Behaviour/MinYScale"]
+layout_mode = 2
+text = "  Near"
+vertical_alignment = 1
+
+[node name="N" type="SpinBox" parent="UI/Generation-Behaviour/MinYScale" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+step = 0.1
+value = 1.0
+script = ExtResource("25_pgk25")
+section = "Block-Generation"
+key = "min-y-scale"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label2" type="Label" parent="UI/Generation-Behaviour/MinYScale"]
+layout_mode = 2
+text = "  Middle  "
+vertical_alignment = 1
+
+[node name="M" type="SpinBox" parent="UI/Generation-Behaviour/MinYScale" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+step = 0.1
+value = 1.0
+script = ExtResource("25_pgk25")
+group = 1
+section = "Block-Generation"
+key = "min-y-scale"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label3" type="Label" parent="UI/Generation-Behaviour/MinYScale"]
+layout_mode = 2
+text = "  Far"
+vertical_alignment = 1
+
+[node name="F" type="SpinBox" parent="UI/Generation-Behaviour/MinYScale" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+step = 0.1
+value = 1.0
+script = ExtResource("25_pgk25")
+group = 2
+section = "Block-Generation"
+key = "min-y-scale"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="HSeparator7" type="HSeparator" parent="UI/Generation-Behaviour"]
+layout_mode = 2
+
+[node name="Label6" type="Label" parent="UI/Generation-Behaviour"]
+layout_mode = 2
+text = "Max height scale (*)"
+
+[node name="MaxYScale" type="GridContainer" parent="UI/Generation-Behaviour"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="UI/Generation-Behaviour/MaxYScale"]
+layout_mode = 2
+text = "  Near"
+vertical_alignment = 1
+
+[node name="N" type="SpinBox" parent="UI/Generation-Behaviour/MaxYScale" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+step = 0.1
+value = 1.0
+script = ExtResource("25_pgk25")
+section = "Block-Generation"
+key = "max-y-scale"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label2" type="Label" parent="UI/Generation-Behaviour/MaxYScale"]
+layout_mode = 2
+text = "  Middle  "
+vertical_alignment = 1
+
+[node name="M" type="SpinBox" parent="UI/Generation-Behaviour/MaxYScale" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+step = 0.1
+value = 1.0
+script = ExtResource("25_pgk25")
+group = 1
+section = "Block-Generation"
+key = "max-y-scale"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label3" type="Label" parent="UI/Generation-Behaviour/MaxYScale"]
+layout_mode = 2
+text = "  Far"
+vertical_alignment = 1
+
+[node name="F" type="SpinBox" parent="UI/Generation-Behaviour/MaxYScale" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+step = 0.1
+value = 1.0
+script = ExtResource("25_pgk25")
+group = 2
+section = "Block-Generation"
+key = "max-y-scale"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="HSeparator8" type="HSeparator" parent="UI/Generation-Behaviour"]
+layout_mode = 2
+
+[node name="Label7" type="Label" parent="UI/Generation-Behaviour"]
+layout_mode = 2
+text = "Rotation speed (*)"
+
+[node name="MaxYScale2" type="GridContainer" parent="UI/Generation-Behaviour"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="UI/Generation-Behaviour/MaxYScale2"]
+layout_mode = 2
+text = "  Near"
+vertical_alignment = 1
+
+[node name="N" type="SpinBox" parent="UI/Generation-Behaviour/MaxYScale2" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+min_value = -1000.0
+max_value = 1000.0
+step = 0.1
+value = 1.0
+script = ExtResource("25_pgk25")
+section = "Block-Behaviour"
+key = "rotation-speed"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label2" type="Label" parent="UI/Generation-Behaviour/MaxYScale2"]
+layout_mode = 2
+text = "  Middle  "
+vertical_alignment = 1
+
+[node name="M" type="SpinBox" parent="UI/Generation-Behaviour/MaxYScale2" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+min_value = -1000.0
+max_value = 1000.0
+step = 0.1
+value = 1.0
+script = ExtResource("25_pgk25")
+group = 1
+section = "Block-Behaviour"
+key = "rotation-speed"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label3" type="Label" parent="UI/Generation-Behaviour/MaxYScale2"]
+layout_mode = 2
+text = "  Far"
+vertical_alignment = 1
+
+[node name="F" type="SpinBox" parent="UI/Generation-Behaviour/MaxYScale2" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+min_value = -1000.0
+max_value = 1000.0
+step = 0.1
+value = 1.0
+script = ExtResource("25_pgk25")
+group = 2
+section = "Block-Behaviour"
+key = "rotation-speed"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Particles" type="VBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 548.0
+offset_top = 84.0
+offset_right = 764.0
+offset_bottom = 584.0
+
+[node name="Label2" type="Label" parent="UI/Particles"]
+layout_mode = 2
+text = "PARTICLES"
+horizontal_alignment = 1
+
+[node name="HSeparator4" type="HSeparator" parent="UI/Particles"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Particles"]
+layout_mode = 2
+text = "Particles Visibility (*)"
+
+[node name="ParticlesEnabled" type="GridContainer" parent="UI/Particles"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="UI/Particles/ParticlesEnabled"]
+layout_mode = 2
+text = "  Near"
+
+[node name="N" type="CheckButton" parent="UI/Particles/ParticlesEnabled" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+button_pressed = true
+script = ExtResource("24_k67gn")
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label2" type="Label" parent="UI/Particles/ParticlesEnabled"]
+layout_mode = 2
+text = "  Middle  "
+
+[node name="M" type="CheckButton" parent="UI/Particles/ParticlesEnabled" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+button_pressed = true
+script = ExtResource("24_k67gn")
+group = 1
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label3" type="Label" parent="UI/Particles/ParticlesEnabled"]
+layout_mode = 2
+text = "  Far"
+
+[node name="F" type="CheckButton" parent="UI/Particles/ParticlesEnabled" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+button_pressed = true
+script = ExtResource("24_k67gn")
+group = 2
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="HSeparator5" type="HSeparator" parent="UI/Particles"]
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="UI/Particles"]
+layout_mode = 2
+text = "Minimum particles (*)"
+
+[node name="MinimumParticles" type="GridContainer" parent="UI/Particles"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="UI/Particles/MinimumParticles"]
+layout_mode = 2
+text = "  Near"
+
+[node name="N" type="SpinBox" parent="UI/Particles/MinimumParticles" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+rounded = true
+script = ExtResource("25_pgk25")
+section = "Particles"
+key = "min"
+config_node = NodePath("../../../../ConfigControl")
+integral = true
+
+[node name="Label2" type="Label" parent="UI/Particles/MinimumParticles"]
+layout_mode = 2
+text = "  Middle  "
+
+[node name="N2" type="SpinBox" parent="UI/Particles/MinimumParticles" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+rounded = true
+script = ExtResource("25_pgk25")
+group = 1
+section = "Particles"
+key = "min"
+config_node = NodePath("../../../../ConfigControl")
+integral = true
+
+[node name="Label3" type="Label" parent="UI/Particles/MinimumParticles"]
+layout_mode = 2
+text = "  Far"
+
+[node name="N3" type="SpinBox" parent="UI/Particles/MinimumParticles" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+rounded = true
+script = ExtResource("25_pgk25")
+group = 2
+section = "Particles"
+key = "min"
+config_node = NodePath("../../../../ConfigControl")
+integral = true
+
+[node name="HSeparator6" type="HSeparator" parent="UI/Particles"]
+layout_mode = 2
+
+[node name="Label6" type="Label" parent="UI/Particles"]
+layout_mode = 2
+text = "Maximum particles (*)"
+
+[node name="MaximumParticles" type="GridContainer" parent="UI/Particles"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="UI/Particles/MaximumParticles"]
+layout_mode = 2
+text = "  Near"
+
+[node name="N" type="SpinBox" parent="UI/Particles/MaximumParticles" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+rounded = true
+script = ExtResource("25_pgk25")
+section = "Particles"
+key = "max"
+config_node = NodePath("../../../../ConfigControl")
+integral = true
+
+[node name="Label2" type="Label" parent="UI/Particles/MaximumParticles"]
+layout_mode = 2
+text = "  Middle  "
+
+[node name="M" type="SpinBox" parent="UI/Particles/MaximumParticles" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+rounded = true
+script = ExtResource("25_pgk25")
+section = "Particles"
+key = "max"
+config_node = NodePath("../../../../ConfigControl")
+integral = true
+
+[node name="Label3" type="Label" parent="UI/Particles/MaximumParticles"]
+layout_mode = 2
+text = "  Far"
+
+[node name="F" type="SpinBox" parent="UI/Particles/MaximumParticles" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+rounded = true
+script = ExtResource("25_pgk25")
+section = "Particles"
+key = "max"
+config_node = NodePath("../../../../ConfigControl")
+integral = true
+
+[node name="HSeparator7" type="HSeparator" parent="UI/Particles"]
+layout_mode = 2
+
+[node name="Label7" type="Label" parent="UI/Particles"]
+layout_mode = 2
+text = "Count from note 
+velocity curve pow (*)"
+
+[node name="MaximumParticles2" type="GridContainer" parent="UI/Particles"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="UI/Particles/MaximumParticles2"]
+layout_mode = 2
+text = "  Near"
+
+[node name="N" type="SpinBox" parent="UI/Particles/MaximumParticles2" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+min_value = -10.0
+max_value = 10.0
+step = 0.1
+rounded = true
+script = ExtResource("25_pgk25")
+section = "Particles"
+key = "velocity-curve-pow"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label2" type="Label" parent="UI/Particles/MaximumParticles2"]
+layout_mode = 2
+text = "  Middle  "
+
+[node name="M" type="SpinBox" parent="UI/Particles/MaximumParticles2" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+min_value = -10.0
+max_value = 10.0
+step = 0.1
+rounded = true
+script = ExtResource("25_pgk25")
+section = "Particles"
+key = "velocity-curve-pow"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label3" type="Label" parent="UI/Particles/MaximumParticles2"]
+layout_mode = 2
+text = "  Far"
+
+[node name="F" type="SpinBox" parent="UI/Particles/MaximumParticles2" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+min_value = -10.0
+max_value = 10.0
+step = 0.1
+rounded = true
+script = ExtResource("25_pgk25")
+section = "Particles"
+key = "velocity-curve-pow"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="HSeparator8" type="HSeparator" parent="UI/Particles"]
+layout_mode = 2
+
+[node name="Label8" type="Label" parent="UI/Particles"]
+layout_mode = 2
+text = "Maximum concurrent 
+particle system count (*)"
+
+[node name="MaximumParticles3" type="GridContainer" parent="UI/Particles"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="UI/Particles/MaximumParticles3"]
+layout_mode = 2
+text = "  Near"
+
+[node name="N" type="SpinBox" parent="UI/Particles/MaximumParticles3" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+rounded = true
+script = ExtResource("25_pgk25")
+section = "Particles"
+key = "pool-size"
+config_node = NodePath("../../../../ConfigControl")
+integral = true
+
+[node name="Label2" type="Label" parent="UI/Particles/MaximumParticles3"]
+layout_mode = 2
+text = "  Middle  "
+
+[node name="M" type="SpinBox" parent="UI/Particles/MaximumParticles3" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+rounded = true
+script = ExtResource("25_pgk25")
+section = "Particles"
+key = "pool-size"
+config_node = NodePath("../../../../ConfigControl")
+integral = true
+
+[node name="Label3" type="Label" parent="UI/Particles/MaximumParticles3"]
+layout_mode = 2
+text = "  Far"
+
+[node name="F" type="SpinBox" parent="UI/Particles/MaximumParticles3" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+rounded = true
+script = ExtResource("25_pgk25")
+section = "Particles"
+key = "pool-size"
+config_node = NodePath("../../../../ConfigControl")
+integral = true
+
+[node name="MIDI" type="VBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 805.0
+offset_top = 84.0
+offset_right = 1064.0
+offset_bottom = 956.0
+
+[node name="Label" type="Label" parent="UI/MIDI"]
+layout_mode = 2
+text = "MIDI"
+horizontal_alignment = 1
+
+[node name="HSeparator8" type="HSeparator" parent="UI/MIDI"]
+layout_mode = 2
+
+[node name="Label7" type="Label" parent="UI/MIDI"]
+layout_mode = 2
+text = "MIDI velocity multiplier (*)"
+
+[node name="MidiVeloScale" type="GridContainer" parent="UI/MIDI"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="UI/MIDI/MidiVeloScale"]
+layout_mode = 2
+text = "  Near"
+
+[node name="N" type="SpinBox" parent="UI/MIDI/MidiVeloScale" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+step = 0.01
+script = ExtResource("25_pgk25")
+section = "Midi"
+key = "velocity-scale"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label2" type="Label" parent="UI/MIDI/MidiVeloScale"]
+layout_mode = 2
+text = "  Middle  "
+
+[node name="M" type="SpinBox" parent="UI/MIDI/MidiVeloScale" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+step = 0.01
+rounded = true
+script = ExtResource("25_pgk25")
+group = 1
+section = "Midi"
+key = "velocity-scale"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label3" type="Label" parent="UI/MIDI/MidiVeloScale"]
+layout_mode = 2
+text = "  Far"
+
+[node name="F" type="SpinBox" parent="UI/MIDI/MidiVeloScale" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+step = 0.01
+rounded = true
+script = ExtResource("25_pgk25")
+group = 2
+section = "Midi"
+key = "velocity-scale"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="HSeparator9" type="HSeparator" parent="UI/MIDI"]
+layout_mode = 2
+
+[node name="Label8" type="Label" parent="UI/MIDI"]
+layout_mode = 2
+text = "MIDI first note (*)"
+
+[node name="MidiFirstNote" type="GridContainer" parent="UI/MIDI"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="UI/MIDI/MidiFirstNote"]
+layout_mode = 2
+text = "  Near"
+
+[node name="N" type="SpinBox" parent="UI/MIDI/MidiFirstNote" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+script = ExtResource("25_pgk25")
+section = "Midi"
+key = "first-note"
+config_node = NodePath("../../../../ConfigControl")
+integral = true
+
+[node name="Label2" type="Label" parent="UI/MIDI/MidiFirstNote"]
+layout_mode = 2
+text = "  Middle  "
+
+[node name="M" type="SpinBox" parent="UI/MIDI/MidiFirstNote" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+rounded = true
+script = ExtResource("25_pgk25")
+group = 1
+section = "Midi"
+key = "first-note"
+config_node = NodePath("../../../../ConfigControl")
+integral = true
+
+[node name="Label3" type="Label" parent="UI/MIDI/MidiFirstNote"]
+layout_mode = 2
+text = "  Far"
+
+[node name="F" type="SpinBox" parent="UI/MIDI/MidiFirstNote" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+rounded = true
+script = ExtResource("25_pgk25")
+group = 2
+section = "Midi"
+key = "first-note"
+config_node = NodePath("../../../../ConfigControl")
+integral = true
+
+[node name="HSeparator10" type="HSeparator" parent="UI/MIDI"]
+layout_mode = 2
+
+[node name="Label9" type="Label" parent="UI/MIDI"]
+layout_mode = 2
+text = "MIDI last note (*)"
+
+[node name="MidiLastNote" type="GridContainer" parent="UI/MIDI"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="UI/MIDI/MidiLastNote"]
+layout_mode = 2
+text = "  Near"
+
+[node name="N" type="SpinBox" parent="UI/MIDI/MidiLastNote" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+script = ExtResource("25_pgk25")
+section = "Midi"
+key = "last-note"
+config_node = NodePath("../../../../ConfigControl")
+integral = true
+
+[node name="Label2" type="Label" parent="UI/MIDI/MidiLastNote"]
+layout_mode = 2
+text = "  Middle  "
+
+[node name="M" type="SpinBox" parent="UI/MIDI/MidiLastNote" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+rounded = true
+script = ExtResource("25_pgk25")
+group = 1
+section = "Midi"
+key = "last-note"
+config_node = NodePath("../../../../ConfigControl")
+integral = true
+
+[node name="Label3" type="Label" parent="UI/MIDI/MidiLastNote"]
+layout_mode = 2
+text = "  Far"
+
+[node name="F" type="SpinBox" parent="UI/MIDI/MidiLastNote" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 1000.0
+rounded = true
+script = ExtResource("25_pgk25")
+group = 2
+section = "Midi"
+key = "last-note"
+config_node = NodePath("../../../../ConfigControl")
+integral = true
+
+[node name="HSeparator7" type="HSeparator" parent="UI/MIDI"]
+layout_mode = 2
+
+[node name="MidiPort" type="HBoxContainer" parent="UI/MIDI"]
+layout_mode = 2
+
+[node name="Midi port" type="Label" parent="UI/MIDI/MidiPort"]
+layout_mode = 2
+tooltip_text = "Linux only"
+mouse_filter = 1
+text = "MIDI Port
+(Linux only) (*) "
+label_settings = ExtResource("19_7nt27")
+
+[node name="SpinBox" type="SpinBox" parent="UI/MIDI/MidiPort"]
+layout_mode = 2
+tooltip_text = "Linux only"
+max_value = 256.0
+rounded = true
+script = ExtResource("28_02d50")
+
+[node name="Sprite2D" type="Sprite2D" parent="UI"]
+position = Vector2(1489.7837, 835.25)
+scale = Vector2(0.43492517, 0.4349251)
+texture = ExtResource("27_4bgka")
 
 [node name="ConfigControl" type="Node" parent="."]
 script = ExtResource("22_adb74")
 
 [node name="Hint" type="Label" parent="."]
-offset_top = 496.0
-offset_right = 1912.0
-offset_bottom = 519.0
+offset_left = 717.0
+offset_top = 531.0
+offset_right = 1201.0
+offset_bottom = 554.0
 text = "Press ESC for options menu"
+label_settings = ExtResource("19_7nt27")
 horizontal_alignment = 1
 script = ExtResource("24_to7gp")
