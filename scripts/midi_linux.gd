@@ -47,5 +47,6 @@ func push_events():
 	
 func shutdown():
 	quit_requested = true;
+	midi_poll_process_stdio.close();
 	midi_poll_thread.wait_to_finish();
 	OS.kill(midi_poll_process_pid);

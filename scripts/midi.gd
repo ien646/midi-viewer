@@ -1,5 +1,7 @@
 extends Node
 
+@export var config_node: Node;
+
 var linux_midi: LinuxMidi = null;
 
 signal note_pressed(note: int, velocity: int);
@@ -7,6 +9,12 @@ signal note_pressed(note: int, velocity: int);
 func _handle_linux_midi_event(note: int, velocity: int):
 	emit_signal("note_pressed", note, velocity);
 
+func _handle_config_setting_changed(section: String, key: String, value: Variant):
+	if(section == Config.SECTION_MIDI && key == Config.KEY_PORT):
+		assert(OS.get_name() == "Linux");
+		linux_midi.shutdown();
+		linux_midi.init(value as int);
+	
 func _ready() -> void:
 	if(OS.get_name() == "Windows"):
 		Win32Midi.init();
@@ -16,6 +24,7 @@ func _ready() -> void:
 		linux_midi.init(Config.get_value("Midi", "port") as int);
 		set_process_input(false);
 		linux_midi.connect("note_on_received", _handle_linux_midi_event);
+	config_node.connect("config_value_changed", _handle_config_setting_changed);
 	
 func _process(_delta: float):
 	if(OS.get_name() == "Linux"):

@@ -103,10 +103,100 @@ func init_config_values():
 	max_particle_systems = get_config_value("Particles", "pool-size") as int
 	
 func handle_config_value_changed(section: String, key: String, value: Variant):
-	if(section.begins_with("Block-Generation") && section.ends_with(config_tag)):
-		match key:
-			"enabled":
-				visible = value as bool;
+	if(section.ends_with(config_tag)):		
+		if(section.begins_with(Config.SECTION_BLOCK_APPEARANCE)):
+			match key:
+				Config.KEY_COLOR_GRAVITY:
+					color_gravity = value as float;
+				Config.KEY_MIN_COLOR_VALUE:
+					min_color_value = value as float;
+				Config.KEY_GRADIENT_HUE_SHIFT_SPEED:
+					gradient_hue_shift_speed = value as float;
+		if(section.begins_with(Config.SECTION_BLOCK_BEHAVIOUR)):
+			match key:
+				Config.KEY_MIN_Y_SCALE:
+					min_y_scale = value as float;
+				Config.KEY_MAX_Y_SCALE:
+					max_y_scale = value as float;
+				Config.KEY_ROTATION_SPEED:
+					rotation_speed = value as float;
+		if(section.begins_with(Config.SECTION_BLOCK_GENERATION)):
+			match key:
+				Config.KEY_ENABLED:
+					visible = value as bool;
+				Config.KEY_NOTES_PER_ROW:
+					row_size = value as int;
+					generate_block_data();
+				Config.KEY_ROW_SEPARATION:
+					row_separation = value as float;
+					generate_block_data();
+				Config.KEY_COLUMN_SEPARATION:
+					col_separation = value as float;
+					generate_block_data();
+		if(section.begins_with(Config.SECTION_PARTICLES)):
+			match key:
+				Config.KEY_ENABLED:
+					particles_disabled = !(value as bool);
+					if(!particles_disabled):
+						generate_particle_data();
+				Config.KEY_MIN:
+					min_particles_hit = value as int;
+					if(!particles_disabled):
+						generate_block_data();
+				Config.KEY_MAX:
+					max_particles_hit = value as int;
+					if(!particles_disabled):
+						generate_block_data();
+				Config.KEY_VELOCITY_CURVE_POW:
+					particle_count_curve = value as float;
+					if(!particles_disabled):
+						generate_block_data();
+				Config.KEY_POOL_SIZE:
+					max_particle_systems = value as int;
+					if(!particles_disabled):
+						generate_block_data();
+		if(section.begins_with(Config.SECTION_MIDI)):
+			match key:
+				Config.KEY_FIRST_NOTE:
+					midi_first_note = value as int;
+				Config.KEY_LAST_NOTE:
+					midi_last_note = value as int;
+				Config.KEY_VELOCITY_SCALE:
+					midi_velocity_scale = value as float;
+func generate_block_data():
+	positions.clear();
+	rotations.clear();
+	scales.clear();
+	colors.clear();
+	
+	var col_size = int(float(note_count) / row_size);
+	
+	for i in range(0, note_count):
+		var x = i % row_size;
+		
+		@warning_ignore("integer_division")
+		var y = i / row_size;
+		
+		@warning_ignore("integer_division")
+		var x_pos = (x - (row_size / 2)) * (1 + col_separation);
+		@warning_ignore("integer_division")
+		var y_pos = (y - (col_size / 2)) * (1 + row_separation);
+		
+		positions.push_back(Vector3(x_pos, 0, y_pos));
+		rotations.push_back(Vector3.ZERO);
+		scales.push_back(Vector3(1, min_y_scale, 1));
+		colors.push_back(Color(0, 0, 0, 0));
+		
+func generate_particle_data():
+	var particle_systems = find_children("", "GPUParticles3D");
+	for s in particle_systems:
+		s.queue_free();
+		
+	for i in range(0, max_particle_systems):
+		var copy = particles_instance.duplicate();
+		copy.connect("finished", handle_particle_system_finished);
+		particles_pool.push_back(copy);
+		add_child(copy);
 		
 func _ready() -> void:
 	if(!SKIP_CONFIG):
@@ -128,30 +218,10 @@ func _ready() -> void:
 	multimesh.mesh = block_mesh;
 	multimesh.mesh.surface_set_material(0, material);
 	
-	var col_size = int(float(note_count) / row_size);
+	if(!particles_disabled):
+		generate_particle_data();
 	
-	if (!particles_disabled):
-		for i in range(0, max_particle_systems):
-			var copy = particles_instance.duplicate();
-			copy.connect("finished", handle_particle_system_finished);
-			particles_pool.push_back(copy);
-			add_child(copy);
-	
-	for i in range(0, note_count):
-		var x = i % row_size;
-		
-		@warning_ignore("integer_division")
-		var y = i / row_size;
-		
-		@warning_ignore("integer_division")
-		var x_pos = (x - (row_size / 2)) * (1 + col_separation);
-		@warning_ignore("integer_division")
-		var y_pos = (y - (col_size / 2)) * (1 + row_separation);
-		
-		positions.push_back(Vector3(x_pos, 0, y_pos));
-		rotations.push_back(Vector3.ZERO);
-		scales.push_back(Vector3(1, min_y_scale, 1));
-		colors.push_back(Color(0, 0, 0, 0));
+	generate_block_data();
 	
 func _physics_process(delta: float) -> void:
 	for i in range(0, note_count):

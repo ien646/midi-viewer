@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://cvt0cgi1d1uyo"]
+[gd_scene load_steps=37 format=4 uid="uid://cvt0cgi1d1uyo"]
 
 [ext_resource type="Script" uid="uid://cpn4jpqqo0gml" path="res://scripts/grid.gd" id="1_0f027"]
 [ext_resource type="Script" uid="uid://8op24g3mtwsf" path="res://scripts/subviewport.gd" id="1_671wp"]
@@ -27,7 +27,6 @@
 [ext_resource type="Script" uid="uid://cyftyoqhjg86u" path="res://scripts/ui/particles_check.gd" id="24_k67gn"]
 [ext_resource type="Script" uid="uid://di2c4whrcw0ky" path="res://scripts/hint.gd" id="24_to7gp"]
 [ext_resource type="Script" uid="uid://dno5v84ewkrl2" path="res://scripts/ui/group_setting_spinbox.gd" id="25_pgk25"]
-[ext_resource type="Texture2D" uid="uid://buxp70d6n2lmt" path="res://groups.png" id="27_4bgka"]
 [ext_resource type="Script" uid="uid://xt2lgjewdgcv" path="res://scripts/ui/midi_port.gd" id="28_02d50"]
 
 [sub_resource type="World3D" id="World3D_mo76n"]
@@ -437,8 +436,9 @@ offset_bottom = 27.0
 text = "Press 'D' to hide"
 label_settings = SubResource("LabelSettings_m35m6")
 
-[node name="Midi" type="Node" parent="."]
+[node name="Midi" type="Node" parent="." node_paths=PackedStringArray("config_node")]
 script = ExtResource("17_6u1mn")
+config_node = NodePath("../ConfigControl")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -461,8 +461,7 @@ offset_top = 40.0
 offset_right = 546.0
 offset_bottom = 56.0
 theme_override_colors/font_color = Color(0.6, 0.6, 1, 1)
-text = "Settings marked with (*) will (for now) take effect after restarting the application.
-Not all configuration settings are exposed via UI. Edit config.cfg for more."
+text = "Not all configuration settings are exposed via UI. Edit config.cfg for more."
 
 [node name="Appearance" type="VBoxContainer" parent="UI"]
 layout_mode = 0
@@ -525,7 +524,7 @@ layout_mode = 2
 
 [node name="Label5" type="Label" parent="UI/Appearance"]
 layout_mode = 2
-text = "Color gravity (*)"
+text = "Color gravity"
 
 [node name="ColorGravity" type="GridContainer" parent="UI/Appearance"]
 layout_mode = 2
@@ -583,7 +582,7 @@ layout_mode = 2
 
 [node name="Label6" type="Label" parent="UI/Appearance"]
 layout_mode = 2
-text = "Min color value (*)"
+text = "Min color value"
 
 [node name="MinColorValue" type="GridContainer" parent="UI/Appearance"]
 layout_mode = 2
@@ -638,7 +637,7 @@ layout_mode = 2
 
 [node name="Label7" type="Label" parent="UI/Appearance"]
 layout_mode = 2
-text = "Gradient shift speed (*)"
+text = "Gradient shift speed"
 
 [node name="GradientShiftSpeed" type="GridContainer" parent="UI/Appearance"]
 layout_mode = 2
@@ -726,7 +725,7 @@ layout_mode = 2
 
 [node name="Label2" type="Label" parent="UI/Generation-Behaviour"]
 layout_mode = 2
-text = "Notes per row (*)"
+text = "Notes per row"
 
 [node name="NotesPerRow" type="GridContainer" parent="UI/Generation-Behaviour"]
 layout_mode = 2
@@ -790,7 +789,7 @@ layout_mode = 2
 
 [node name="Label3" type="Label" parent="UI/Generation-Behaviour"]
 layout_mode = 2
-text = "Row separation (*)"
+text = "Row separation"
 
 [node name="RowSeparation" type="GridContainer" parent="UI/Generation-Behaviour"]
 layout_mode = 2
@@ -848,7 +847,7 @@ layout_mode = 2
 
 [node name="Label4" type="Label" parent="UI/Generation-Behaviour"]
 layout_mode = 2
-text = "Column separation (*)"
+text = "Column separation"
 
 [node name="ColumnSeparation" type="GridContainer" parent="UI/Generation-Behaviour"]
 layout_mode = 2
@@ -906,7 +905,7 @@ layout_mode = 2
 
 [node name="Label5" type="Label" parent="UI/Generation-Behaviour"]
 layout_mode = 2
-text = "Minimum height scale (*)"
+text = "Minimum height scale"
 
 [node name="MinYScale" type="GridContainer" parent="UI/Generation-Behaviour"]
 layout_mode = 2
@@ -964,7 +963,7 @@ layout_mode = 2
 
 [node name="Label6" type="Label" parent="UI/Generation-Behaviour"]
 layout_mode = 2
-text = "Max height scale (*)"
+text = "Max height scale"
 
 [node name="MaxYScale" type="GridContainer" parent="UI/Generation-Behaviour"]
 layout_mode = 2
@@ -1022,7 +1021,7 @@ layout_mode = 2
 
 [node name="Label7" type="Label" parent="UI/Generation-Behaviour"]
 layout_mode = 2
-text = "Rotation speed (*)"
+text = "Rotation speed"
 
 [node name="MaxYScale2" type="GridContainer" parent="UI/Generation-Behaviour"]
 layout_mode = 2
@@ -1095,7 +1094,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="UI/Particles"]
 layout_mode = 2
-text = "Particles Visibility (*)"
+text = "Particles Visibility"
 
 [node name="ParticlesEnabled" type="GridContainer" parent="UI/Particles"]
 layout_mode = 2
@@ -1138,7 +1137,7 @@ layout_mode = 2
 
 [node name="Label5" type="Label" parent="UI/Particles"]
 layout_mode = 2
-text = "Minimum particles (*)"
+text = "Minimum particles"
 
 [node name="MinimumParticles" type="GridContainer" parent="UI/Particles"]
 layout_mode = 2
@@ -1193,7 +1192,7 @@ layout_mode = 2
 
 [node name="Label6" type="Label" parent="UI/Particles"]
 layout_mode = 2
-text = "Maximum particles (*)"
+text = "Maximum particles"
 
 [node name="MaximumParticles" type="GridContainer" parent="UI/Particles"]
 layout_mode = 2
@@ -1247,17 +1246,17 @@ layout_mode = 2
 [node name="Label7" type="Label" parent="UI/Particles"]
 layout_mode = 2
 text = "Count from note 
-velocity curve pow (*)"
+velocity curve pow"
 
-[node name="MaximumParticles2" type="GridContainer" parent="UI/Particles"]
+[node name="ParticleCurvePow" type="GridContainer" parent="UI/Particles"]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="UI/Particles/MaximumParticles2"]
+[node name="Label" type="Label" parent="UI/Particles/ParticleCurvePow"]
 layout_mode = 2
 text = "  Near"
 
-[node name="N" type="SpinBox" parent="UI/Particles/MaximumParticles2" node_paths=PackedStringArray("config_node")]
+[node name="N" type="SpinBox" parent="UI/Particles/ParticleCurvePow" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 min_value = -10.0
 max_value = 10.0
@@ -1268,11 +1267,11 @@ section = "Particles"
 key = "velocity-curve-pow"
 config_node = NodePath("../../../../ConfigControl")
 
-[node name="Label2" type="Label" parent="UI/Particles/MaximumParticles2"]
+[node name="Label2" type="Label" parent="UI/Particles/ParticleCurvePow"]
 layout_mode = 2
 text = "  Middle  "
 
-[node name="M" type="SpinBox" parent="UI/Particles/MaximumParticles2" node_paths=PackedStringArray("config_node")]
+[node name="M" type="SpinBox" parent="UI/Particles/ParticleCurvePow" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 min_value = -10.0
 max_value = 10.0
@@ -1283,11 +1282,11 @@ section = "Particles"
 key = "velocity-curve-pow"
 config_node = NodePath("../../../../ConfigControl")
 
-[node name="Label3" type="Label" parent="UI/Particles/MaximumParticles2"]
+[node name="Label3" type="Label" parent="UI/Particles/ParticleCurvePow"]
 layout_mode = 2
 text = "  Far"
 
-[node name="F" type="SpinBox" parent="UI/Particles/MaximumParticles2" node_paths=PackedStringArray("config_node")]
+[node name="F" type="SpinBox" parent="UI/Particles/ParticleCurvePow" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 min_value = -10.0
 max_value = 10.0
@@ -1304,17 +1303,17 @@ layout_mode = 2
 [node name="Label8" type="Label" parent="UI/Particles"]
 layout_mode = 2
 text = "Maximum concurrent 
-particle system count (*)"
+particle system count"
 
-[node name="MaximumParticles3" type="GridContainer" parent="UI/Particles"]
+[node name="MaxAliveParticleSys" type="GridContainer" parent="UI/Particles"]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="UI/Particles/MaximumParticles3"]
+[node name="Label" type="Label" parent="UI/Particles/MaxAliveParticleSys"]
 layout_mode = 2
 text = "  Near"
 
-[node name="N" type="SpinBox" parent="UI/Particles/MaximumParticles3" node_paths=PackedStringArray("config_node")]
+[node name="N" type="SpinBox" parent="UI/Particles/MaxAliveParticleSys" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 rounded = true
 script = ExtResource("25_pgk25")
@@ -1323,11 +1322,11 @@ key = "pool-size"
 config_node = NodePath("../../../../ConfigControl")
 integral = true
 
-[node name="Label2" type="Label" parent="UI/Particles/MaximumParticles3"]
+[node name="Label2" type="Label" parent="UI/Particles/MaxAliveParticleSys"]
 layout_mode = 2
 text = "  Middle  "
 
-[node name="M" type="SpinBox" parent="UI/Particles/MaximumParticles3" node_paths=PackedStringArray("config_node")]
+[node name="M" type="SpinBox" parent="UI/Particles/MaxAliveParticleSys" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 rounded = true
 script = ExtResource("25_pgk25")
@@ -1336,11 +1335,11 @@ key = "pool-size"
 config_node = NodePath("../../../../ConfigControl")
 integral = true
 
-[node name="Label3" type="Label" parent="UI/Particles/MaximumParticles3"]
+[node name="Label3" type="Label" parent="UI/Particles/MaxAliveParticleSys"]
 layout_mode = 2
 text = "  Far"
 
-[node name="F" type="SpinBox" parent="UI/Particles/MaximumParticles3" node_paths=PackedStringArray("config_node")]
+[node name="F" type="SpinBox" parent="UI/Particles/MaxAliveParticleSys" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 rounded = true
 script = ExtResource("25_pgk25")
@@ -1366,7 +1365,7 @@ layout_mode = 2
 
 [node name="Label7" type="Label" parent="UI/MIDI"]
 layout_mode = 2
-text = "MIDI velocity multiplier (*)"
+text = "MIDI velocity multiplier"
 
 [node name="MidiVeloScale" type="GridContainer" parent="UI/MIDI"]
 layout_mode = 2
@@ -1420,7 +1419,7 @@ layout_mode = 2
 
 [node name="Label8" type="Label" parent="UI/MIDI"]
 layout_mode = 2
-text = "MIDI first note (*)"
+text = "MIDI first note"
 
 [node name="MidiFirstNote" type="GridContainer" parent="UI/MIDI"]
 layout_mode = 2
@@ -1474,7 +1473,7 @@ layout_mode = 2
 
 [node name="Label9" type="Label" parent="UI/MIDI"]
 layout_mode = 2
-text = "MIDI last note (*)"
+text = "MIDI last note"
 
 [node name="MidiLastNote" type="GridContainer" parent="UI/MIDI"]
 layout_mode = 2
@@ -1533,30 +1532,17 @@ layout_mode = 2
 layout_mode = 2
 tooltip_text = "Linux only"
 mouse_filter = 1
-text = "MIDI Port
-(Linux only) (*) "
+text = "MIDI Port (Linux only)"
 label_settings = ExtResource("19_7nt27")
 
-[node name="SpinBox" type="SpinBox" parent="UI/MIDI/MidiPort"]
+[node name="SpinBox" type="SpinBox" parent="UI/MIDI/MidiPort" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 tooltip_text = "Linux only"
 max_value = 256.0
+value = 16.0
 rounded = true
 script = ExtResource("28_02d50")
-
-[node name="GroupsExample" type="Sprite2D" parent="UI"]
-position = Vector2(1489.7837, 835.25)
-scale = Vector2(0.43492517, 0.4349251)
-texture = ExtResource("27_4bgka")
-
-[node name="Label" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 1090.0
-offset_top = 626.0
-offset_right = 1342.0
-offset_bottom = 661.0
-text = "Initial groups visualization:
-"
+config_node = NodePath("../../../../ConfigControl")
 
 [node name="ConfigControl" type="Node" parent="."]
 script = ExtResource("22_adb74")

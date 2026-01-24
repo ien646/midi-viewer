@@ -4,7 +4,7 @@ extends CheckButton
 @export var config_node: Node;
 
 func _ready() -> void:
-	toggle_mode = Config.get_tagged_value(Config.SECTION_PARTICLES, Config.KEY_ENABLED, Utils.group_tag(group));
+	button_pressed = Config.get_tagged_value(Config.SECTION_PARTICLES, Config.KEY_ENABLED, Utils.group_tag(group));
 
 func _toggled(toggled_on: bool) -> void:
-	Config.set_tagged_value(Config.SECTION_PARTICLES, Config.KEY_ENABLED, Utils.group_tag(group), toggled_on);
+	config_node.update_config_value_tagged(Config.SECTION_PARTICLES, Utils.group_tag(group), Config.KEY_ENABLED, toggled_on);
