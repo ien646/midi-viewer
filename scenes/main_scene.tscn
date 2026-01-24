@@ -1544,10 +1544,19 @@ max_value = 256.0
 rounded = true
 script = ExtResource("28_02d50")
 
-[node name="Sprite2D" type="Sprite2D" parent="UI"]
+[node name="GroupsExample" type="Sprite2D" parent="UI"]
 position = Vector2(1489.7837, 835.25)
 scale = Vector2(0.43492517, 0.4349251)
 texture = ExtResource("27_4bgka")
+
+[node name="Label" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 1090.0
+offset_top = 626.0
+offset_right = 1342.0
+offset_bottom = 661.0
+text = "Initial groups visualization:
+"
 
 [node name="ConfigControl" type="Node" parent="."]
 script = ExtResource("22_adb74")
