@@ -57,6 +57,7 @@ const KEY_PORT = "port";
 const KEY_VELOCITY_SCALE = "velocity-scale";
 const KEY_FIRST_NOTE = "first-note";
 const KEY_LAST_NOTE = "last-note";
+const KEY_FOV = "fov";
 
 const TAG_NEAR = "Near";
 const TAG_MIDDLE = "Middle";
@@ -77,6 +78,7 @@ static func _init_config_default_values(config: ConfigFile):
 	config.set_value(SECTION_BACKGROUND, KEY_IMAGE_DARKEN, 0.5);
 	
 	config.set_value(SECTION_CAMERA, KEY_POSITION, Vector3(0, 22, 55));
+	config.set_value(SECTION_CAMERA, KEY_FOV, 50.0);
 	
 	config.set_value(tagged(SECTION_GRADIENT, TAG_NEAR), KEY_OFFSETS, _DEFAULT_GRADIENT_OFFSETS);
 	config.set_value(tagged(SECTION_GRADIENT, TAG_NEAR), KEY_COLORS, _DEFAULT_GRADIENT_COLORS);

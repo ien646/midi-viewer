@@ -41,12 +41,17 @@ func init(midi_port: int):
 	_poll_midi_events(midi_port);
 	
 func push_events():
+	note_queue_mutex.lock();
 	for n in note_queue:
 		emit_signal("note_on_received", n[0], n[1]);
 	note_queue.clear();
+	note_queue_mutex.unlock();
 	
 func shutdown():
+	# Kill process first so that aseqdump's stdio doesn't block forever
+	# on get_line() without additional MIDI inputs
+	OS.kill(midi_poll_process_pid);
+	
 	quit_requested = true;
 	midi_poll_process_stdio.close();
 	midi_poll_thread.wait_to_finish();
-	OS.kill(midi_poll_process_pid);
