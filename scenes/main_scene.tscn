@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://cvt0cgi1d1uyo"]
+[gd_scene load_steps=42 format=4 uid="uid://cvt0cgi1d1uyo"]
 
 [ext_resource type="Script" uid="uid://cpn4jpqqo0gml" path="res://scripts/grid.gd" id="1_0f027"]
 [ext_resource type="Script" uid="uid://8op24g3mtwsf" path="res://scripts/subviewport.gd" id="1_671wp"]
@@ -28,8 +28,10 @@
 [ext_resource type="Script" uid="uid://brj3tgjwptx7i" path="res://scripts/ui/group_setting_check_button.gd" id="24_4bgka"]
 [ext_resource type="Script" uid="uid://dvv7k4xq17o0i" path="res://scripts/ui/anti_aliasing_combo.gd" id="24_6p3nn"]
 [ext_resource type="Script" uid="uid://di2c4whrcw0ky" path="res://scripts/hint.gd" id="24_to7gp"]
-[ext_resource type="Script" uid="uid://djgnngoutn4iu" path="res://scenes/bg_color_preview.gd" id="25_kkokr"]
+[ext_resource type="Script" uid="uid://djgnngoutn4iu" path="res://scripts/ui/bg_color_preview.gd" id="25_kkokr"]
 [ext_resource type="Script" uid="uid://dno5v84ewkrl2" path="res://scripts/ui/group_setting_spinbox.gd" id="25_pgk25"]
+[ext_resource type="Script" uid="uid://bogrrjafbqfap" path="res://scripts/ui/bgimage_load_button.gd" id="26_lhwp2"]
+[ext_resource type="Script" uid="uid://b3q7bfvxpdpwu" path="res://scripts/ui/bgimage_clear_button.gd" id="27_l40q6"]
 [ext_resource type="Script" uid="uid://xt2lgjewdgcv" path="res://scripts/ui/midi_port.gd" id="28_02d50"]
 
 [sub_resource type="World3D" id="World3D_mo76n"]
@@ -347,9 +349,10 @@ size = 80.0
 script = ExtResource("9_7ycvg")
 config_node = NodePath("../../ConfigControl")
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="." node_paths=PackedStringArray("config_node")]
 modulate = Color(0.35406289, 0.35406289, 0.3540628, 1)
 script = ExtResource("7_nfk4m")
+config_node = NodePath("../ConfigControl")
 
 [node name="Foreground" type="Sprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_mo76n")
@@ -602,6 +605,56 @@ layout_mode = 2
 color = Color(0, 0, 0, 1)
 script = ExtResource("25_kkokr")
 config_node = NodePath("../../../ConfigControl")
+
+[node name="HSeparator4" type="HSeparator" parent="UI/Graphics"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="UI/Graphics"]
+layout_mode = 2
+text = "Custom background"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Graphics"]
+layout_mode = 2
+
+[node name="Load" type="Button" parent="UI/Graphics/HBoxContainer" node_paths=PackedStringArray("config_node", "file_dialog")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "LOAD"
+script = ExtResource("26_lhwp2")
+config_node = NodePath("../../../../ConfigControl")
+file_dialog = NodePath("FileDialog")
+
+[node name="FileDialog" type="FileDialog" parent="UI/Graphics/HBoxContainer/Load"]
+oversampling_override = 1.0
+title = "Open a File"
+initial_position = 1
+size = Vector2i(1500, 1130)
+file_mode = 0
+use_native_dialog = true
+
+[node name="Clear" type="Button" parent="UI/Graphics/HBoxContainer" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CLEAR"
+script = ExtResource("27_l40q6")
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/Graphics"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="UI/Graphics/HBoxContainer2"]
+layout_mode = 2
+text = "Dark tint     "
+
+[node name="SpinBox" type="SpinBox" parent="UI/Graphics/HBoxContainer2" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+script = ExtResource("22_02d50")
+section = "Background"
+key = "image-darken"
+config_node = NodePath("../../../../ConfigControl")
 
 [node name="Appearance" type="VBoxContainer" parent="UI"]
 layout_mode = 0
