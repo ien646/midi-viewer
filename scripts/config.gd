@@ -34,6 +34,9 @@ const KEY_IMAGE = "image";
 const KEY_IMAGE_DARKEN = "image-darken";
 const KEY_FXAA = "FXAA";
 const KEY_SMAA = "SMAA";
+const KEY_FULLSCREEN = "fullscreen";
+const KEY_RENDER_SCALE = "render-scale";
+const KEY_FSR = "FSR";
 const KEY_OFFSETS = "offsets";
 const KEY_COLORS = "colors";
 const KEY_INTERPOLATE = "interpolate";
@@ -72,6 +75,9 @@ static func _init_config_default_values(config: ConfigFile):
 	begin_batch();
 	config.set_value(SECTION_GRAPHICS, KEY_FXAA, false);
 	config.set_value(SECTION_GRAPHICS, KEY_SMAA, true);
+	config.set_value(SECTION_GRAPHICS, KEY_FULLSCREEN, false);
+	config.set_value(SECTION_GRAPHICS, KEY_RENDER_SCALE, 100);
+	config.set_value(SECTION_GRAPHICS, KEY_FSR, false);
 	
 	config.set_value(SECTION_BACKGROUND, KEY_COLOR, Color(0.02, 0.02, 0.02));
 	config.set_value(SECTION_BACKGROUND, KEY_IMAGE, "");

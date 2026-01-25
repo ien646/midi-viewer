@@ -20,12 +20,12 @@
 [ext_resource type="Script" uid="uid://xrx3jjbnoptb" path="res://scripts/ui.gd" id="18_58gk3"]
 [ext_resource type="Theme" uid="uid://cfbptf6c0qfbj" path="res://themes/default_theme.tres" id="18_k67gn"]
 [ext_resource type="LabelSettings" uid="uid://boximwnph3wgp" path="res://fonts/ui_label_settings.tres" id="19_7nt27"]
-[ext_resource type="Script" uid="uid://brj3tgjwptx7i" path="res://scripts/ui/check_button_vis.gd" id="21_58gk3"]
+[ext_resource type="Script" uid="uid://cttpn2xl8awxe" path="res://scripts/ui/setting_check_button.gd" id="21_58gk3"]
+[ext_resource type="Script" uid="uid://dfm4prv2pdosb" path="res://scripts/ui/setting_spinbox.gd" id="22_02d50"]
 [ext_resource type="Script" uid="uid://btpsx7oi6vdcg" path="res://scripts/config_control.gd" id="22_adb74"]
 [ext_resource type="FontFile" uid="uid://thgiu4bfjbj8" path="res://fonts/Perfect DOS VGA 437 Win.ttf" id="23_u0fll"]
-[ext_resource type="Script" uid="uid://b430nmvr8jpfg" path="res://scripts/ui/camera_fov_spinbox.gd" id="24_4bgka"]
+[ext_resource type="Script" uid="uid://brj3tgjwptx7i" path="res://scripts/ui/group_setting_check_button.gd" id="24_4bgka"]
 [ext_resource type="Script" uid="uid://dvv7k4xq17o0i" path="res://scripts/ui/anti_aliasing_combo.gd" id="24_6p3nn"]
-[ext_resource type="Script" uid="uid://cyftyoqhjg86u" path="res://scripts/ui/particles_check.gd" id="24_k67gn"]
 [ext_resource type="Script" uid="uid://di2c4whrcw0ky" path="res://scripts/hint.gd" id="24_to7gp"]
 [ext_resource type="Script" uid="uid://dno5v84ewkrl2" path="res://scripts/ui/group_setting_spinbox.gd" id="25_pgk25"]
 [ext_resource type="Script" uid="uid://xt2lgjewdgcv" path="res://scripts/ui/midi_port.gd" id="28_02d50"]
@@ -465,12 +465,96 @@ offset_bottom = 56.0
 theme_override_colors/font_color = Color(0.6, 0.6, 1, 1)
 text = "Not all configuration settings are exposed via UI. Edit config.cfg for more."
 
+[node name="Graphics" type="VBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 84.0
+offset_right = 284.0
+offset_bottom = 220.0
+
+[node name="Label" type="Label" parent="UI/Graphics"]
+layout_mode = 2
+text = "GRAPHICS"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/Graphics"]
+layout_mode = 2
+
+[node name="Antialiasing" type="HBoxContainer" parent="UI/Graphics"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="UI/Graphics/Antialiasing"]
+layout_mode = 2
+text = "Antialiasing  "
+
+[node name="AntiAliasingCombo" type="OptionButton" parent="UI/Graphics/Antialiasing" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("23_u0fll")
+selected = 2
+item_count = 3
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "FXAA"
+popup/item_1/id = 1
+popup/item_2/text = "SMAA"
+popup/item_2/id = 2
+script = ExtResource("24_6p3nn")
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Fullscreen" type="HBoxContainer" parent="UI/Graphics"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Graphics/Fullscreen"]
+layout_mode = 2
+text = "Fullscreen   "
+
+[node name="CheckButton" type="CheckButton" parent="UI/Graphics/Fullscreen" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+script = ExtResource("21_58gk3")
+section = "Graphics"
+key = "fullscreen"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="RenderScale" type="HBoxContainer" parent="UI/Graphics"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Graphics/RenderScale"]
+layout_mode = 2
+text = "Render scale  "
+
+[node name="SpinBox" type="SpinBox" parent="UI/Graphics/RenderScale" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 10.0
+max_value = 400.0
+step = 0.1
+value = 100.0
+script = ExtResource("22_02d50")
+section = "Graphics"
+key = "render-scale"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="ScalingMode" type="HBoxContainer" parent="UI/Graphics"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Graphics/ScalingMode"]
+layout_mode = 2
+text = "FSR Scaling  "
+
+[node name="CheckButton" type="CheckButton" parent="UI/Graphics/ScalingMode" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+script = ExtResource("21_58gk3")
+section = "Graphics"
+key = "FSR"
+config_node = NodePath("../../../../ConfigControl")
+
 [node name="Appearance" type="VBoxContainer" parent="UI"]
 layout_mode = 0
-offset_left = 52.0
+offset_left = 318.0
 offset_top = 84.0
-offset_right = 268.0
-offset_bottom = 297.0
+offset_right = 552.0
+offset_bottom = 668.0
 
 [node name="Label" type="Label" parent="UI/Appearance"]
 layout_mode = 2
@@ -496,7 +580,9 @@ text = "  Near"
 [node name="N" type="CheckButton" parent="UI/Appearance/GroupVisibility" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 button_pressed = true
-script = ExtResource("21_58gk3")
+script = ExtResource("24_4bgka")
+section = "Block-Generation"
+key = "enabled"
 config_node = NodePath("../../../../ConfigControl")
 
 [node name="Label2" type="Label" parent="UI/Appearance/GroupVisibility"]
@@ -506,8 +592,10 @@ text = "  Middle  "
 [node name="M" type="CheckButton" parent="UI/Appearance/GroupVisibility" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 button_pressed = true
-script = ExtResource("21_58gk3")
+script = ExtResource("24_4bgka")
 group = 1
+section = "Block-Generation"
+key = "enabled"
 config_node = NodePath("../../../../ConfigControl")
 
 [node name="Label3" type="Label" parent="UI/Appearance/GroupVisibility"]
@@ -517,8 +605,10 @@ text = "  Far"
 [node name="F" type="CheckButton" parent="UI/Appearance/GroupVisibility" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 button_pressed = true
-script = ExtResource("21_58gk3")
+script = ExtResource("24_4bgka")
 group = 2
+section = "Block-Generation"
+key = "enabled"
 config_node = NodePath("../../../../ConfigControl")
 
 [node name="HSeparator4" type="HSeparator" parent="UI/Appearance"]
@@ -539,6 +629,7 @@ vertical_alignment = 1
 
 [node name="N" type="SpinBox" parent="UI/Appearance/ColorGravity" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 step = 0.1
 value = 1.0
@@ -554,6 +645,7 @@ vertical_alignment = 1
 
 [node name="M" type="SpinBox" parent="UI/Appearance/ColorGravity" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 step = 0.1
 value = 1.0
@@ -570,6 +662,7 @@ vertical_alignment = 1
 
 [node name="F" type="SpinBox" parent="UI/Appearance/ColorGravity" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 step = 0.1
 value = 1.0
@@ -597,6 +690,7 @@ vertical_alignment = 1
 
 [node name="N" type="SpinBox" parent="UI/Appearance/MinColorValue" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
 script = ExtResource("25_pgk25")
@@ -611,6 +705,7 @@ vertical_alignment = 1
 
 [node name="M" type="SpinBox" parent="UI/Appearance/MinColorValue" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
 script = ExtResource("25_pgk25")
@@ -626,6 +721,7 @@ vertical_alignment = 1
 
 [node name="F" type="SpinBox" parent="UI/Appearance/MinColorValue" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
 script = ExtResource("25_pgk25")
@@ -652,6 +748,7 @@ vertical_alignment = 1
 
 [node name="N" type="SpinBox" parent="UI/Appearance/GradientShiftSpeed" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 step = 0.01
 script = ExtResource("25_pgk25")
@@ -666,6 +763,7 @@ vertical_alignment = 1
 
 [node name="M" type="SpinBox" parent="UI/Appearance/GradientShiftSpeed" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 step = 0.01
 script = ExtResource("25_pgk25")
@@ -681,6 +779,7 @@ vertical_alignment = 1
 
 [node name="F" type="SpinBox" parent="UI/Appearance/GradientShiftSpeed" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 step = 0.01
 script = ExtResource("25_pgk25")
@@ -689,32 +788,11 @@ section = "Block-Appearance"
 key = "gradient-hue-shift-speed"
 config_node = NodePath("../../../../ConfigControl")
 
-[node name="HSeparator" type="HSeparator" parent="UI/Appearance"]
-layout_mode = 2
-
-[node name="Label4" type="Label" parent="UI/Appearance"]
-layout_mode = 2
-text = "Antialiasing"
-
-[node name="AntiAliasingCombo" type="OptionButton" parent="UI/Appearance" node_paths=PackedStringArray("config_node")]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("23_u0fll")
-selected = 2
-item_count = 3
-popup/item_0/text = "None"
-popup/item_0/id = 0
-popup/item_1/text = "FXAA"
-popup/item_1/id = 1
-popup/item_2/text = "SMAA"
-popup/item_2/id = 2
-script = ExtResource("24_6p3nn")
-config_node = NodePath("../../../ConfigControl")
-
 [node name="Camera" type="VBoxContainer" parent="UI"]
 layout_mode = 0
-offset_left = 308.0
+offset_left = 582.0
 offset_top = 84.0
-offset_right = 524.0
+offset_right = 798.0
 offset_bottom = 772.0
 
 [node name="Label" type="Label" parent="UI/Camera"]
@@ -734,17 +812,20 @@ text = "Field of view  "
 
 [node name="SpinBox" type="SpinBox" parent="UI/Camera/FOV" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 min_value = 1.0
 max_value = 179.0
 value = 50.0
-script = ExtResource("24_4bgka")
+script = ExtResource("22_02d50")
+section = "Camera"
+key = "fov"
 config_node = NodePath("../../../../ConfigControl")
 
 [node name="Generation-Behaviour" type="VBoxContainer" parent="UI"]
 layout_mode = 0
-offset_left = 564.0
+offset_left = 830.0
 offset_top = 84.0
-offset_right = 780.0
+offset_right = 1046.0
 offset_bottom = 772.0
 
 [node name="Label" type="Label" parent="UI/Generation-Behaviour"]
@@ -770,6 +851,7 @@ vertical_alignment = 1
 
 [node name="N" type="SpinBox" parent="UI/Generation-Behaviour/NotesPerRow" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 min_value = 1.0
 max_value = 128.0
 value = 1.0
@@ -787,6 +869,7 @@ vertical_alignment = 1
 
 [node name="M" type="SpinBox" parent="UI/Generation-Behaviour/NotesPerRow" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 min_value = 1.0
 max_value = 128.0
 value = 1.0
@@ -805,6 +888,7 @@ vertical_alignment = 1
 
 [node name="F" type="SpinBox" parent="UI/Generation-Behaviour/NotesPerRow" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 min_value = 1.0
 max_value = 128.0
 value = 1.0
@@ -834,6 +918,7 @@ vertical_alignment = 1
 
 [node name="N" type="SpinBox" parent="UI/Generation-Behaviour/RowSeparation" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 step = 0.01
 value = 1.0
@@ -849,6 +934,7 @@ vertical_alignment = 1
 
 [node name="M" type="SpinBox" parent="UI/Generation-Behaviour/RowSeparation" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 step = 0.01
 value = 1.0
@@ -865,6 +951,7 @@ vertical_alignment = 1
 
 [node name="F" type="SpinBox" parent="UI/Generation-Behaviour/RowSeparation" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 step = 0.01
 value = 1.0
@@ -892,6 +979,7 @@ vertical_alignment = 1
 
 [node name="N" type="SpinBox" parent="UI/Generation-Behaviour/ColumnSeparation" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 step = 0.01
 value = 1.0
@@ -907,6 +995,7 @@ vertical_alignment = 1
 
 [node name="M" type="SpinBox" parent="UI/Generation-Behaviour/ColumnSeparation" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 step = 0.01
 value = 1.0
@@ -923,6 +1012,7 @@ vertical_alignment = 1
 
 [node name="F" type="SpinBox" parent="UI/Generation-Behaviour/ColumnSeparation" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 step = 0.01
 value = 1.0
@@ -950,6 +1040,7 @@ vertical_alignment = 1
 
 [node name="N" type="SpinBox" parent="UI/Generation-Behaviour/MinYScale" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 step = 0.1
 value = 1.0
@@ -965,6 +1056,7 @@ vertical_alignment = 1
 
 [node name="M" type="SpinBox" parent="UI/Generation-Behaviour/MinYScale" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 step = 0.1
 value = 1.0
@@ -981,6 +1073,7 @@ vertical_alignment = 1
 
 [node name="F" type="SpinBox" parent="UI/Generation-Behaviour/MinYScale" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 step = 0.1
 value = 1.0
@@ -1008,6 +1101,7 @@ vertical_alignment = 1
 
 [node name="N" type="SpinBox" parent="UI/Generation-Behaviour/MaxYScale" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 step = 0.1
 value = 1.0
@@ -1023,6 +1117,7 @@ vertical_alignment = 1
 
 [node name="M" type="SpinBox" parent="UI/Generation-Behaviour/MaxYScale" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 step = 0.1
 value = 1.0
@@ -1039,6 +1134,7 @@ vertical_alignment = 1
 
 [node name="F" type="SpinBox" parent="UI/Generation-Behaviour/MaxYScale" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 step = 0.1
 value = 1.0
@@ -1066,6 +1162,7 @@ vertical_alignment = 1
 
 [node name="N" type="SpinBox" parent="UI/Generation-Behaviour/MaxYScale2" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 min_value = -1000.0
 max_value = 1000.0
 step = 0.1
@@ -1082,6 +1179,7 @@ vertical_alignment = 1
 
 [node name="M" type="SpinBox" parent="UI/Generation-Behaviour/MaxYScale2" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 min_value = -1000.0
 max_value = 1000.0
 step = 0.1
@@ -1099,6 +1197,7 @@ vertical_alignment = 1
 
 [node name="F" type="SpinBox" parent="UI/Generation-Behaviour/MaxYScale2" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 min_value = -1000.0
 max_value = 1000.0
 step = 0.1
@@ -1111,9 +1210,9 @@ config_node = NodePath("../../../../ConfigControl")
 
 [node name="Particles" type="VBoxContainer" parent="UI"]
 layout_mode = 0
-offset_left = 812.0
+offset_left = 1078.0
 offset_top = 84.0
-offset_right = 1028.0
+offset_right = 1294.0
 offset_bottom = 698.0
 
 [node name="Label2" type="Label" parent="UI/Particles"]
@@ -1139,7 +1238,9 @@ text = "  Near"
 [node name="N" type="CheckButton" parent="UI/Particles/ParticlesEnabled" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 button_pressed = true
-script = ExtResource("24_k67gn")
+script = ExtResource("24_4bgka")
+section = "Particles"
+key = "enabled"
 config_node = NodePath("../../../../ConfigControl")
 
 [node name="Label2" type="Label" parent="UI/Particles/ParticlesEnabled"]
@@ -1149,8 +1250,10 @@ text = "  Middle  "
 [node name="M" type="CheckButton" parent="UI/Particles/ParticlesEnabled" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 button_pressed = true
-script = ExtResource("24_k67gn")
+script = ExtResource("24_4bgka")
 group = 1
+section = "Particles"
+key = "enabled"
 config_node = NodePath("../../../../ConfigControl")
 
 [node name="Label3" type="Label" parent="UI/Particles/ParticlesEnabled"]
@@ -1160,8 +1263,10 @@ text = "  Far"
 [node name="F" type="CheckButton" parent="UI/Particles/ParticlesEnabled" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 button_pressed = true
-script = ExtResource("24_k67gn")
+script = ExtResource("24_4bgka")
 group = 2
+section = "Particles"
+key = "enabled"
 config_node = NodePath("../../../../ConfigControl")
 
 [node name="HSeparator5" type="HSeparator" parent="UI/Particles"]
@@ -1181,6 +1286,7 @@ text = "  Near"
 
 [node name="N" type="SpinBox" parent="UI/Particles/MinimumParticles" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 rounded = true
 script = ExtResource("25_pgk25")
@@ -1195,6 +1301,7 @@ text = "  Middle  "
 
 [node name="N2" type="SpinBox" parent="UI/Particles/MinimumParticles" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 rounded = true
 script = ExtResource("25_pgk25")
@@ -1210,6 +1317,7 @@ text = "  Far"
 
 [node name="N3" type="SpinBox" parent="UI/Particles/MinimumParticles" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 rounded = true
 script = ExtResource("25_pgk25")
@@ -1236,6 +1344,7 @@ text = "  Near"
 
 [node name="N" type="SpinBox" parent="UI/Particles/MaximumParticles" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 rounded = true
 script = ExtResource("25_pgk25")
@@ -1250,6 +1359,7 @@ text = "  Middle  "
 
 [node name="M" type="SpinBox" parent="UI/Particles/MaximumParticles" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 rounded = true
 script = ExtResource("25_pgk25")
@@ -1264,6 +1374,7 @@ text = "  Far"
 
 [node name="F" type="SpinBox" parent="UI/Particles/MaximumParticles" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 rounded = true
 script = ExtResource("25_pgk25")
@@ -1290,6 +1401,7 @@ text = "  Near"
 
 [node name="N" type="SpinBox" parent="UI/Particles/ParticleCurvePow" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 min_value = -10.0
 max_value = 10.0
 step = 0.1
@@ -1305,6 +1417,7 @@ text = "  Middle  "
 
 [node name="M" type="SpinBox" parent="UI/Particles/ParticleCurvePow" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 min_value = -10.0
 max_value = 10.0
 step = 0.1
@@ -1320,6 +1433,7 @@ text = "  Far"
 
 [node name="F" type="SpinBox" parent="UI/Particles/ParticleCurvePow" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 min_value = -10.0
 max_value = 10.0
 step = 0.1
@@ -1347,6 +1461,7 @@ text = "  Near"
 
 [node name="N" type="SpinBox" parent="UI/Particles/MaxAliveParticleSys" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 rounded = true
 script = ExtResource("25_pgk25")
 section = "Particles"
@@ -1360,6 +1475,7 @@ text = "  Middle  "
 
 [node name="M" type="SpinBox" parent="UI/Particles/MaxAliveParticleSys" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 rounded = true
 script = ExtResource("25_pgk25")
 section = "Particles"
@@ -1373,6 +1489,7 @@ text = "  Far"
 
 [node name="F" type="SpinBox" parent="UI/Particles/MaxAliveParticleSys" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 rounded = true
 script = ExtResource("25_pgk25")
 section = "Particles"
@@ -1382,9 +1499,9 @@ integral = true
 
 [node name="MIDI" type="VBoxContainer" parent="UI"]
 layout_mode = 0
-offset_left = 1069.0
+offset_left = 1335.0
 offset_top = 84.0
-offset_right = 1333.0
+offset_right = 1599.0
 offset_bottom = 956.0
 
 [node name="Label" type="Label" parent="UI/MIDI"]
@@ -1409,6 +1526,7 @@ text = "  Near"
 
 [node name="N" type="SpinBox" parent="UI/MIDI/MidiVeloScale" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 step = 0.01
 script = ExtResource("25_pgk25")
@@ -1422,6 +1540,7 @@ text = "  Middle  "
 
 [node name="M" type="SpinBox" parent="UI/MIDI/MidiVeloScale" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 step = 0.01
 rounded = true
@@ -1437,6 +1556,7 @@ text = "  Far"
 
 [node name="F" type="SpinBox" parent="UI/MIDI/MidiVeloScale" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 step = 0.01
 rounded = true
@@ -1463,6 +1583,7 @@ text = "  Near"
 
 [node name="N" type="SpinBox" parent="UI/MIDI/MidiFirstNote" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 script = ExtResource("25_pgk25")
 section = "Midi"
@@ -1476,6 +1597,7 @@ text = "  Middle  "
 
 [node name="M" type="SpinBox" parent="UI/MIDI/MidiFirstNote" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 rounded = true
 script = ExtResource("25_pgk25")
@@ -1491,6 +1613,7 @@ text = "  Far"
 
 [node name="F" type="SpinBox" parent="UI/MIDI/MidiFirstNote" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 rounded = true
 script = ExtResource("25_pgk25")
@@ -1517,6 +1640,7 @@ text = "  Near"
 
 [node name="N" type="SpinBox" parent="UI/MIDI/MidiLastNote" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 script = ExtResource("25_pgk25")
 section = "Midi"
@@ -1530,6 +1654,7 @@ text = "  Middle  "
 
 [node name="M" type="SpinBox" parent="UI/MIDI/MidiLastNote" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 rounded = true
 script = ExtResource("25_pgk25")
@@ -1545,6 +1670,7 @@ text = "  Far"
 
 [node name="F" type="SpinBox" parent="UI/MIDI/MidiLastNote" node_paths=PackedStringArray("config_node")]
 layout_mode = 2
+size_flags_horizontal = 3
 max_value = 1000.0
 rounded = true
 script = ExtResource("25_pgk25")
