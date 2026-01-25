@@ -25,13 +25,10 @@ func update_fsr():
 	else:
 		scaling_3d_mode = Viewport.SCALING_3D_MODE_BILINEAR;
 
-func update_aa():
-	var fxaa: bool = Config.get_value(Config.SECTION_GRAPHICS, Config.KEY_FXAA);
-	var smaa: bool = Config.get_value(Config.SECTION_GRAPHICS, Config.KEY_SMAA);
-	
-	if(smaa):
+func update_aa():	
+	if(Config.get_value(Config.SECTION_GRAPHICS, Config.KEY_SMAA) as bool):
 		screen_space_aa = Viewport.SCREEN_SPACE_AA_SMAA;
-	elif(fxaa):
+	elif(Config.get_value(Config.SECTION_GRAPHICS, Config.KEY_FXAA) as bool):
 		screen_space_aa = Viewport.SCREEN_SPACE_AA_FXAA;
 	else:
 		screen_space_aa = Viewport.SCREEN_SPACE_AA_DISABLED

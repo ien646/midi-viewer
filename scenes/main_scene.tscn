@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://cvt0cgi1d1uyo"]
+[gd_scene load_steps=40 format=4 uid="uid://cvt0cgi1d1uyo"]
 
 [ext_resource type="Script" uid="uid://cpn4jpqqo0gml" path="res://scripts/grid.gd" id="1_0f027"]
 [ext_resource type="Script" uid="uid://8op24g3mtwsf" path="res://scripts/subviewport.gd" id="1_671wp"]
@@ -24,9 +24,11 @@
 [ext_resource type="Script" uid="uid://dfm4prv2pdosb" path="res://scripts/ui/setting_spinbox.gd" id="22_02d50"]
 [ext_resource type="Script" uid="uid://btpsx7oi6vdcg" path="res://scripts/config_control.gd" id="22_adb74"]
 [ext_resource type="FontFile" uid="uid://thgiu4bfjbj8" path="res://fonts/Perfect DOS VGA 437 Win.ttf" id="23_u0fll"]
+[ext_resource type="Script" uid="uid://ymibh6qsx1qo" path="res://scripts/ui/bgcolor_component.gd" id="24_02d50"]
 [ext_resource type="Script" uid="uid://brj3tgjwptx7i" path="res://scripts/ui/group_setting_check_button.gd" id="24_4bgka"]
 [ext_resource type="Script" uid="uid://dvv7k4xq17o0i" path="res://scripts/ui/anti_aliasing_combo.gd" id="24_6p3nn"]
 [ext_resource type="Script" uid="uid://di2c4whrcw0ky" path="res://scripts/hint.gd" id="24_to7gp"]
+[ext_resource type="Script" uid="uid://djgnngoutn4iu" path="res://scenes/bg_color_preview.gd" id="25_kkokr"]
 [ext_resource type="Script" uid="uid://dno5v84ewkrl2" path="res://scripts/ui/group_setting_spinbox.gd" id="25_pgk25"]
 [ext_resource type="Script" uid="uid://xt2lgjewdgcv" path="res://scripts/ui/midi_port.gd" id="28_02d50"]
 
@@ -474,7 +476,7 @@ offset_bottom = 220.0
 
 [node name="Label" type="Label" parent="UI/Graphics"]
 layout_mode = 2
-text = "GRAPHICS"
+text = "GRAPHICS/BACKGROUND"
 horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="UI/Graphics"]
@@ -516,6 +518,9 @@ section = "Graphics"
 key = "fullscreen"
 config_node = NodePath("../../../../ConfigControl")
 
+[node name="HSeparator3" type="HSeparator" parent="UI/Graphics"]
+layout_mode = 2
+
 [node name="RenderScale" type="HBoxContainer" parent="UI/Graphics"]
 layout_mode = 2
 
@@ -548,6 +553,55 @@ script = ExtResource("21_58gk3")
 section = "Graphics"
 key = "FSR"
 config_node = NodePath("../../../../ConfigControl")
+
+[node name="HSeparator2" type="HSeparator" parent="UI/Graphics"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="UI/Graphics"]
+layout_mode = 2
+text = "Background color"
+
+[node name="BGColor" type="HBoxContainer" parent="UI/Graphics"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Graphics/BGColor"]
+layout_mode = 2
+text = "R"
+
+[node name="R" type="SpinBox" parent="UI/Graphics/BGColor" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 255.0
+script = ExtResource("24_02d50")
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label2" type="Label" parent="UI/Graphics/BGColor"]
+layout_mode = 2
+text = "G"
+
+[node name="G" type="SpinBox" parent="UI/Graphics/BGColor" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 255.0
+script = ExtResource("24_02d50")
+component_index_rgb = 1
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="Label3" type="Label" parent="UI/Graphics/BGColor"]
+layout_mode = 2
+text = "B"
+
+[node name="B" type="SpinBox" parent="UI/Graphics/BGColor" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+max_value = 255.0
+script = ExtResource("24_02d50")
+component_index_rgb = 2
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="BGColorPreview" type="ColorRect" parent="UI/Graphics" node_paths=PackedStringArray("config_node")]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("25_kkokr")
+config_node = NodePath("../../../ConfigControl")
 
 [node name="Appearance" type="VBoxContainer" parent="UI"]
 layout_mode = 0

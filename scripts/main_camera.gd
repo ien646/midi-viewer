@@ -9,8 +9,13 @@ func _handle_config_value_changed(section: String, key: String, value: Variant):
 				position = value as Vector3;
 			Config.KEY_FOV: 
 				fov = value as float;
+	elif(section == Config.SECTION_BACKGROUND):
+		match key:
+			Config.KEY_COLOR:
+				environment.background_color = value as Color;
 
 func _ready() -> void:
 	position = Config.get_value(Config.SECTION_CAMERA, Config.KEY_POSITION) as Vector3;
-	fov = Config.get_value(Config.SECTION_CAMERA, Config.KEY_FOV);
+	fov = Config.get_value(Config.SECTION_CAMERA, Config.KEY_FOV) as float;
+	environment.background_color = Config.get_value(Config.SECTION_BACKGROUND, Config.KEY_COLOR) as Color;
 	config_node.connect("config_value_changed", _handle_config_value_changed);
