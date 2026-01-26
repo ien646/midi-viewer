@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqh8eo2bxrf1c"]
+
+[ext_resource type="Script" uid="uid://d03sbjcesi0rg" path="res://scripts/ui/setting_vec3.gd" id="1_c8fh1"]
+
+[node name="Position" type="HBoxContainer" node_paths=PackedStringArray("x_node", "y_node", "z_node", "config_node")]
+script = ExtResource("1_c8fh1")
+x_node = NodePath("X")
+y_node = NodePath("Y")
+z_node = NodePath("Z")
+config_node = NodePath("")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "X"
+
+[node name="X" type="SpinBox" parent="."]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 2
+text = "Y"
+
+[node name="Y" type="SpinBox" parent="."]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 2
+text = "Z"
+
+[node name="Z" type="SpinBox" parent="."]
+layout_mode = 2

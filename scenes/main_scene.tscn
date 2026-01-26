@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://cvt0cgi1d1uyo"]
+[gd_scene load_steps=44 format=4 uid="uid://cvt0cgi1d1uyo"]
 
 [ext_resource type="Script" uid="uid://cpn4jpqqo0gml" path="res://scripts/grid.gd" id="1_0f027"]
 [ext_resource type="Script" uid="uid://8op24g3mtwsf" path="res://scripts/subviewport.gd" id="1_671wp"]
@@ -33,7 +33,8 @@
 [ext_resource type="Script" uid="uid://bogrrjafbqfap" path="res://scripts/ui/bgimage_load_button.gd" id="26_lhwp2"]
 [ext_resource type="Script" uid="uid://b3q7bfvxpdpwu" path="res://scripts/ui/bgimage_clear_button.gd" id="27_l40q6"]
 [ext_resource type="Script" uid="uid://xt2lgjewdgcv" path="res://scripts/ui/midi_port.gd" id="28_02d50"]
-[ext_resource type="Script" uid="uid://d03sbjcesi0rg" path="res://scenes/vec3_setting.gd" id="30_l40q6"]
+[ext_resource type="Script" uid="uid://d03sbjcesi0rg" path="res://scripts/ui/setting_vec3.gd" id="30_l40q6"]
+[ext_resource type="Script" uid="uid://dtfes0sa4png2" path="res://scripts/ui/group_setting_vec3.gd" id="31_iav3h"]
 
 [sub_resource type="World3D" id="World3D_mo76n"]
 environment = ExtResource("5_nfk4m")
@@ -969,10 +970,10 @@ layout_mode = 2
 
 [node name="Generation-Behaviour" type="VBoxContainer" parent="UI"]
 layout_mode = 0
-offset_left = 830.0
+offset_left = 846.0
 offset_top = 84.0
-offset_right = 1046.0
-offset_bottom = 772.0
+offset_right = 1116.0
+offset_bottom = 868.0
 
 [node name="Label" type="Label" parent="UI/Generation-Behaviour"]
 layout_mode = 2
@@ -1354,11 +1355,143 @@ section = "Block-Behaviour"
 key = "rotation-speed"
 config_node = NodePath("../../../../ConfigControl")
 
+[node name="HSeparator9" type="HSeparator" parent="UI/Generation-Behaviour"]
+layout_mode = 2
+
+[node name="Label8" type="Label" parent="UI/Generation-Behaviour"]
+layout_mode = 2
+text = "Position"
+
+[node name="PositionNear" type="HBoxContainer" parent="UI/Generation-Behaviour" node_paths=PackedStringArray("x_node", "y_node", "z_node", "config_node")]
+layout_mode = 2
+script = ExtResource("31_iav3h")
+config_section = "Block-Generation"
+config_key = "position"
+x_node = NodePath("X")
+y_node = NodePath("Y")
+z_node = NodePath("Z")
+config_node = NodePath("../../../ConfigControl")
+
+[node name="Label9" type="Label" parent="UI/Generation-Behaviour/PositionNear"]
+layout_mode = 2
+text = "  Near   "
+
+[node name="Label12" type="Label" parent="UI/Generation-Behaviour/PositionNear"]
+layout_mode = 2
+text = "X"
+
+[node name="X" type="SpinBox" parent="UI/Generation-Behaviour/PositionNear"]
+layout_mode = 2
+min_value = -99999.0
+max_value = 99999.0
+
+[node name="Label10" type="Label" parent="UI/Generation-Behaviour/PositionNear"]
+layout_mode = 2
+text = "Y"
+
+[node name="Y" type="SpinBox" parent="UI/Generation-Behaviour/PositionNear"]
+layout_mode = 2
+min_value = -99999.0
+max_value = 99999.0
+
+[node name="Label11" type="Label" parent="UI/Generation-Behaviour/PositionNear"]
+layout_mode = 2
+text = "Z"
+
+[node name="Z" type="SpinBox" parent="UI/Generation-Behaviour/PositionNear"]
+layout_mode = 2
+min_value = -99999.0
+max_value = 99999.0
+
+[node name="PositionMiddle" type="HBoxContainer" parent="UI/Generation-Behaviour" node_paths=PackedStringArray("x_node", "y_node", "z_node", "config_node")]
+layout_mode = 2
+script = ExtResource("31_iav3h")
+group = 1
+config_section = "Block-Generation"
+config_key = "position"
+x_node = NodePath("X")
+y_node = NodePath("Y")
+z_node = NodePath("Z")
+config_node = NodePath("../../../ConfigControl")
+
+[node name="Label9" type="Label" parent="UI/Generation-Behaviour/PositionMiddle"]
+layout_mode = 2
+text = "  Middle "
+
+[node name="Label12" type="Label" parent="UI/Generation-Behaviour/PositionMiddle"]
+layout_mode = 2
+text = "X"
+
+[node name="X" type="SpinBox" parent="UI/Generation-Behaviour/PositionMiddle"]
+layout_mode = 2
+min_value = -99999.0
+max_value = 99999.0
+
+[node name="Label10" type="Label" parent="UI/Generation-Behaviour/PositionMiddle"]
+layout_mode = 2
+text = "Y"
+
+[node name="Y" type="SpinBox" parent="UI/Generation-Behaviour/PositionMiddle"]
+layout_mode = 2
+min_value = -99999.0
+max_value = 99999.0
+
+[node name="Label11" type="Label" parent="UI/Generation-Behaviour/PositionMiddle"]
+layout_mode = 2
+text = "Z"
+
+[node name="Z" type="SpinBox" parent="UI/Generation-Behaviour/PositionMiddle"]
+layout_mode = 2
+min_value = -99999.0
+max_value = 99999.0
+
+[node name="PositionFar" type="HBoxContainer" parent="UI/Generation-Behaviour" node_paths=PackedStringArray("x_node", "y_node", "z_node", "config_node")]
+layout_mode = 2
+script = ExtResource("31_iav3h")
+group = 2
+config_section = "Block-Generation"
+config_key = "position"
+x_node = NodePath("X")
+y_node = NodePath("Y")
+z_node = NodePath("Z")
+config_node = NodePath("../../../ConfigControl")
+
+[node name="Label9" type="Label" parent="UI/Generation-Behaviour/PositionFar"]
+layout_mode = 2
+text = "  Far    "
+
+[node name="Label12" type="Label" parent="UI/Generation-Behaviour/PositionFar"]
+layout_mode = 2
+text = "X"
+
+[node name="X" type="SpinBox" parent="UI/Generation-Behaviour/PositionFar"]
+layout_mode = 2
+min_value = -99999.0
+max_value = 99999.0
+
+[node name="Label10" type="Label" parent="UI/Generation-Behaviour/PositionFar"]
+layout_mode = 2
+text = "Y"
+
+[node name="Y" type="SpinBox" parent="UI/Generation-Behaviour/PositionFar"]
+layout_mode = 2
+min_value = -99999.0
+max_value = 99999.0
+
+[node name="Label11" type="Label" parent="UI/Generation-Behaviour/PositionFar"]
+layout_mode = 2
+text = "Z"
+
+[node name="Z" type="SpinBox" parent="UI/Generation-Behaviour/PositionFar"]
+layout_mode = 2
+min_value = -99999.0
+max_value = 99999.0
+
 [node name="Particles" type="VBoxContainer" parent="UI"]
 layout_mode = 0
-offset_left = 1078.0
+offset_left = 1190.0
 offset_top = 84.0
-offset_right = 1294.0
+offset_right = 1406.0
 offset_bottom = 698.0
 
 [node name="Label2" type="Label" parent="UI/Particles"]
@@ -1645,9 +1778,9 @@ integral = true
 
 [node name="MIDI" type="VBoxContainer" parent="UI"]
 layout_mode = 0
-offset_left = 1335.0
+offset_left = 1439.0
 offset_top = 84.0
-offset_right = 1599.0
+offset_right = 1703.0
 offset_bottom = 956.0
 
 [node name="Label" type="Label" parent="UI/MIDI"]

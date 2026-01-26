@@ -133,6 +133,8 @@ func handle_config_value_changed(section: String, key: String, value: Variant):
 				Config.KEY_COLUMN_SEPARATION:
 					col_separation = value as float;
 					generate_block_data();
+				Config.KEY_POSITION:
+					position = value as Vector3;
 		if(section.begins_with(Config.SECTION_PARTICLES)):
 			match key:
 				Config.KEY_ENABLED:
