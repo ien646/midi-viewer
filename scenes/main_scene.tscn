@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://cvt0cgi1d1uyo"]
+[gd_scene load_steps=43 format=4 uid="uid://cvt0cgi1d1uyo"]
 
 [ext_resource type="Script" uid="uid://cpn4jpqqo0gml" path="res://scripts/grid.gd" id="1_0f027"]
 [ext_resource type="Script" uid="uid://8op24g3mtwsf" path="res://scripts/subviewport.gd" id="1_671wp"]
@@ -33,6 +33,7 @@
 [ext_resource type="Script" uid="uid://bogrrjafbqfap" path="res://scripts/ui/bgimage_load_button.gd" id="26_lhwp2"]
 [ext_resource type="Script" uid="uid://b3q7bfvxpdpwu" path="res://scripts/ui/bgimage_clear_button.gd" id="27_l40q6"]
 [ext_resource type="Script" uid="uid://xt2lgjewdgcv" path="res://scripts/ui/midi_port.gd" id="28_02d50"]
+[ext_resource type="Script" uid="uid://d03sbjcesi0rg" path="res://scenes/vec3_setting.gd" id="30_l40q6"]
 
 [sub_resource type="World3D" id="World3D_mo76n"]
 environment = ExtResource("5_nfk4m")
@@ -927,6 +928,44 @@ script = ExtResource("22_02d50")
 section = "Camera"
 key = "fov"
 config_node = NodePath("../../../../ConfigControl")
+
+[node name="HSeparator4" type="HSeparator" parent="UI/Camera"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="UI/Camera"]
+layout_mode = 2
+text = "Position"
+
+[node name="Position" type="HBoxContainer" parent="UI/Camera" node_paths=PackedStringArray("x_node", "y_node", "z_node", "config_node")]
+layout_mode = 2
+script = ExtResource("30_l40q6")
+config_section = "Camera"
+config_key = "position"
+x_node = NodePath("X")
+y_node = NodePath("Y")
+z_node = NodePath("Z")
+config_node = NodePath("../../../ConfigControl")
+
+[node name="Label" type="Label" parent="UI/Camera/Position"]
+layout_mode = 2
+text = "X"
+
+[node name="X" type="SpinBox" parent="UI/Camera/Position"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="UI/Camera/Position"]
+layout_mode = 2
+text = "Y"
+
+[node name="Y" type="SpinBox" parent="UI/Camera/Position"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="UI/Camera/Position"]
+layout_mode = 2
+text = "Z"
+
+[node name="Z" type="SpinBox" parent="UI/Camera/Position"]
+layout_mode = 2
 
 [node name="Generation-Behaviour" type="VBoxContainer" parent="UI"]
 layout_mode = 0
