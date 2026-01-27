@@ -470,7 +470,8 @@ offset_top = 40.0
 offset_right = 546.0
 offset_bottom = 56.0
 theme_override_colors/font_color = Color(0.6, 0.6, 1, 1)
-text = "Not all configuration settings are exposed via UI. Edit config.cfg for more."
+text = "Not all configuration settings are exposed via UI. Edit config.cfg for more.
+To reset settings to default values, delete config.cfg."
 
 [node name="Graphics" type="VBoxContainer" parent="UI"]
 layout_mode = 0
@@ -1008,6 +1009,63 @@ text = "Z"
 layout_mode = 2
 min_value = -360.0
 max_value = 360.0
+
+[node name="HSeparator5" type="HSeparator" parent="UI/Camera"]
+layout_mode = 2
+
+[node name="FOV2" type="HBoxContainer" parent="UI/Camera"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="UI/Camera/FOV2"]
+layout_mode = 2
+text = "Brightness  "
+
+[node name="SpinBox" type="SpinBox" parent="UI/Camera/FOV2" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 10.0
+step = 0.01
+value = 1.0
+script = ExtResource("22_02d50")
+section = "Camera"
+key = "brightness"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="FOV3" type="HBoxContainer" parent="UI/Camera"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="UI/Camera/FOV3"]
+layout_mode = 2
+text = "Contrast    "
+
+[node name="SpinBox" type="SpinBox" parent="UI/Camera/FOV3" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 10.0
+step = 0.01
+value = 1.0
+script = ExtResource("22_02d50")
+section = "Camera"
+key = "contrast"
+config_node = NodePath("../../../../ConfigControl")
+
+[node name="FOV4" type="HBoxContainer" parent="UI/Camera"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="UI/Camera/FOV4"]
+layout_mode = 2
+text = "Saturation  "
+
+[node name="SpinBox" type="SpinBox" parent="UI/Camera/FOV4" node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 10.0
+step = 0.01
+value = 1.0
+script = ExtResource("22_02d50")
+section = "Camera"
+key = "saturation"
+config_node = NodePath("../../../../ConfigControl")
 
 [node name="Generation-Behaviour" type="VBoxContainer" parent="UI"]
 layout_mode = 0
