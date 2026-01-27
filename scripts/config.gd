@@ -41,6 +41,7 @@ const KEY_OFFSETS = "offsets";
 const KEY_COLORS = "colors";
 const KEY_INTERPOLATE = "interpolate";
 const KEY_POSITION = "position";
+const KEY_ROTATION = "rotation";
 const KEY_ENABLED = "enabled";
 const KEY_COLUMN_SEPARATION = "column-separation";
 const KEY_ROW_SEPARATION = "row-separation";
@@ -84,6 +85,7 @@ static func _init_config_default_values(config: ConfigFile):
 	config.set_value(SECTION_BACKGROUND, KEY_IMAGE_DARKEN, 0.5);
 	
 	config.set_value(SECTION_CAMERA, KEY_POSITION, Vector3(0, 22, 55));
+	config.set_value(SECTION_CAMERA, KEY_ROTATION, Vector3(-18, 0, 0));
 	config.set_value(SECTION_CAMERA, KEY_FOV, 50.0);
 	
 	config.set_value(tagged(SECTION_GRADIENT, TAG_NEAR), KEY_OFFSETS, _DEFAULT_GRADIENT_OFFSETS);

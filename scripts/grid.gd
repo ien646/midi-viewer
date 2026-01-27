@@ -49,7 +49,8 @@ var scales: Array[Vector3] = [];
 var colors: Array[Color] = [];
 var hue_shift = 0;
 
-var note_count = midi_last_note - midi_first_note + 1;
+func note_count() -> int:
+	return midi_last_note - midi_first_note + 1;
 
 var particles_pool: Array[GPUParticles3D];
 var particles_pool_index = 0;
@@ -120,6 +121,8 @@ func handle_config_value_changed(section: String, key: String, value: Variant):
 					max_y_scale = value as float;
 				Config.KEY_ROTATION_SPEED:
 					rotation_speed = value as float;
+				Config.KEY_GRAVITY:
+					gravity = value as float;
 		if(section.begins_with(Config.SECTION_BLOCK_GENERATION)):
 			match key:
 				Config.KEY_ENABLED:
@@ -161,19 +164,25 @@ func handle_config_value_changed(section: String, key: String, value: Variant):
 			match key:
 				Config.KEY_FIRST_NOTE:
 					midi_first_note = value as int;
+					generate_block_data();
 				Config.KEY_LAST_NOTE:
 					midi_last_note = value as int;
+					generate_block_data();
 				Config.KEY_VELOCITY_SCALE:
 					midi_velocity_scale = value as float;
+					
 func generate_block_data():
 	positions.clear();
 	rotations.clear();
 	scales.clear();
 	colors.clear();
 	
-	var col_size = int(float(note_count) / row_size);
+	multimesh.instance_count = note_count();
+	multimesh.visible_instance_count = note_count();
 	
-	for i in range(0, note_count):
+	var col_size = int(float(note_count()) / row_size);
+	
+	for i in range(0, note_count()):
 		var x = i % row_size;
 		
 		@warning_ignore("integer_division")
@@ -214,8 +223,8 @@ func _ready() -> void:
 	multimesh = MultiMesh.new();
 	multimesh.transform_format = MultiMesh.TRANSFORM_3D;
 	multimesh.use_colors = true;
-	multimesh.instance_count = note_count;
-	multimesh.visible_instance_count = note_count;
+	multimesh.instance_count = note_count();
+	multimesh.visible_instance_count = note_count();
 	
 	multimesh.mesh = block_mesh;
 	multimesh.mesh.surface_set_material(0, material);
@@ -226,7 +235,7 @@ func _ready() -> void:
 	generate_block_data();
 	
 func _physics_process(delta: float) -> void:
-	for i in range(0, note_count):
+	for i in range(0, note_count()):
 		multimesh.set_instance_transform(i, Transform3D(Basis.from_euler(rotations[i]), positions[i]).scaled(scales[i]));
 		multimesh.set_instance_color(i, colors[i]);
 		
@@ -254,7 +263,7 @@ func _process_midi_event(note: int, vel: int) -> void:
 	scales[i].y += remap(v, 0, 127, min_y_scale, max_y_scale);
 	var y_position = clamp(scales[i].y, min_y_scale, max_y_scale);
 	scales[i].y = y_position;
-	var color_sample_point = remap(i, 0, note_count, 0, 1) + hue_shift;
+	var color_sample_point = remap(i, 0, note_count(), 0, 1) + hue_shift;
 	colors[i] = gradient.sample(fmod(color_sample_point, 1));
 
 	if (!particles_disabled):

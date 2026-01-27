@@ -20,7 +20,7 @@ func _physics_process(delta: float) -> void:
 		add_text("[" + tag + "] " + "PS:" + str(alive_particles) + "\n");
 		if(gradient_view):
 			var gradient: Gradient = node.gradient;
-			var note_count: int = node.note_count;
+			var note_count: int = node.note_count();
 			var hue_shift: float = node.hue_shift;
 			for i in range(0, note_count):
 				var sample_point = fmod((float(i) / note_count) + hue_shift, 1.0);

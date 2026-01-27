@@ -7,7 +7,9 @@ func _handle_config_value_changed(section: String, key: String, value: Variant):
 		match key:
 			Config.KEY_POSITION:
 				position = value as Vector3;
-			Config.KEY_FOV: 
+			Config.KEY_ROTATION:
+				rotation_degrees = value as Vector3;
+			Config.KEY_FOV:
 				fov = value as float;
 	elif(section == Config.SECTION_BACKGROUND):
 		match key:
