@@ -40,12 +40,12 @@ extends MultiMeshInstance3D
 @export var midi_last_note = 108;
 @export var midi_port = 16;
 
-const CONFIG_FILE = "config.cfg";
 const SKIP_CONFIG = false;
 
 var positions: Array[Vector3] = [];
 var rotations: Array[Vector3] = [];
 var scales: Array[Vector3] = [];
+var velocities: Array[float] = [];
 var colors: Array[Color] = [];
 var hue_shift = 0;
 
@@ -67,41 +67,45 @@ func get_config_value(section: String, key: String) -> Variant:
 	
 func init_config_values():
 	# -- Block Gradient --
-	var gradient_offsets = get_config_value("Gradient", "offsets") as Array[float];
-	var gradient_colors = get_config_value("Gradient", "colors") as Array[Color];
-	var gradient_interp = get_config_value("Gradient", "interpolate") as bool;
+	var gradient_offsets = get_config_value(Config.SECTION_GRADIENT, Config.KEY_OFFSETS) as Array[float];
+	var gradient_colors = get_config_value(Config.SECTION_GRADIENT, Config.KEY_COLORS) as Array[Color];
+	var gradient_interp = get_config_value(Config.SECTION_GRADIENT, Config.KEY_INTERPOLATE) as bool;
 	var imported_gradient = Gradient.new();
 	imported_gradient.interpolation_mode = Gradient.GRADIENT_INTERPOLATE_LINEAR if gradient_interp else Gradient.GRADIENT_INTERPOLATE_CONSTANT;
 	imported_gradient.offsets = gradient_offsets;
 	imported_gradient.colors = gradient_colors;
 	self.gradient = imported_gradient;
 	
-	# -- Block Generation --
-	if(!get_config_value("Block-Generation", "enabled") as bool):
+	# -- Block Generation -- 
+	if(!get_config_value(Config.SECTION_BLOCK_GENERATION, Config.KEY_ENABLED) as bool):
 		visible = false;
 		
-	position = get_config_value("Block-Generation", "position") as Vector3;
-	col_separation = get_config_value("Block-Generation", "column-separation") as float;
-	row_separation = get_config_value("Block-Generation", "row-separation") as float;
-	row_size = get_config_value("Block-Generation", "notes-per-row") as int;
-	min_y_scale =  get_config_value("Block-Generation", "min-y-scale") as float;
-	max_y_scale = get_config_value("Block-Generation", "max-y-scale") as float;
+	position = get_config_value(Config.SECTION_BLOCK_GENERATION, Config.KEY_POSITION) as Vector3;
+	col_separation = get_config_value(Config.SECTION_BLOCK_GENERATION, Config.KEY_COLUMN_SEPARATION) as float;
+	row_separation = get_config_value(Config.SECTION_BLOCK_GENERATION, Config.KEY_ROW_SEPARATION) as float;
+	row_size = get_config_value(Config.SECTION_BLOCK_GENERATION, Config.KEY_NOTES_PER_ROW) as int;
+	min_y_scale =  get_config_value(Config.SECTION_BLOCK_GENERATION, Config.KEY_MIN_Y_SCALE) as float;
+	max_y_scale = get_config_value(Config.SECTION_BLOCK_GENERATION, Config.KEY_MAX_Y_SCALE) as float;
 	
 	# -- Block Behaviour --
-	gravity = get_config_value("Block-Behaviour", "gravity") as float;
-	rotation_speed = get_config_value("Block-Behaviour", "rotation-speed") as float;
+	gravity = get_config_value(Config.SECTION_BLOCK_BEHAVIOUR, Config.KEY_GRAVITY) as float;
+	rotation_speed = get_config_value(Config.SECTION_BLOCK_BEHAVIOUR, Config.KEY_ROTATION_SPEED) as float;
 	
 	# -- Block Appearance --
-	color_gravity = get_config_value("Block-Appearance", "color-gravity") as float;
-	min_color_value = get_config_value("Block-Appearance", "min-color-value") as float;
-	gradient_hue_shift_speed = get_config_value("Block-Appearance", "gradient-hue-shift-speed") as float;
+	color_gravity = get_config_value(Config.SECTION_BLOCK_APPEARANCE, Config.KEY_COLOR_GRAVITY) as float;
+	min_color_value = get_config_value(Config.SECTION_BLOCK_APPEARANCE, Config.KEY_MIN_COLOR_VALUE) as float;
+	gradient_hue_shift_speed = get_config_value(Config.SECTION_BLOCK_APPEARANCE, Config.KEY_GRADIENT_HUE_SHIFT_SPEED) as float;
 	
 	# -- Particles --
-	particles_disabled = !get_config_value("Particles", "enabled") as bool;
-	min_particles_hit = get_config_value("Particles", "min") as int;
-	max_particles_hit = get_config_value("Particles", "max") as int;
-	particle_count_curve = get_config_value("Particles", "velocity-curve-pow") as float;
-	max_particle_systems = get_config_value("Particles", "pool-size") as int
+	particles_disabled = !get_config_value(Config.SECTION_PARTICLES, Config.KEY_ENABLED) as bool;
+	min_particles_hit = get_config_value(Config.SECTION_PARTICLES, Config.KEY_MIN) as int;
+	max_particles_hit = get_config_value(Config.SECTION_PARTICLES, Config.KEY_MAX) as int;
+	particle_count_curve = get_config_value(Config.SECTION_PARTICLES, Config.KEY_VELOCITY_CURVE_POW) as float;
+	max_particle_systems = get_config_value(Config.SECTION_PARTICLES, Config.KEY_POOL_SIZE) as int
+	
+	# -- Midi --
+	midi_first_note = get_config_value(Config.SECTION_MIDI, Config.KEY_FIRST_NOTE) as int;
+	midi_last_note = get_config_value(Config.SECTION_MIDI, Config.KEY_LAST_NOTE) as int;
 	
 func handle_config_value_changed(section: String, key: String, value: Variant):
 	if(section.ends_with(config_tag)):		
@@ -115,16 +119,16 @@ func handle_config_value_changed(section: String, key: String, value: Variant):
 					gradient_hue_shift_speed = value as float;
 		if(section.begins_with(Config.SECTION_BLOCK_BEHAVIOUR)):
 			match key:
-				Config.KEY_MIN_Y_SCALE:
-					min_y_scale = value as float;
-				Config.KEY_MAX_Y_SCALE:
-					max_y_scale = value as float;
 				Config.KEY_ROTATION_SPEED:
 					rotation_speed = value as float;
 				Config.KEY_GRAVITY:
 					gravity = value as float;
 		if(section.begins_with(Config.SECTION_BLOCK_GENERATION)):
 			match key:
+				Config.KEY_MIN_Y_SCALE:
+					min_y_scale = value as float;
+				Config.KEY_MAX_Y_SCALE:
+					max_y_scale = value as float;
 				Config.KEY_ENABLED:
 					visible = value as bool;
 				Config.KEY_NOTES_PER_ROW:
@@ -176,6 +180,7 @@ func generate_block_data():
 	rotations.clear();
 	scales.clear();
 	colors.clear();
+	velocities.clear();
 	
 	multimesh.instance_count = note_count();
 	multimesh.visible_instance_count = note_count();
@@ -197,6 +202,7 @@ func generate_block_data():
 		rotations.push_back(Vector3.ZERO);
 		scales.push_back(Vector3(1, min_y_scale, 1));
 		colors.push_back(Color(0, 0, 0, 0));
+		velocities.push_back(0);
 		
 func generate_particle_data():
 	var particle_systems = find_children("", "GPUParticles3D");
@@ -239,7 +245,9 @@ func _physics_process(delta: float) -> void:
 		multimesh.set_instance_transform(i, Transform3D(Basis.from_euler(rotations[i]), positions[i]).scaled(scales[i]));
 		multimesh.set_instance_color(i, colors[i]);
 		
-		scales[i].y -= gravity * delta;
+		velocities[i] += gravity * delta;
+		
+		scales[i].y -= velocities[i] * delta;
 		scales[i].y = max(scales[i].y, min_y_scale);
 		
 		colors[i] = (colors[i] * (1 - (color_gravity * delta))).clamp(
@@ -260,9 +268,15 @@ func _process_midi_event(note: int, vel: int) -> void:
 	var i = note - midi_first_note;
 	var v = vel * midi_velocity_scale;
 	
-	scales[i].y += remap(v, 0, 127, min_y_scale, max_y_scale);
+	var velocity_y = remap(v, 0, 127, min_y_scale, max_y_scale) as float;
+	if(scales[i].y >= velocity_y):
+		scales[i].y += velocity_y * 0.05;
+	else:	
+		scales[i].y += velocity_y;
+		
 	var y_position = clamp(scales[i].y, min_y_scale, max_y_scale);
 	scales[i].y = y_position;
+	velocities[i] = 0;
 	var color_sample_point = remap(i, 0, note_count(), 0, 1) + hue_shift;
 	colors[i] = gradient.sample(fmod(color_sample_point, 1));
 
