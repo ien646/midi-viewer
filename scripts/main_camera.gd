@@ -21,6 +21,10 @@ func _handle_config_value_changed(section: String, key: String, value: Variant):
 		match key:
 			Config.KEY_COLOR:
 				environment.background_color = value as Color;
+	elif(section == Config.SECTION_GRAPHICS):
+		match key:
+			Config.KEY_BLOOM_STRENGTH:
+				environment.glow_bloom = value as float;
 
 func _ready() -> void:
 	position = Config.get_value(Config.SECTION_CAMERA, Config.KEY_POSITION) as Vector3;

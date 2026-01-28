@@ -39,6 +39,7 @@ const KEY_VSYNC = "vsync";
 const KEY_SHOW_FPS = "show-fps";
 const KEY_RENDER_SCALE = "render-scale";
 const KEY_FSR = "FSR";
+const KEY_BLOOM_STRENGTH = "bloom-strength";
 const KEY_OFFSETS = "offsets";
 const KEY_COLORS = "colors";
 const KEY_INTERPOLATE = "interpolate";
@@ -86,6 +87,7 @@ static func _init_config_default_values(config: ConfigFile):
 	config.set_value(SECTION_GRAPHICS, KEY_FSR, false);
 	config.set_value(SECTION_GRAPHICS, KEY_VSYNC, true);
 	config.set_value(SECTION_GRAPHICS, KEY_SHOW_FPS, false);
+	config.set_value(SECTION_GRAPHICS, KEY_BLOOM_STRENGTH, 0.25);
 	
 	config.set_value(SECTION_BACKGROUND, KEY_COLOR, Color(0.02, 0.02, 0.02));
 	config.set_value(SECTION_BACKGROUND, KEY_IMAGE, "");

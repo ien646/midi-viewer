@@ -45,6 +45,51 @@ blend_mode = 1
 [sub_resource type="ViewportTexture" id="ViewportTexture_hq1ik"]
 viewport_path = NodePath("SubViewport")
 
+[sub_resource type="LabelSettings" id="LabelSettings_0wyf6"]
+font = ExtResource("18_iav3h")
+font_size = 20
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xp01v"]
+font = ExtResource("18_iav3h")
+font_size = 20
+font_color = Color(0, 1, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_iav3h"]
+font = ExtResource("18_iav3h")
+font_size = 20
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_womr8"]
+font = ExtResource("18_iav3h")
+font_size = 20
+font_color = Color(0, 1, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_onjth"]
+font = ExtResource("18_iav3h")
+font_size = 20
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xa0eo"]
+font = ExtResource("18_iav3h")
+font_size = 20
+font_color = Color(0, 1, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3mjum"]
+font = ExtResource("18_iav3h")
+font_size = 20
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_p27gv"]
+font = ExtResource("18_iav3h")
+font_size = 20
+font_color = Color(0, 1, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cn4eu"]
+font = ExtResource("18_iav3h")
+font_size = 20
+font_color = Color(0, 0, 1, 1)
+
 [node name="Root" type="Node3D" unique_id=471767970]
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=1588735975 node_paths=PackedStringArray("config_node")]
@@ -118,6 +163,7 @@ midi_control_node = NodePath("../../Midi")
 [node name="Particles" parent="SubViewport" unique_id=1647818639 instance=ExtResource("5_8mm7a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04838085, 0, 0.08194113)
 visible = false
+lifetime = 5.0
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport" unique_id=629613268 node_paths=PackedStringArray("config_node")]
 process_mode = 3
@@ -378,7 +424,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/BackgroundColor/BGColor" unique_id=813342586]
 layout_mode = 2
 text = "R"
-label_settings = ExtResource("19_7nt27")
+label_settings = SubResource("LabelSettings_0wyf6")
 
 [node name="R" type="SpinBox" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/BackgroundColor/BGColor" unique_id=1257445488 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
@@ -390,7 +436,7 @@ config_node = NodePath("../../../../../../../../../ConfigControl")
 [node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/BackgroundColor/BGColor" unique_id=869146805]
 layout_mode = 2
 text = "G"
-label_settings = ExtResource("19_7nt27")
+label_settings = SubResource("LabelSettings_xp01v")
 
 [node name="G" type="SpinBox" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/BackgroundColor/BGColor" unique_id=861651995 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
@@ -471,6 +517,25 @@ step = 0.01
 script = ExtResource("22_02d50")
 section = "Background"
 key = "image-darken"
+config_node = NodePath("../../../../../../../../ConfigControl")
+
+[node name="HSeparator5" type="HSeparator" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=2123821836]
+layout_mode = 2
+
+[node name="BloomStrength" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=2032943013]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/BloomStrength" unique_id=1552029940]
+layout_mode = 2
+text = "BLOOM AMOUNT  "
+
+[node name="SpinBox" type="SpinBox" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/BloomStrength" unique_id=1194728041 node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+size_flags_horizontal = 3
+step = 0.01
+script = ExtResource("22_02d50")
+section = "Graphics"
+key = "bloom-strength"
 config_node = NodePath("../../../../../../../../ConfigControl")
 
 [node name="APPEARANCE" type="MarginContainer" parent="UI/MarginContainer/TabContainer" unique_id=1000257615]
@@ -784,7 +849,7 @@ config_node = NodePath("../../../../../../../../ConfigControl")
 [node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer/Position" unique_id=534931179]
 layout_mode = 2
 text = "X"
-label_settings = ExtResource("19_7nt27")
+label_settings = SubResource("LabelSettings_iav3h")
 
 [node name="X" type="SpinBox" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer/Position" unique_id=1429550772]
 layout_mode = 2
@@ -793,7 +858,7 @@ size_flags_horizontal = 3
 [node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer/Position" unique_id=1800469106]
 layout_mode = 2
 text = "Y"
-label_settings = ExtResource("19_7nt27")
+label_settings = SubResource("LabelSettings_womr8")
 
 [node name="Y" type="SpinBox" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer/Position" unique_id=1106013553]
 layout_mode = 2
@@ -829,7 +894,7 @@ config_node = NodePath("../../../../../../../../ConfigControl")
 [node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer2/Rotation" unique_id=1282801438]
 layout_mode = 2
 text = "X"
-label_settings = ExtResource("19_7nt27")
+label_settings = SubResource("LabelSettings_onjth")
 
 [node name="X" type="SpinBox" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer2/Rotation" unique_id=1836119477]
 layout_mode = 2
@@ -840,7 +905,7 @@ max_value = 360.0
 [node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer2/Rotation" unique_id=577060939]
 layout_mode = 2
 text = "Y"
-label_settings = ExtResource("19_7nt27")
+label_settings = SubResource("LabelSettings_xa0eo")
 
 [node name="Y" type="SpinBox" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer2/Rotation" unique_id=2021375413]
 layout_mode = 2
@@ -1423,7 +1488,7 @@ label_settings = ExtResource("19_7nt27")
 [node name="Label12" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionNear" unique_id=1315854514]
 layout_mode = 2
 text = "X"
-label_settings = ExtResource("19_7nt27")
+label_settings = SubResource("LabelSettings_3mjum")
 
 [node name="X" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionNear" unique_id=1807695075]
 layout_mode = 2
@@ -1434,7 +1499,7 @@ max_value = 99999.0
 [node name="Label10" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionNear" unique_id=1856772933]
 layout_mode = 2
 text = "Y"
-label_settings = ExtResource("19_7nt27")
+label_settings = SubResource("LabelSettings_p27gv")
 
 [node name="Y" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionNear" unique_id=344106648]
 layout_mode = 2
@@ -1445,7 +1510,7 @@ max_value = 99999.0
 [node name="Label11" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionNear" unique_id=368367877]
 layout_mode = 2
 text = "Z"
-label_settings = ExtResource("19_7nt27")
+label_settings = SubResource("LabelSettings_cn4eu")
 
 [node name="Z" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionNear" unique_id=2118666257]
 layout_mode = 2
@@ -1472,7 +1537,7 @@ label_settings = ExtResource("19_7nt27")
 [node name="Label12" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionMiddle" unique_id=351420564]
 layout_mode = 2
 text = "X"
-label_settings = ExtResource("19_7nt27")
+label_settings = SubResource("LabelSettings_3mjum")
 
 [node name="X" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionMiddle" unique_id=1949161083]
 layout_mode = 2
@@ -1483,7 +1548,7 @@ max_value = 99999.0
 [node name="Label10" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionMiddle" unique_id=1762433644]
 layout_mode = 2
 text = "Y"
-label_settings = ExtResource("19_7nt27")
+label_settings = SubResource("LabelSettings_p27gv")
 
 [node name="Y" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionMiddle" unique_id=1377337249]
 layout_mode = 2
@@ -1494,7 +1559,7 @@ max_value = 99999.0
 [node name="Label11" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionMiddle" unique_id=2129444100]
 layout_mode = 2
 text = "Z"
-label_settings = ExtResource("19_7nt27")
+label_settings = SubResource("LabelSettings_cn4eu")
 
 [node name="Z" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionMiddle" unique_id=666922772]
 layout_mode = 2
@@ -1521,7 +1586,7 @@ label_settings = ExtResource("19_7nt27")
 [node name="Label12" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionFar" unique_id=1728402251]
 layout_mode = 2
 text = "X"
-label_settings = ExtResource("19_7nt27")
+label_settings = SubResource("LabelSettings_3mjum")
 
 [node name="X" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionFar" unique_id=1930163215]
 layout_mode = 2
@@ -1532,7 +1597,7 @@ max_value = 99999.0
 [node name="Label10" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionFar" unique_id=2051844783]
 layout_mode = 2
 text = "Y"
-label_settings = ExtResource("19_7nt27")
+label_settings = SubResource("LabelSettings_p27gv")
 
 [node name="Y" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionFar" unique_id=7420707]
 layout_mode = 2
@@ -1543,7 +1608,7 @@ max_value = 99999.0
 [node name="Label11" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionFar" unique_id=921721768]
 layout_mode = 2
 text = "Z"
-label_settings = ExtResource("19_7nt27")
+label_settings = SubResource("LabelSettings_cn4eu")
 
 [node name="Z" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionFar" unique_id=1649843838]
 layout_mode = 2
@@ -2092,7 +2157,6 @@ script = ExtResource("15_m35m6")
 config_node = NodePath("../ConfigControl")
 
 [node name="Hint" type="Label" parent="." unique_id=714204214]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
