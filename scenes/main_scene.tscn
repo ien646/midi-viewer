@@ -155,7 +155,6 @@ environment = ExtResource("5_nfk4m")
 script = ExtResource("8_66tet")
 
 [node name="Debug" type="Control" parent="." unique_id=125930432]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -177,7 +176,7 @@ texture_filter = 1
 layout_mode = 0
 offset_left = 3.0
 offset_top = 56.0
-offset_right = 1376.0
+offset_right = 1918.0
 offset_bottom = 79.0
 text = "DEBUG NEAR"
 fit_content = true
@@ -191,7 +190,7 @@ texture_filter = 1
 layout_mode = 0
 offset_left = 3.0
 offset_top = 104.0
-offset_right = 1478.0
+offset_right = 1916.0
 offset_bottom = 127.0
 text = "DEBUG MIDDLE"
 fit_content = true
@@ -205,7 +204,7 @@ texture_filter = 1
 layout_mode = 0
 offset_left = 3.0
 offset_top = 152.0
-offset_right = 1565.0
+offset_right = 1919.0
 offset_bottom = 175.0
 text = "DEBUG FAR"
 fit_content = true
@@ -228,6 +227,7 @@ script = ExtResource("17_6u1mn")
 config_node = NodePath("../ConfigControl")
 
 [node name="UI" type="Control" parent="." unique_id=194025033]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1921.0
