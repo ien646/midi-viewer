@@ -163,13 +163,13 @@ static func _init_config_default_values(config: ConfigFile):
 	
 	config.set_value(tagged(SECTION_PARTICLES, TAG_MIDDLE), KEY_ENABLED, true);
 	config.set_value(tagged(SECTION_PARTICLES, TAG_MIDDLE), KEY_MIN, 2);
-	config.set_value(tagged(SECTION_PARTICLES, TAG_MIDDLE), KEY_MAX, 15);
+	config.set_value(tagged(SECTION_PARTICLES, TAG_MIDDLE), KEY_MAX, 20);
 	config.set_value(tagged(SECTION_PARTICLES, TAG_MIDDLE), KEY_VELOCITY_CURVE_POW, 2);
 	config.set_value(tagged(SECTION_PARTICLES, TAG_MIDDLE), KEY_POOL_SIZE, 50);
 	
 	config.set_value(tagged(SECTION_PARTICLES, TAG_FAR), KEY_ENABLED, true);
 	config.set_value(tagged(SECTION_PARTICLES, TAG_FAR), KEY_MIN, 2);
-	config.set_value(tagged(SECTION_PARTICLES, TAG_FAR), KEY_MAX, 15);
+	config.set_value(tagged(SECTION_PARTICLES, TAG_FAR), KEY_MAX, 30);
 	config.set_value(tagged(SECTION_PARTICLES, TAG_FAR), KEY_VELOCITY_CURVE_POW, 2);
 	config.set_value(tagged(SECTION_PARTICLES, TAG_FAR), KEY_POOL_SIZE, 50);
 	
