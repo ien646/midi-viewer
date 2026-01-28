@@ -63,6 +63,10 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hrivf"]
 bg_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_oxkhk"]
+color = Color(0.2509804, 0.2509804, 0.2509804, 1)
+thickness = 4
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5juw1"]
 bg_color = Color(0, 0, 0, 1)
 
@@ -184,6 +188,39 @@ border_color = Color(0, 0, 1, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yxy25"]
 bg_color = Color(0, 0, 0, 0.5019608)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uij3o"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8lyrx"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_color = Color(0, 0, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tpasj"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 1, 1)
+
 [resource]
 default_font = ExtResource("1_mlkpy")
 default_font_size = 20
@@ -215,6 +252,7 @@ GraphFrameTitleLabel/colors/font_color = Color(0, 0, 0, 1)
 GraphNodeTitleLabel/colors/font_color = Color(0, 0, 0, 1)
 GraphNodeTitleLabel/fonts/font = ExtResource("1_mlkpy")
 HSeparator/constants/separation = 32
+HSeparator/styles/separator = SubResource("StyleBoxLine_oxkhk")
 ItemList/colors/font_color = Color(0, 0, 1, 1)
 ItemList/fonts/font = ExtResource("1_mlkpy")
 ItemList/styles/panel = SubResource("StyleBoxFlat_5juw1")
@@ -277,6 +315,9 @@ TabContainer/colors/font_unselected_color = Color(0, 0, 1, 1)
 TabContainer/constants/tab_separation = 0
 TabContainer/fonts/font = ExtResource("1_mlkpy")
 TabContainer/styles/panel = SubResource("StyleBoxFlat_yxy25")
+TabContainer/styles/tab_hovered = SubResource("StyleBoxFlat_uij3o")
+TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_8lyrx")
+TabContainer/styles/tab_unselected = SubResource("StyleBoxFlat_tpasj")
 TextEdit/colors/font_color = Color(0, 0, 1, 1)
 TextEdit/fonts/font = ExtResource("1_mlkpy")
 TooltipLabel/colors/font_color = Color(0, 0, 1, 1)

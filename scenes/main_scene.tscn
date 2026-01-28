@@ -155,6 +155,7 @@ environment = ExtResource("5_nfk4m")
 script = ExtResource("8_66tet")
 
 [node name="Debug" type="Control" parent="." unique_id=125930432]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -227,7 +228,6 @@ script = ExtResource("17_6u1mn")
 config_node = NodePath("../ConfigControl")
 
 [node name="UI" type="Control" parent="." unique_id=194025033]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1921.0
@@ -235,37 +235,44 @@ offset_bottom = 1084.0
 theme = ExtResource("18_k67gn")
 script = ExtResource("18_58gk3")
 
-[node name="TabContainer" type="TabContainer" parent="UI" unique_id=236598583]
+[node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=1008461243]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="TabContainer" type="TabContainer" parent="UI/MarginContainer" unique_id=236598583]
+layout_mode = 2
 current_tab = 0
 
-[node name="GRAPHICS" type="MarginContainer" parent="UI/TabContainer" unique_id=145875210]
+[node name="GRAPHICS" type="MarginContainer" parent="UI/MarginContainer/TabContainer" unique_id=145875210]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/TabContainer/GRAPHICS" unique_id=903845812]
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/MarginContainer/TabContainer/GRAPHICS" unique_id=903845812]
 layout_mode = 2
 
-[node name="Graphics" type="VBoxContainer" parent="UI/TabContainer/GRAPHICS/ScrollContainer" unique_id=551318912]
+[node name="Graphics" type="VBoxContainer" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer" unique_id=551318912]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=1653970946]
+[node name="HSeparator" type="HSeparator" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=1653970946]
 layout_mode = 2
 
-[node name="Antialiasing" type="HBoxContainer" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=277017723]
+[node name="Antialiasing" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=277017723]
 layout_mode = 2
 
-[node name="Label4" type="Label" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics/Antialiasing" unique_id=1158544145]
+[node name="Label4" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/Antialiasing" unique_id=1158544145]
 layout_mode = 2
 text = "ANTIALIASING  "
 label_settings = ExtResource("19_7nt27")
 
-[node name="AntiAliasingCombo" type="OptionButton" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics/Antialiasing" unique_id=351577410 node_paths=PackedStringArray("config_node")]
+[node name="AntiAliasingCombo" type="OptionButton" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/Antialiasing" unique_id=351577410 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 selected = 2
@@ -277,35 +284,35 @@ popup/item_1/id = 1
 popup/item_2/text = "SMAA"
 popup/item_2/id = 2
 script = ExtResource("24_6p3nn")
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Fullscreen" type="HBoxContainer" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=1009953187]
+[node name="Fullscreen" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=1009953187]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics/Fullscreen" unique_id=1819925242]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/Fullscreen" unique_id=1819925242]
 layout_mode = 2
 text = "FULLSCREEN    "
 label_settings = ExtResource("19_7nt27")
 
-[node name="CheckButton" type="CheckButton" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics/Fullscreen" unique_id=2045828591 node_paths=PackedStringArray("config_node")]
+[node name="CheckButton" type="CheckButton" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/Fullscreen" unique_id=2045828591 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 script = ExtResource("21_58gk3")
 section = "Graphics"
 key = "fullscreen"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="HSeparator3" type="HSeparator" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=1169674708]
+[node name="HSeparator3" type="HSeparator" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=1169674708]
 layout_mode = 2
 
-[node name="RenderScale" type="HBoxContainer" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=1667282988]
+[node name="RenderScale" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=1667282988]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics/RenderScale" unique_id=1721045162]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/RenderScale" unique_id=1721045162]
 layout_mode = 2
 text = "RENDER SCALE  "
 label_settings = ExtResource("19_7nt27")
 
-[node name="SpinBox" type="SpinBox" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics/RenderScale" unique_id=833282482 node_paths=PackedStringArray("config_node")]
+[node name="SpinBox" type="SpinBox" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/RenderScale" unique_id=833282482 node_paths=PackedStringArray("config_node")]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -316,102 +323,102 @@ value = 100.0
 script = ExtResource("22_02d50")
 section = "Graphics"
 key = "render-scale"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="ScalingMode" type="HBoxContainer" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=1767699999]
+[node name="ScalingMode" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=1767699999]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics/ScalingMode" unique_id=2077144312]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/ScalingMode" unique_id=2077144312]
 layout_mode = 2
 text = "FSR SCALING   "
 label_settings = ExtResource("19_7nt27")
 
-[node name="CheckButton" type="CheckButton" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics/ScalingMode" unique_id=210074040 node_paths=PackedStringArray("config_node")]
+[node name="CheckButton" type="CheckButton" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/ScalingMode" unique_id=210074040 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 script = ExtResource("21_58gk3")
 section = "Graphics"
 key = "FSR"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="HSeparator2" type="HSeparator" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=1785065121]
+[node name="HSeparator2" type="HSeparator" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=1785065121]
 layout_mode = 2
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=2069448759]
+[node name="HBoxContainer3" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=2069448759]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3" unique_id=539606397]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3" unique_id=539606397]
 layout_mode = 2
 text = "BACKGROUND COLOR   "
 label_settings = ExtResource("19_7nt27")
 
-[node name="BGColor" type="HBoxContainer" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3" unique_id=788385407]
+[node name="BGColor" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3" unique_id=788385407]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3/BGColor" unique_id=813342586]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3/BGColor" unique_id=813342586]
 layout_mode = 2
 text = "R"
 label_settings = ExtResource("19_7nt27")
 
-[node name="R" type="SpinBox" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3/BGColor" unique_id=1257445488 node_paths=PackedStringArray("config_node")]
+[node name="R" type="SpinBox" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3/BGColor" unique_id=1257445488 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 255.0
 script = ExtResource("24_02d50")
-config_node = NodePath("../../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../../ConfigControl")
 
-[node name="Label2" type="Label" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3/BGColor" unique_id=869146805]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3/BGColor" unique_id=869146805]
 layout_mode = 2
 text = "G"
 label_settings = ExtResource("19_7nt27")
 
-[node name="G" type="SpinBox" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3/BGColor" unique_id=861651995 node_paths=PackedStringArray("config_node")]
+[node name="G" type="SpinBox" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3/BGColor" unique_id=861651995 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 255.0
 script = ExtResource("24_02d50")
 component_index_rgb = 1
-config_node = NodePath("../../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../../ConfigControl")
 
-[node name="Label3" type="Label" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3/BGColor" unique_id=776872243]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3/BGColor" unique_id=776872243]
 layout_mode = 2
 text = "B"
 label_settings = ExtResource("19_7nt27")
 
-[node name="B" type="SpinBox" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3/BGColor" unique_id=1966684659 node_paths=PackedStringArray("config_node")]
+[node name="B" type="SpinBox" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3/BGColor" unique_id=1966684659 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 255.0
 script = ExtResource("24_02d50")
 component_index_rgb = 2
-config_node = NodePath("../../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../../ConfigControl")
 
-[node name="BGColorPreview" type="ColorRect" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3" unique_id=1107524173 node_paths=PackedStringArray("config_node")]
+[node name="BGColorPreview" type="ColorRect" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3" unique_id=1107524173 node_paths=PackedStringArray("config_node")]
 custom_minimum_size = Vector2(64, 24)
 layout_mode = 2
 color = Color(0, 0, 0, 1)
 script = ExtResource("25_kkokr")
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="HSeparator4" type="HSeparator" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=1284919077]
+[node name="HSeparator4" type="HSeparator" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=1284919077]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=774874411]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=774874411]
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer" unique_id=355815883]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer" unique_id=355815883]
 layout_mode = 2
 text = "CUSTOM BRACKGROUND  "
 label_settings = ExtResource("19_7nt27")
 
-[node name="Load" type="Button" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer" unique_id=915170710 node_paths=PackedStringArray("config_node", "file_dialog")]
+[node name="Load" type="Button" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer" unique_id=915170710 node_paths=PackedStringArray("config_node", "file_dialog")]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 text = "LOAD"
 script = ExtResource("26_lhwp2")
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 file_dialog = NodePath("FileDialog")
 
-[node name="FileDialog" type="FileDialog" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer/Load" unique_id=269973464]
+[node name="FileDialog" type="FileDialog" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer/Load" unique_id=269973464]
 oversampling_override = 1.0
 title = "Open a File"
 initial_position = 1
@@ -419,23 +426,23 @@ size = Vector2i(1500, 1130)
 file_mode = 0
 use_native_dialog = true
 
-[node name="Clear" type="Button" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer" unique_id=111469093 node_paths=PackedStringArray("config_node")]
+[node name="Clear" type="Button" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer" unique_id=111469093 node_paths=PackedStringArray("config_node")]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 disabled = true
 text = "CLEAR"
 script = ExtResource("27_l40q6")
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=558653523]
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=558653523]
 layout_mode = 2
 
-[node name="Label4" type="Label" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer2" unique_id=454308834]
+[node name="Label4" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer2" unique_id=454308834]
 layout_mode = 2
 text = "DARK TINT     "
 label_settings = ExtResource("19_7nt27")
 
-[node name="SpinBox" type="SpinBox" parent="UI/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer2" unique_id=1709621698 node_paths=PackedStringArray("config_node")]
+[node name="SpinBox" type="SpinBox" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer2" unique_id=1709621698 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
@@ -443,92 +450,92 @@ step = 0.01
 script = ExtResource("22_02d50")
 section = "Background"
 key = "image-darken"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="APPEARANCE" type="MarginContainer" parent="UI/TabContainer" unique_id=1000257615]
+[node name="APPEARANCE" type="MarginContainer" parent="UI/MarginContainer/TabContainer" unique_id=1000257615]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/TabContainer/APPEARANCE" unique_id=1766054168]
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/MarginContainer/TabContainer/APPEARANCE" unique_id=1766054168]
 layout_mode = 2
 
-[node name="Appearance" type="VBoxContainer" parent="UI/TabContainer/APPEARANCE/ScrollContainer" unique_id=379548513]
+[node name="Appearance" type="VBoxContainer" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer" unique_id=379548513]
 layout_mode = 2
 
-[node name="HSeparator2" type="HSeparator" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=509958237]
+[node name="HSeparator2" type="HSeparator" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=509958237]
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=1256040118]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=1256040118]
 layout_mode = 2
 text = "GROUP VISIBILITY"
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="GroupVisibility" type="GridContainer" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=1064781464]
+[node name="GroupVisibility" type="GridContainer" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=1064781464]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/GroupVisibility" unique_id=1301587118]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/GroupVisibility" unique_id=1301587118]
 layout_mode = 2
 text = "  NEAR"
 label_settings = ExtResource("19_7nt27")
 
-[node name="N" type="CheckButton" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/GroupVisibility" unique_id=1961901316 node_paths=PackedStringArray("config_node")]
+[node name="N" type="CheckButton" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/GroupVisibility" unique_id=1961901316 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 button_pressed = true
 script = ExtResource("24_4bgka")
 section = "Block-Generation"
 key = "enabled"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label2" type="Label" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/GroupVisibility" unique_id=212282302]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/GroupVisibility" unique_id=212282302]
 layout_mode = 2
 text = "  MIDDLE  "
 label_settings = ExtResource("19_7nt27")
 
-[node name="M" type="CheckButton" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/GroupVisibility" unique_id=248991588 node_paths=PackedStringArray("config_node")]
+[node name="M" type="CheckButton" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/GroupVisibility" unique_id=248991588 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 button_pressed = true
 script = ExtResource("24_4bgka")
 group = 1
 section = "Block-Generation"
 key = "enabled"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label3" type="Label" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/GroupVisibility" unique_id=744250525]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/GroupVisibility" unique_id=744250525]
 layout_mode = 2
 text = "  FAR"
 label_settings = ExtResource("19_7nt27")
 
-[node name="F" type="CheckButton" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/GroupVisibility" unique_id=139811285 node_paths=PackedStringArray("config_node")]
+[node name="F" type="CheckButton" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/GroupVisibility" unique_id=139811285 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 button_pressed = true
 script = ExtResource("24_4bgka")
 group = 2
 section = "Block-Generation"
 key = "enabled"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="HSeparator4" type="HSeparator" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=78515680]
+[node name="HSeparator4" type="HSeparator" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=78515680]
 layout_mode = 2
 
-[node name="Label5" type="Label" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=619490525]
+[node name="Label5" type="Label" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=619490525]
 layout_mode = 2
 text = "COLOR GRAVITY"
 label_settings = ExtResource("19_7nt27")
 
-[node name="ColorGravity" type="GridContainer" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=741857150]
+[node name="ColorGravity" type="GridContainer" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=741857150]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/ColorGravity" unique_id=1106098629]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/ColorGravity" unique_id=1106098629]
 layout_mode = 2
 text = "  NEAR"
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="N" type="SpinBox" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/ColorGravity" unique_id=808401619 node_paths=PackedStringArray("config_node")]
+[node name="N" type="SpinBox" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/ColorGravity" unique_id=808401619 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -537,15 +544,15 @@ value = 1.0
 script = ExtResource("25_pgk25")
 section = "Block-Appearance"
 key = "color-gravity"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label2" type="Label" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/ColorGravity" unique_id=148662252]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/ColorGravity" unique_id=148662252]
 layout_mode = 2
 text = "  MIDDLE  "
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="M" type="SpinBox" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/ColorGravity" unique_id=1649945196 node_paths=PackedStringArray("config_node")]
+[node name="M" type="SpinBox" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/ColorGravity" unique_id=1649945196 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -555,15 +562,15 @@ script = ExtResource("25_pgk25")
 group = 1
 section = "Block-Appearance"
 key = "color-gravity"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label3" type="Label" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/ColorGravity" unique_id=1243783668]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/ColorGravity" unique_id=1243783668]
 layout_mode = 2
 text = "  FAR"
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="F" type="SpinBox" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/ColorGravity" unique_id=1970391725 node_paths=PackedStringArray("config_node")]
+[node name="F" type="SpinBox" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/ColorGravity" unique_id=1970391725 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -573,27 +580,27 @@ script = ExtResource("25_pgk25")
 group = 2
 section = "Block-Appearance"
 key = "color-gravity"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="HSeparator5" type="HSeparator" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=20096252]
+[node name="HSeparator5" type="HSeparator" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=20096252]
 layout_mode = 2
 
-[node name="Label6" type="Label" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=1978783519]
+[node name="Label6" type="Label" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=1978783519]
 layout_mode = 2
 text = "MIN COLOR VALUE"
 label_settings = ExtResource("19_7nt27")
 
-[node name="MinColorValue" type="GridContainer" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=1580496110]
+[node name="MinColorValue" type="GridContainer" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=1580496110]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/MinColorValue" unique_id=1713461529]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/MinColorValue" unique_id=1713461529]
 layout_mode = 2
 text = "  NEAR"
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="N" type="SpinBox" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/MinColorValue" unique_id=774291336 node_paths=PackedStringArray("config_node")]
+[node name="N" type="SpinBox" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/MinColorValue" unique_id=774291336 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
@@ -601,15 +608,15 @@ step = 0.01
 script = ExtResource("25_pgk25")
 section = "Block-Appearance"
 key = "min-color-value"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label2" type="Label" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/MinColorValue" unique_id=1871619003]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/MinColorValue" unique_id=1871619003]
 layout_mode = 2
 text = "  MIDDLE  "
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="M" type="SpinBox" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/MinColorValue" unique_id=2012478214 node_paths=PackedStringArray("config_node")]
+[node name="M" type="SpinBox" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/MinColorValue" unique_id=2012478214 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
@@ -618,15 +625,15 @@ script = ExtResource("25_pgk25")
 group = 1
 section = "Block-Appearance"
 key = "min-color-value"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label3" type="Label" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/MinColorValue" unique_id=1065758179]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/MinColorValue" unique_id=1065758179]
 layout_mode = 2
 text = "  FAR"
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="F" type="SpinBox" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/MinColorValue" unique_id=1195366473 node_paths=PackedStringArray("config_node")]
+[node name="F" type="SpinBox" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/MinColorValue" unique_id=1195366473 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
@@ -635,27 +642,27 @@ script = ExtResource("25_pgk25")
 group = 2
 section = "Block-Appearance"
 key = "min-color-value"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="HSeparator6" type="HSeparator" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=550383085]
+[node name="HSeparator6" type="HSeparator" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=550383085]
 layout_mode = 2
 
-[node name="Label7" type="Label" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=1166036673]
+[node name="Label7" type="Label" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=1166036673]
 layout_mode = 2
 text = "GRADIENT COLOR SHIFT SPEED (LOOPS PER SECOND)"
 label_settings = ExtResource("19_7nt27")
 
-[node name="GradientShiftSpeed" type="GridContainer" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=209632181]
+[node name="GradientShiftSpeed" type="GridContainer" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=209632181]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/GradientShiftSpeed" unique_id=772097050]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/GradientShiftSpeed" unique_id=772097050]
 layout_mode = 2
 text = "  NEAR"
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="N" type="SpinBox" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/GradientShiftSpeed" unique_id=307069512 node_paths=PackedStringArray("config_node")]
+[node name="N" type="SpinBox" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/GradientShiftSpeed" unique_id=307069512 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -663,15 +670,15 @@ step = 0.01
 script = ExtResource("25_pgk25")
 section = "Block-Appearance"
 key = "gradient-hue-shift-speed"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label2" type="Label" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/GradientShiftSpeed" unique_id=1254943563]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/GradientShiftSpeed" unique_id=1254943563]
 layout_mode = 2
 text = "  MIDDLE  "
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="M" type="SpinBox" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/GradientShiftSpeed" unique_id=139341493 node_paths=PackedStringArray("config_node")]
+[node name="M" type="SpinBox" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/GradientShiftSpeed" unique_id=139341493 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -680,15 +687,15 @@ script = ExtResource("25_pgk25")
 group = 1
 section = "Block-Appearance"
 key = "gradient-hue-shift-speed"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label3" type="Label" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/GradientShiftSpeed" unique_id=489686569]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/GradientShiftSpeed" unique_id=489686569]
 layout_mode = 2
 text = "  FAR"
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="F" type="SpinBox" parent="UI/TabContainer/APPEARANCE/ScrollContainer/Appearance/GradientShiftSpeed" unique_id=1322910077 node_paths=PackedStringArray("config_node")]
+[node name="F" type="SpinBox" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance/GradientShiftSpeed" unique_id=1322910077 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -697,31 +704,31 @@ script = ExtResource("25_pgk25")
 group = 2
 section = "Block-Appearance"
 key = "gradient-hue-shift-speed"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="CAMERA" type="MarginContainer" parent="UI/TabContainer" unique_id=2054528327]
+[node name="CAMERA" type="MarginContainer" parent="UI/MarginContainer/TabContainer" unique_id=2054528327]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/TabContainer/CAMERA" unique_id=2137776045]
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/MarginContainer/TabContainer/CAMERA" unique_id=2137776045]
 layout_mode = 2
 
-[node name="Camera" type="VBoxContainer" parent="UI/TabContainer/CAMERA/ScrollContainer" unique_id=388057185]
+[node name="Camera" type="VBoxContainer" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer" unique_id=388057185]
 layout_mode = 2
 
-[node name="HSeparator3" type="HSeparator" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera" unique_id=2014588402]
+[node name="HSeparator3" type="HSeparator" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera" unique_id=2014588402]
 layout_mode = 2
 
-[node name="FOV" type="HBoxContainer" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera" unique_id=1742647931]
+[node name="FOV" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera" unique_id=1742647931]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/FOV" unique_id=79225479]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/FOV" unique_id=79225479]
 layout_mode = 2
 text = "FIELD OF VIEW  "
 label_settings = ExtResource("19_7nt27")
 
-[node name="SpinBox" type="SpinBox" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/FOV" unique_id=2034058687 node_paths=PackedStringArray("config_node")]
+[node name="SpinBox" type="SpinBox" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/FOV" unique_id=2034058687 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = 1.0
@@ -730,20 +737,20 @@ value = 50.0
 script = ExtResource("22_02d50")
 section = "Camera"
 key = "fov"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="HSeparator4" type="HSeparator" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera" unique_id=1514475898]
+[node name="HSeparator4" type="HSeparator" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera" unique_id=1514475898]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera" unique_id=2116146064]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera" unique_id=2116146064]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer" unique_id=1708235418]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer" unique_id=1708235418]
 layout_mode = 2
 text = "POSITION  "
 label_settings = ExtResource("19_7nt27")
 
-[node name="Position" type="HBoxContainer" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer" unique_id=1033220101 node_paths=PackedStringArray("x_node", "y_node", "z_node", "config_node")]
+[node name="Position" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer" unique_id=1033220101 node_paths=PackedStringArray("x_node", "y_node", "z_node", "config_node")]
 layout_mode = 2
 script = ExtResource("30_l40q6")
 config_section = "Camera"
@@ -751,44 +758,44 @@ config_key = "position"
 x_node = NodePath("X")
 y_node = NodePath("Y")
 z_node = NodePath("Z")
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label" type="Label" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer/Position" unique_id=534931179]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer/Position" unique_id=534931179]
 layout_mode = 2
 text = "X"
 label_settings = ExtResource("19_7nt27")
 
-[node name="X" type="SpinBox" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer/Position" unique_id=1429550772]
+[node name="X" type="SpinBox" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer/Position" unique_id=1429550772]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label2" type="Label" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer/Position" unique_id=1800469106]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer/Position" unique_id=1800469106]
 layout_mode = 2
 text = "Y"
 label_settings = ExtResource("19_7nt27")
 
-[node name="Y" type="SpinBox" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer/Position" unique_id=1106013553]
+[node name="Y" type="SpinBox" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer/Position" unique_id=1106013553]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label3" type="Label" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer/Position" unique_id=1074833281]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer/Position" unique_id=1074833281]
 layout_mode = 2
 text = "Z"
 label_settings = ExtResource("19_7nt27")
 
-[node name="Z" type="SpinBox" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer/Position" unique_id=1206019726]
+[node name="Z" type="SpinBox" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer/Position" unique_id=1206019726]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera" unique_id=987464128]
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera" unique_id=987464128]
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer2" unique_id=1214627625]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer2" unique_id=1214627625]
 layout_mode = 2
 text = "ROTATION  "
 label_settings = ExtResource("19_7nt27")
 
-[node name="Rotation" type="HBoxContainer" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer2" unique_id=558393908 node_paths=PackedStringArray("x_node", "y_node", "z_node", "config_node")]
+[node name="Rotation" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer2" unique_id=558393908 node_paths=PackedStringArray("x_node", "y_node", "z_node", "config_node")]
 layout_mode = 2
 script = ExtResource("30_l40q6")
 config_section = "Camera"
@@ -796,53 +803,53 @@ config_key = "rotation"
 x_node = NodePath("X")
 y_node = NodePath("Y")
 z_node = NodePath("Z")
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label" type="Label" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer2/Rotation" unique_id=1282801438]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer2/Rotation" unique_id=1282801438]
 layout_mode = 2
 text = "X"
 label_settings = ExtResource("19_7nt27")
 
-[node name="X" type="SpinBox" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer2/Rotation" unique_id=1836119477]
+[node name="X" type="SpinBox" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer2/Rotation" unique_id=1836119477]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -360.0
 max_value = 360.0
 
-[node name="Label2" type="Label" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer2/Rotation" unique_id=577060939]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer2/Rotation" unique_id=577060939]
 layout_mode = 2
 text = "Y"
 label_settings = ExtResource("19_7nt27")
 
-[node name="Y" type="SpinBox" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer2/Rotation" unique_id=2021375413]
+[node name="Y" type="SpinBox" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer2/Rotation" unique_id=2021375413]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -360.0
 max_value = 360.0
 
-[node name="Label3" type="Label" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer2/Rotation" unique_id=1522924997]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer2/Rotation" unique_id=1522924997]
 layout_mode = 2
 text = "Z"
 label_settings = ExtResource("19_7nt27")
 
-[node name="Z" type="SpinBox" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer2/Rotation" unique_id=2054652245]
+[node name="Z" type="SpinBox" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/HBoxContainer2/Rotation" unique_id=2054652245]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -360.0
 max_value = 360.0
 
-[node name="HSeparator5" type="HSeparator" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera" unique_id=301776644]
+[node name="HSeparator5" type="HSeparator" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera" unique_id=301776644]
 layout_mode = 2
 
-[node name="FOV2" type="HBoxContainer" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera" unique_id=274436278]
+[node name="FOV2" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera" unique_id=274436278]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/FOV2" unique_id=2007994467]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/FOV2" unique_id=2007994467]
 layout_mode = 2
 text = "BRIGHTNESS  "
 label_settings = ExtResource("19_7nt27")
 
-[node name="SpinBox" type="SpinBox" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/FOV2" unique_id=968697211 node_paths=PackedStringArray("config_node")]
+[node name="SpinBox" type="SpinBox" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/FOV2" unique_id=968697211 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 10.0
@@ -851,17 +858,17 @@ value = 1.0
 script = ExtResource("22_02d50")
 section = "Camera"
 key = "brightness"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="FOV3" type="HBoxContainer" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera" unique_id=1373639030]
+[node name="FOV3" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera" unique_id=1373639030]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/FOV3" unique_id=2015512558]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/FOV3" unique_id=2015512558]
 layout_mode = 2
 text = "CONTRAST    "
 label_settings = ExtResource("19_7nt27")
 
-[node name="SpinBox" type="SpinBox" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/FOV3" unique_id=1236466391 node_paths=PackedStringArray("config_node")]
+[node name="SpinBox" type="SpinBox" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/FOV3" unique_id=1236466391 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 10.0
@@ -870,17 +877,17 @@ value = 1.0
 script = ExtResource("22_02d50")
 section = "Camera"
 key = "contrast"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="FOV4" type="HBoxContainer" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera" unique_id=1395062789]
+[node name="FOV4" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera" unique_id=1395062789]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/FOV4" unique_id=1474514485]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/FOV4" unique_id=1474514485]
 layout_mode = 2
 text = "SATURATION  "
 label_settings = ExtResource("19_7nt27")
 
-[node name="SpinBox" type="SpinBox" parent="UI/TabContainer/CAMERA/ScrollContainer/Camera/FOV4" unique_id=205823851 node_paths=PackedStringArray("config_node")]
+[node name="SpinBox" type="SpinBox" parent="UI/MarginContainer/TabContainer/CAMERA/ScrollContainer/Camera/FOV4" unique_id=205823851 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 10.0
@@ -889,38 +896,38 @@ value = 1.0
 script = ExtResource("22_02d50")
 section = "Camera"
 key = "saturation"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="GENERATION & BEHAVIOUR" type="MarginContainer" parent="UI/TabContainer" unique_id=1549824621]
+[node name="GENERATION & BEHAVIOUR" type="MarginContainer" parent="UI/MarginContainer/TabContainer" unique_id=1549824621]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/TabContainer/GENERATION & BEHAVIOUR" unique_id=1710744996]
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR" unique_id=1710744996]
 layout_mode = 2
 
-[node name="Generation-Behaviour" type="VBoxContainer" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer" unique_id=1542894107]
+[node name="Generation-Behaviour" type="VBoxContainer" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer" unique_id=1542894107]
 layout_mode = 2
 
-[node name="HSeparator3" type="HSeparator" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=322926165]
+[node name="HSeparator3" type="HSeparator" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=322926165]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=1452622855]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=1452622855]
 layout_mode = 2
 text = "NOTES PER ROW"
 label_settings = ExtResource("19_7nt27")
 
-[node name="NotesPerRow" type="GridContainer" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=390932264]
+[node name="NotesPerRow" type="GridContainer" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=390932264]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/NotesPerRow" unique_id=1734102818]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/NotesPerRow" unique_id=1734102818]
 layout_mode = 2
 text = "  NEAR"
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="N" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/NotesPerRow" unique_id=733733454 node_paths=PackedStringArray("config_node")]
+[node name="N" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/NotesPerRow" unique_id=733733454 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = 1.0
@@ -930,16 +937,16 @@ rounded = true
 script = ExtResource("25_pgk25")
 section = "Block-Generation"
 key = "notes-per-row"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 integral = true
 
-[node name="Label2" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/NotesPerRow" unique_id=1007436618]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/NotesPerRow" unique_id=1007436618]
 layout_mode = 2
 text = "  MIDDLE  "
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="M" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/NotesPerRow" unique_id=1104993077 node_paths=PackedStringArray("config_node")]
+[node name="M" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/NotesPerRow" unique_id=1104993077 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = 1.0
@@ -950,16 +957,16 @@ script = ExtResource("25_pgk25")
 group = 1
 section = "Block-Generation"
 key = "notes-per-row"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 integral = true
 
-[node name="Label3" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/NotesPerRow" unique_id=756040736]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/NotesPerRow" unique_id=756040736]
 layout_mode = 2
 text = "  FAR"
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="F" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/NotesPerRow" unique_id=1593101234 node_paths=PackedStringArray("config_node")]
+[node name="F" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/NotesPerRow" unique_id=1593101234 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = 1.0
@@ -970,28 +977,28 @@ script = ExtResource("25_pgk25")
 group = 2
 section = "Block-Generation"
 key = "notes-per-row"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 integral = true
 
-[node name="HSeparator4" type="HSeparator" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=1437893476]
+[node name="HSeparator4" type="HSeparator" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=1437893476]
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=2088514930]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=2088514930]
 layout_mode = 2
 text = "ROW(X) SEPARATION"
 label_settings = ExtResource("19_7nt27")
 
-[node name="RowSeparation" type="GridContainer" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=982015406]
+[node name="RowSeparation" type="GridContainer" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=982015406]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/RowSeparation" unique_id=1332124620]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/RowSeparation" unique_id=1332124620]
 layout_mode = 2
 text = "  NEAR"
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="N" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/RowSeparation" unique_id=1400251302 node_paths=PackedStringArray("config_node")]
+[node name="N" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/RowSeparation" unique_id=1400251302 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -1000,15 +1007,15 @@ value = 1.0
 script = ExtResource("25_pgk25")
 section = "Block-Generation"
 key = "row-separation"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label2" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/RowSeparation" unique_id=1494585279]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/RowSeparation" unique_id=1494585279]
 layout_mode = 2
 text = "  MIDDLE  "
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="M" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/RowSeparation" unique_id=431417175 node_paths=PackedStringArray("config_node")]
+[node name="M" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/RowSeparation" unique_id=431417175 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -1018,15 +1025,15 @@ script = ExtResource("25_pgk25")
 group = 1
 section = "Block-Generation"
 key = "row-separation"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label3" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/RowSeparation" unique_id=1729457396]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/RowSeparation" unique_id=1729457396]
 layout_mode = 2
 text = "  FAR"
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="F" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/RowSeparation" unique_id=608719193 node_paths=PackedStringArray("config_node")]
+[node name="F" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/RowSeparation" unique_id=608719193 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -1036,27 +1043,27 @@ script = ExtResource("25_pgk25")
 group = 2
 section = "Block-Generation"
 key = "row-separation"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="HSeparator5" type="HSeparator" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=103933194]
+[node name="HSeparator5" type="HSeparator" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=103933194]
 layout_mode = 2
 
-[node name="Label4" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=756061361]
+[node name="Label4" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=756061361]
 layout_mode = 2
 text = "COLUMN(Z) SEPARATION"
 label_settings = ExtResource("19_7nt27")
 
-[node name="ColumnSeparation" type="GridContainer" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=788122873]
+[node name="ColumnSeparation" type="GridContainer" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=788122873]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/ColumnSeparation" unique_id=61145466]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/ColumnSeparation" unique_id=61145466]
 layout_mode = 2
 text = "  NEAR"
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="N" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/ColumnSeparation" unique_id=596284294 node_paths=PackedStringArray("config_node")]
+[node name="N" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/ColumnSeparation" unique_id=596284294 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -1065,15 +1072,15 @@ value = 1.0
 script = ExtResource("25_pgk25")
 section = "Block-Generation"
 key = "column-separation"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label2" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/ColumnSeparation" unique_id=456036890]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/ColumnSeparation" unique_id=456036890]
 layout_mode = 2
 text = "  MIDDLE  "
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="M" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/ColumnSeparation" unique_id=2038420976 node_paths=PackedStringArray("config_node")]
+[node name="M" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/ColumnSeparation" unique_id=2038420976 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -1083,15 +1090,15 @@ script = ExtResource("25_pgk25")
 group = 1
 section = "Block-Generation"
 key = "column-separation"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label3" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/ColumnSeparation" unique_id=94358371]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/ColumnSeparation" unique_id=94358371]
 layout_mode = 2
 text = "  FAR"
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="F" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/ColumnSeparation" unique_id=946586909 node_paths=PackedStringArray("config_node")]
+[node name="F" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/ColumnSeparation" unique_id=946586909 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -1101,27 +1108,27 @@ script = ExtResource("25_pgk25")
 group = 2
 section = "Block-Generation"
 key = "column-separation"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="HSeparator6" type="HSeparator" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=1432991357]
+[node name="HSeparator6" type="HSeparator" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=1432991357]
 layout_mode = 2
 
-[node name="Label5" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=238111682]
+[node name="Label5" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=238111682]
 layout_mode = 2
 text = "MINIMUM BLOCK HEIGHT"
 label_settings = ExtResource("19_7nt27")
 
-[node name="MinYScale" type="GridContainer" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=189520766]
+[node name="MinYScale" type="GridContainer" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=189520766]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MinYScale" unique_id=1014715463]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MinYScale" unique_id=1014715463]
 layout_mode = 2
 text = "  NEAR"
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="N" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MinYScale" unique_id=1182974579 node_paths=PackedStringArray("config_node")]
+[node name="N" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MinYScale" unique_id=1182974579 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -1130,15 +1137,15 @@ value = 1.0
 script = ExtResource("25_pgk25")
 section = "Block-Generation"
 key = "min-y-scale"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label2" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MinYScale" unique_id=1117022443]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MinYScale" unique_id=1117022443]
 layout_mode = 2
 text = "  MIDDLE  "
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="M" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MinYScale" unique_id=1755357414 node_paths=PackedStringArray("config_node")]
+[node name="M" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MinYScale" unique_id=1755357414 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -1148,15 +1155,15 @@ script = ExtResource("25_pgk25")
 group = 1
 section = "Block-Generation"
 key = "min-y-scale"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label3" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MinYScale" unique_id=372950027]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MinYScale" unique_id=372950027]
 layout_mode = 2
 text = "  FAR"
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="F" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MinYScale" unique_id=817519615 node_paths=PackedStringArray("config_node")]
+[node name="F" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MinYScale" unique_id=817519615 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -1166,27 +1173,27 @@ script = ExtResource("25_pgk25")
 group = 2
 section = "Block-Generation"
 key = "min-y-scale"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="HSeparator7" type="HSeparator" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=527208692]
+[node name="HSeparator7" type="HSeparator" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=527208692]
 layout_mode = 2
 
-[node name="Label6" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=234175810]
+[node name="Label6" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=234175810]
 layout_mode = 2
 text = "MAXIMUM BLOCK HEIGHT"
 label_settings = ExtResource("19_7nt27")
 
-[node name="MaxYScale" type="GridContainer" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=497240723]
+[node name="MaxYScale" type="GridContainer" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=497240723]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale" unique_id=2047628973]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale" unique_id=2047628973]
 layout_mode = 2
 text = "  NEAR"
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="N" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale" unique_id=865212500 node_paths=PackedStringArray("config_node")]
+[node name="N" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale" unique_id=865212500 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -1195,15 +1202,15 @@ value = 1.0
 script = ExtResource("25_pgk25")
 section = "Block-Generation"
 key = "max-y-scale"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label2" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale" unique_id=584145345]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale" unique_id=584145345]
 layout_mode = 2
 text = "  MIDDLE  "
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="M" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale" unique_id=352942860 node_paths=PackedStringArray("config_node")]
+[node name="M" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale" unique_id=352942860 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -1213,15 +1220,15 @@ script = ExtResource("25_pgk25")
 group = 1
 section = "Block-Generation"
 key = "max-y-scale"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label3" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale" unique_id=691742712]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale" unique_id=691742712]
 layout_mode = 2
 text = "  FAR"
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="F" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale" unique_id=1853953256 node_paths=PackedStringArray("config_node")]
+[node name="F" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale" unique_id=1853953256 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -1231,27 +1238,27 @@ script = ExtResource("25_pgk25")
 group = 2
 section = "Block-Generation"
 key = "max-y-scale"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="HSeparator8" type="HSeparator" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=946655004]
+[node name="HSeparator8" type="HSeparator" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=946655004]
 layout_mode = 2
 
-[node name="Label7" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=380155160]
+[node name="Label7" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=380155160]
 layout_mode = 2
 text = "ROTATION SPEED"
 label_settings = ExtResource("19_7nt27")
 
-[node name="MaxYScale2" type="GridContainer" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=1856678653]
+[node name="MaxYScale2" type="GridContainer" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=1856678653]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale2" unique_id=959368565]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale2" unique_id=959368565]
 layout_mode = 2
 text = "  NEAR"
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="N" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale2" unique_id=365241030 node_paths=PackedStringArray("config_node")]
+[node name="N" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale2" unique_id=365241030 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -1000.0
@@ -1261,15 +1268,15 @@ value = 1.0
 script = ExtResource("25_pgk25")
 section = "Block-Behaviour"
 key = "rotation-speed"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label2" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale2" unique_id=1523246750]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale2" unique_id=1523246750]
 layout_mode = 2
 text = "  MIDDLE  "
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="M" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale2" unique_id=545224903 node_paths=PackedStringArray("config_node")]
+[node name="M" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale2" unique_id=545224903 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -1000.0
@@ -1280,15 +1287,15 @@ script = ExtResource("25_pgk25")
 group = 1
 section = "Block-Behaviour"
 key = "rotation-speed"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label3" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale2" unique_id=1209250635]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale2" unique_id=1209250635]
 layout_mode = 2
 text = "  FAR"
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="F" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale2" unique_id=181978844 node_paths=PackedStringArray("config_node")]
+[node name="F" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale2" unique_id=181978844 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -1000.0
@@ -1299,27 +1306,27 @@ script = ExtResource("25_pgk25")
 group = 2
 section = "Block-Behaviour"
 key = "rotation-speed"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="HSeparator10" type="HSeparator" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=659041219]
+[node name="HSeparator10" type="HSeparator" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=659041219]
 layout_mode = 2
 
-[node name="Label9" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=961466980]
+[node name="Label9" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=961466980]
 layout_mode = 2
 text = "BLOCK GRAVITY"
 label_settings = ExtResource("19_7nt27")
 
-[node name="MaxYScale3" type="GridContainer" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=1008415476]
+[node name="MaxYScale3" type="GridContainer" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=1008415476]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale3" unique_id=562887706]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale3" unique_id=562887706]
 layout_mode = 2
 text = "  NEAR"
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="N" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale3" unique_id=2093108712 node_paths=PackedStringArray("config_node")]
+[node name="N" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale3" unique_id=2093108712 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -1000.0
@@ -1329,15 +1336,15 @@ value = 1.0
 script = ExtResource("25_pgk25")
 section = "Block-Behaviour"
 key = "gravity"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label2" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale3" unique_id=1175641615]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale3" unique_id=1175641615]
 layout_mode = 2
 text = "  MIDDLE  "
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="M" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale3" unique_id=1136592544 node_paths=PackedStringArray("config_node")]
+[node name="M" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale3" unique_id=1136592544 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -1000.0
@@ -1348,15 +1355,15 @@ script = ExtResource("25_pgk25")
 group = 1
 section = "Block-Behaviour"
 key = "gravity"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label3" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale3" unique_id=1080246335]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale3" unique_id=1080246335]
 layout_mode = 2
 text = "  FAR"
 label_settings = ExtResource("19_7nt27")
 vertical_alignment = 1
 
-[node name="F" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale3" unique_id=702265595 node_paths=PackedStringArray("config_node")]
+[node name="F" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/MaxYScale3" unique_id=702265595 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -1000.0
@@ -1367,17 +1374,17 @@ script = ExtResource("25_pgk25")
 group = 2
 section = "Block-Behaviour"
 key = "gravity"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="HSeparator9" type="HSeparator" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=1157752766]
+[node name="HSeparator9" type="HSeparator" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=1157752766]
 layout_mode = 2
 
-[node name="Label8" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=1680097547]
+[node name="Label8" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=1680097547]
 layout_mode = 2
 text = "POSITION"
 label_settings = ExtResource("19_7nt27")
 
-[node name="PositionNear" type="HBoxContainer" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=1413524313 node_paths=PackedStringArray("x_node", "y_node", "z_node", "config_node")]
+[node name="PositionNear" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=1413524313 node_paths=PackedStringArray("x_node", "y_node", "z_node", "config_node")]
 layout_mode = 2
 script = ExtResource("31_iav3h")
 config_section = "Block-Generation"
@@ -1385,47 +1392,47 @@ config_key = "position"
 x_node = NodePath("X")
 y_node = NodePath("Y")
 z_node = NodePath("Z")
-config_node = NodePath("../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../ConfigControl")
 
-[node name="Label9" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionNear" unique_id=1622565080]
+[node name="Label9" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionNear" unique_id=1622565080]
 layout_mode = 2
 text = "  NEAR   "
 label_settings = ExtResource("19_7nt27")
 
-[node name="Label12" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionNear" unique_id=1315854514]
+[node name="Label12" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionNear" unique_id=1315854514]
 layout_mode = 2
 text = "X"
 label_settings = ExtResource("19_7nt27")
 
-[node name="X" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionNear" unique_id=1807695075]
+[node name="X" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionNear" unique_id=1807695075]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -99999.0
 max_value = 99999.0
 
-[node name="Label10" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionNear" unique_id=1856772933]
+[node name="Label10" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionNear" unique_id=1856772933]
 layout_mode = 2
 text = "Y"
 label_settings = ExtResource("19_7nt27")
 
-[node name="Y" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionNear" unique_id=344106648]
+[node name="Y" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionNear" unique_id=344106648]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -99999.0
 max_value = 99999.0
 
-[node name="Label11" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionNear" unique_id=368367877]
+[node name="Label11" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionNear" unique_id=368367877]
 layout_mode = 2
 text = "Z"
 label_settings = ExtResource("19_7nt27")
 
-[node name="Z" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionNear" unique_id=2118666257]
+[node name="Z" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionNear" unique_id=2118666257]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -99999.0
 max_value = 99999.0
 
-[node name="PositionMiddle" type="HBoxContainer" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=568275398 node_paths=PackedStringArray("x_node", "y_node", "z_node", "config_node")]
+[node name="PositionMiddle" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=568275398 node_paths=PackedStringArray("x_node", "y_node", "z_node", "config_node")]
 layout_mode = 2
 script = ExtResource("31_iav3h")
 group = 1
@@ -1434,47 +1441,47 @@ config_key = "position"
 x_node = NodePath("X")
 y_node = NodePath("Y")
 z_node = NodePath("Z")
-config_node = NodePath("../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../ConfigControl")
 
-[node name="Label9" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionMiddle" unique_id=1984234354]
+[node name="Label9" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionMiddle" unique_id=1984234354]
 layout_mode = 2
 text = "  MIDDLE "
 label_settings = ExtResource("19_7nt27")
 
-[node name="Label12" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionMiddle" unique_id=351420564]
+[node name="Label12" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionMiddle" unique_id=351420564]
 layout_mode = 2
 text = "X"
 label_settings = ExtResource("19_7nt27")
 
-[node name="X" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionMiddle" unique_id=1949161083]
+[node name="X" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionMiddle" unique_id=1949161083]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -99999.0
 max_value = 99999.0
 
-[node name="Label10" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionMiddle" unique_id=1762433644]
+[node name="Label10" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionMiddle" unique_id=1762433644]
 layout_mode = 2
 text = "Y"
 label_settings = ExtResource("19_7nt27")
 
-[node name="Y" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionMiddle" unique_id=1377337249]
+[node name="Y" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionMiddle" unique_id=1377337249]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -99999.0
 max_value = 99999.0
 
-[node name="Label11" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionMiddle" unique_id=2129444100]
+[node name="Label11" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionMiddle" unique_id=2129444100]
 layout_mode = 2
 text = "Z"
 label_settings = ExtResource("19_7nt27")
 
-[node name="Z" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionMiddle" unique_id=666922772]
+[node name="Z" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionMiddle" unique_id=666922772]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -99999.0
 max_value = 99999.0
 
-[node name="PositionFar" type="HBoxContainer" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=52510424 node_paths=PackedStringArray("x_node", "y_node", "z_node", "config_node")]
+[node name="PositionFar" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour" unique_id=52510424 node_paths=PackedStringArray("x_node", "y_node", "z_node", "config_node")]
 layout_mode = 2
 script = ExtResource("31_iav3h")
 group = 2
@@ -1483,128 +1490,128 @@ config_key = "position"
 x_node = NodePath("X")
 y_node = NodePath("Y")
 z_node = NodePath("Z")
-config_node = NodePath("../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../ConfigControl")
 
-[node name="Label9" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionFar" unique_id=1348464974]
+[node name="Label9" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionFar" unique_id=1348464974]
 layout_mode = 2
 text = "  FAR    "
 label_settings = ExtResource("19_7nt27")
 
-[node name="Label12" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionFar" unique_id=1728402251]
+[node name="Label12" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionFar" unique_id=1728402251]
 layout_mode = 2
 text = "X"
 label_settings = ExtResource("19_7nt27")
 
-[node name="X" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionFar" unique_id=1930163215]
+[node name="X" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionFar" unique_id=1930163215]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -99999.0
 max_value = 99999.0
 
-[node name="Label10" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionFar" unique_id=2051844783]
+[node name="Label10" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionFar" unique_id=2051844783]
 layout_mode = 2
 text = "Y"
 label_settings = ExtResource("19_7nt27")
 
-[node name="Y" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionFar" unique_id=7420707]
+[node name="Y" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionFar" unique_id=7420707]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -99999.0
 max_value = 99999.0
 
-[node name="Label11" type="Label" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionFar" unique_id=921721768]
+[node name="Label11" type="Label" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionFar" unique_id=921721768]
 layout_mode = 2
 text = "Z"
 label_settings = ExtResource("19_7nt27")
 
-[node name="Z" type="SpinBox" parent="UI/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionFar" unique_id=1649843838]
+[node name="Z" type="SpinBox" parent="UI/MarginContainer/TabContainer/GENERATION & BEHAVIOUR/ScrollContainer/Generation-Behaviour/PositionFar" unique_id=1649843838]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -99999.0
 max_value = 99999.0
 
-[node name="PARTICLES" type="MarginContainer" parent="UI/TabContainer" unique_id=2131962045]
+[node name="PARTICLES" type="MarginContainer" parent="UI/MarginContainer/TabContainer" unique_id=2131962045]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/TabContainer/PARTICLES" unique_id=640116642]
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/MarginContainer/TabContainer/PARTICLES" unique_id=640116642]
 layout_mode = 2
 
-[node name="Particles" type="VBoxContainer" parent="UI/TabContainer/PARTICLES/ScrollContainer" unique_id=1065300677]
+[node name="Particles" type="VBoxContainer" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer" unique_id=1065300677]
 layout_mode = 2
 
-[node name="HSeparator4" type="HSeparator" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=1352745137]
+[node name="HSeparator4" type="HSeparator" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=1352745137]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=1507623354]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=1507623354]
 layout_mode = 2
 text = "VISIBILITY"
 label_settings = ExtResource("19_7nt27")
 
-[node name="ParticlesEnabled" type="GridContainer" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=1727126553]
+[node name="ParticlesEnabled" type="GridContainer" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=1727126553]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/ParticlesEnabled" unique_id=2126036046]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/ParticlesEnabled" unique_id=2126036046]
 layout_mode = 2
 text = "  NEAR"
 label_settings = ExtResource("19_7nt27")
 
-[node name="N" type="CheckButton" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/ParticlesEnabled" unique_id=1224519736 node_paths=PackedStringArray("config_node")]
+[node name="N" type="CheckButton" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/ParticlesEnabled" unique_id=1224519736 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 button_pressed = true
 script = ExtResource("24_4bgka")
 section = "Particles"
 key = "enabled"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label2" type="Label" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/ParticlesEnabled" unique_id=1219491353]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/ParticlesEnabled" unique_id=1219491353]
 layout_mode = 2
 text = "  MIDDLE  "
 label_settings = ExtResource("19_7nt27")
 
-[node name="M" type="CheckButton" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/ParticlesEnabled" unique_id=690212405 node_paths=PackedStringArray("config_node")]
+[node name="M" type="CheckButton" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/ParticlesEnabled" unique_id=690212405 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 button_pressed = true
 script = ExtResource("24_4bgka")
 group = 1
 section = "Particles"
 key = "enabled"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label3" type="Label" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/ParticlesEnabled" unique_id=659619298]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/ParticlesEnabled" unique_id=659619298]
 layout_mode = 2
 text = "  FAR"
 label_settings = ExtResource("19_7nt27")
 
-[node name="F" type="CheckButton" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/ParticlesEnabled" unique_id=1715193609 node_paths=PackedStringArray("config_node")]
+[node name="F" type="CheckButton" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/ParticlesEnabled" unique_id=1715193609 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 button_pressed = true
 script = ExtResource("24_4bgka")
 group = 2
 section = "Particles"
 key = "enabled"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="HSeparator5" type="HSeparator" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=1249035944]
+[node name="HSeparator5" type="HSeparator" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=1249035944]
 layout_mode = 2
 
-[node name="Label5" type="Label" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=1443881853]
+[node name="Label5" type="Label" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=1443881853]
 layout_mode = 2
 text = "MINIMUM PER EMMITER COUNT"
 label_settings = ExtResource("19_7nt27")
 
-[node name="MinimumParticles" type="GridContainer" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=1815294264]
+[node name="MinimumParticles" type="GridContainer" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=1815294264]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/MinimumParticles" unique_id=735938882]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/MinimumParticles" unique_id=735938882]
 layout_mode = 2
 text = "  NEAR"
 label_settings = ExtResource("19_7nt27")
 
-[node name="N" type="SpinBox" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/MinimumParticles" unique_id=1472147320 node_paths=PackedStringArray("config_node")]
+[node name="N" type="SpinBox" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/MinimumParticles" unique_id=1472147320 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -1612,15 +1619,15 @@ rounded = true
 script = ExtResource("25_pgk25")
 section = "Particles"
 key = "min"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 integral = true
 
-[node name="Label2" type="Label" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/MinimumParticles" unique_id=1144280869]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/MinimumParticles" unique_id=1144280869]
 layout_mode = 2
 text = "  MIDDLE  "
 label_settings = ExtResource("19_7nt27")
 
-[node name="N2" type="SpinBox" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/MinimumParticles" unique_id=1867610763 node_paths=PackedStringArray("config_node")]
+[node name="N2" type="SpinBox" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/MinimumParticles" unique_id=1867610763 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -1629,15 +1636,15 @@ script = ExtResource("25_pgk25")
 group = 1
 section = "Particles"
 key = "min"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 integral = true
 
-[node name="Label3" type="Label" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/MinimumParticles" unique_id=363451921]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/MinimumParticles" unique_id=363451921]
 layout_mode = 2
 text = "  FAR"
 label_settings = ExtResource("19_7nt27")
 
-[node name="N3" type="SpinBox" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/MinimumParticles" unique_id=233861935 node_paths=PackedStringArray("config_node")]
+[node name="N3" type="SpinBox" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/MinimumParticles" unique_id=233861935 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -1646,27 +1653,27 @@ script = ExtResource("25_pgk25")
 group = 2
 section = "Particles"
 key = "min"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 integral = true
 
-[node name="HSeparator6" type="HSeparator" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=1177003466]
+[node name="HSeparator6" type="HSeparator" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=1177003466]
 layout_mode = 2
 
-[node name="Label6" type="Label" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=719514991]
+[node name="Label6" type="Label" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=719514991]
 layout_mode = 2
 text = "MAXIMUM PER EMITTER COUNT"
 label_settings = ExtResource("19_7nt27")
 
-[node name="MaximumParticles" type="GridContainer" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=480519634]
+[node name="MaximumParticles" type="GridContainer" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=480519634]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/MaximumParticles" unique_id=1715756220]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/MaximumParticles" unique_id=1715756220]
 layout_mode = 2
 text = "  NEAR"
 label_settings = ExtResource("19_7nt27")
 
-[node name="N" type="SpinBox" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/MaximumParticles" unique_id=2056519833 node_paths=PackedStringArray("config_node")]
+[node name="N" type="SpinBox" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/MaximumParticles" unique_id=2056519833 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -1674,15 +1681,15 @@ rounded = true
 script = ExtResource("25_pgk25")
 section = "Particles"
 key = "max"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 integral = true
 
-[node name="Label2" type="Label" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/MaximumParticles" unique_id=1356279105]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/MaximumParticles" unique_id=1356279105]
 layout_mode = 2
 text = "  MIDDLE  "
 label_settings = ExtResource("19_7nt27")
 
-[node name="M" type="SpinBox" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/MaximumParticles" unique_id=2029329100 node_paths=PackedStringArray("config_node")]
+[node name="M" type="SpinBox" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/MaximumParticles" unique_id=2029329100 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -1691,15 +1698,15 @@ script = ExtResource("25_pgk25")
 group = 1
 section = "Particles"
 key = "max"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 integral = true
 
-[node name="Label3" type="Label" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/MaximumParticles" unique_id=1845895050]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/MaximumParticles" unique_id=1845895050]
 layout_mode = 2
 text = "  FAR"
 label_settings = ExtResource("19_7nt27")
 
-[node name="F" type="SpinBox" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/MaximumParticles" unique_id=738134280 node_paths=PackedStringArray("config_node")]
+[node name="F" type="SpinBox" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/MaximumParticles" unique_id=738134280 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -1708,28 +1715,28 @@ script = ExtResource("25_pgk25")
 group = 2
 section = "Particles"
 key = "max"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 integral = true
 
-[node name="HSeparator7" type="HSeparator" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=1688869442]
+[node name="HSeparator7" type="HSeparator" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=1688869442]
 layout_mode = 2
 
-[node name="Label7" type="Label" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=1947703381]
+[node name="Label7" type="Label" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=1947703381]
 layout_mode = 2
 text = "NOTE VELOCITY TO EMITTER 
 COUNT CURVE EXPONENT"
 label_settings = ExtResource("19_7nt27")
 
-[node name="ParticleCurvePow" type="GridContainer" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=1494524844]
+[node name="ParticleCurvePow" type="GridContainer" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=1494524844]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/ParticleCurvePow" unique_id=826049811]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/ParticleCurvePow" unique_id=826049811]
 layout_mode = 2
 text = "  NEAR"
 label_settings = ExtResource("19_7nt27")
 
-[node name="N" type="SpinBox" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/ParticleCurvePow" unique_id=1468506144 node_paths=PackedStringArray("config_node")]
+[node name="N" type="SpinBox" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/ParticleCurvePow" unique_id=1468506144 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -10.0
@@ -1739,14 +1746,14 @@ rounded = true
 script = ExtResource("25_pgk25")
 section = "Particles"
 key = "velocity-curve-pow"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label2" type="Label" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/ParticleCurvePow" unique_id=1023829840]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/ParticleCurvePow" unique_id=1023829840]
 layout_mode = 2
 text = "  MIDDLE  "
 label_settings = ExtResource("19_7nt27")
 
-[node name="M" type="SpinBox" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/ParticleCurvePow" unique_id=862131996 node_paths=PackedStringArray("config_node")]
+[node name="M" type="SpinBox" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/ParticleCurvePow" unique_id=862131996 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -10.0
@@ -1756,14 +1763,14 @@ rounded = true
 script = ExtResource("25_pgk25")
 section = "Particles"
 key = "velocity-curve-pow"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label3" type="Label" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/ParticleCurvePow" unique_id=459805439]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/ParticleCurvePow" unique_id=459805439]
 layout_mode = 2
 text = "  FAR"
 label_settings = ExtResource("19_7nt27")
 
-[node name="F" type="SpinBox" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/ParticleCurvePow" unique_id=604703211 node_paths=PackedStringArray("config_node")]
+[node name="F" type="SpinBox" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/ParticleCurvePow" unique_id=604703211 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = -10.0
@@ -1773,94 +1780,94 @@ rounded = true
 script = ExtResource("25_pgk25")
 section = "Particles"
 key = "velocity-curve-pow"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="HSeparator8" type="HSeparator" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=621661709]
+[node name="HSeparator8" type="HSeparator" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=621661709]
 layout_mode = 2
 
-[node name="Label8" type="Label" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=127766180]
+[node name="Label8" type="Label" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=127766180]
 layout_mode = 2
 text = "PARTICLE SYSTEMS POOL SIZE"
 label_settings = ExtResource("19_7nt27")
 
-[node name="MaxAliveParticleSys" type="GridContainer" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=567620829]
+[node name="MaxAliveParticleSys" type="GridContainer" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=567620829]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/MaxAliveParticleSys" unique_id=1606652967]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/MaxAliveParticleSys" unique_id=1606652967]
 layout_mode = 2
 text = "  NEAR"
 label_settings = ExtResource("19_7nt27")
 
-[node name="N" type="SpinBox" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/MaxAliveParticleSys" unique_id=911071200 node_paths=PackedStringArray("config_node")]
+[node name="N" type="SpinBox" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/MaxAliveParticleSys" unique_id=911071200 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 rounded = true
 script = ExtResource("25_pgk25")
 section = "Particles"
 key = "pool-size"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 integral = true
 
-[node name="Label2" type="Label" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/MaxAliveParticleSys" unique_id=1424741593]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/MaxAliveParticleSys" unique_id=1424741593]
 layout_mode = 2
 text = "  MIDDLE  "
 label_settings = ExtResource("19_7nt27")
 
-[node name="M" type="SpinBox" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/MaxAliveParticleSys" unique_id=1645131802 node_paths=PackedStringArray("config_node")]
+[node name="M" type="SpinBox" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/MaxAliveParticleSys" unique_id=1645131802 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 rounded = true
 script = ExtResource("25_pgk25")
 section = "Particles"
 key = "pool-size"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 integral = true
 
-[node name="Label3" type="Label" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/MaxAliveParticleSys" unique_id=681694223]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/MaxAliveParticleSys" unique_id=681694223]
 layout_mode = 2
 text = "  FAR"
 label_settings = ExtResource("19_7nt27")
 
-[node name="F" type="SpinBox" parent="UI/TabContainer/PARTICLES/ScrollContainer/Particles/MaxAliveParticleSys" unique_id=777941178 node_paths=PackedStringArray("config_node")]
+[node name="F" type="SpinBox" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles/MaxAliveParticleSys" unique_id=777941178 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 rounded = true
 script = ExtResource("25_pgk25")
 section = "Particles"
 key = "pool-size"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 integral = true
 
-[node name="MIDI" type="MarginContainer" parent="UI/TabContainer" unique_id=1579839248]
+[node name="MIDI" type="MarginContainer" parent="UI/MarginContainer/TabContainer" unique_id=1579839248]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 5
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/TabContainer/MIDI" unique_id=1803103717]
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/MarginContainer/TabContainer/MIDI" unique_id=1803103717]
 layout_mode = 2
 
-[node name="MIDI" type="VBoxContainer" parent="UI/TabContainer/MIDI/ScrollContainer" unique_id=827041278]
+[node name="MIDI" type="VBoxContainer" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer" unique_id=827041278]
 layout_mode = 2
 
-[node name="HSeparator8" type="HSeparator" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI" unique_id=1100845057]
+[node name="HSeparator8" type="HSeparator" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI" unique_id=1100845057]
 layout_mode = 2
 
-[node name="Label7" type="Label" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI" unique_id=23080598]
+[node name="Label7" type="Label" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI" unique_id=23080598]
 layout_mode = 2
 text = "VELOCITY SCALE MULTIPLIER"
 label_settings = ExtResource("19_7nt27")
 
-[node name="MidiVeloScale" type="GridContainer" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI" unique_id=455616783]
+[node name="MidiVeloScale" type="GridContainer" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI" unique_id=455616783]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI/MidiVeloScale" unique_id=2067487119]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI/MidiVeloScale" unique_id=2067487119]
 layout_mode = 2
 text = "  NEAR"
 label_settings = ExtResource("19_7nt27")
 
-[node name="N" type="SpinBox" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI/MidiVeloScale" unique_id=1064239143 node_paths=PackedStringArray("config_node")]
+[node name="N" type="SpinBox" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI/MidiVeloScale" unique_id=1064239143 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -1868,14 +1875,14 @@ step = 0.01
 script = ExtResource("25_pgk25")
 section = "Midi"
 key = "velocity-scale"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label2" type="Label" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI/MidiVeloScale" unique_id=1059222950]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI/MidiVeloScale" unique_id=1059222950]
 layout_mode = 2
 text = "  MIDDLE  "
 label_settings = ExtResource("19_7nt27")
 
-[node name="M" type="SpinBox" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI/MidiVeloScale" unique_id=149319288 node_paths=PackedStringArray("config_node")]
+[node name="M" type="SpinBox" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI/MidiVeloScale" unique_id=149319288 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -1885,14 +1892,14 @@ script = ExtResource("25_pgk25")
 group = 1
 section = "Midi"
 key = "velocity-scale"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="Label3" type="Label" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI/MidiVeloScale" unique_id=935836812]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI/MidiVeloScale" unique_id=935836812]
 layout_mode = 2
 text = "  FAR"
 label_settings = ExtResource("19_7nt27")
 
-[node name="F" type="SpinBox" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI/MidiVeloScale" unique_id=542864838 node_paths=PackedStringArray("config_node")]
+[node name="F" type="SpinBox" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI/MidiVeloScale" unique_id=542864838 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -1902,41 +1909,41 @@ script = ExtResource("25_pgk25")
 group = 2
 section = "Midi"
 key = "velocity-scale"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="HSeparator9" type="HSeparator" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI" unique_id=1878158080]
+[node name="HSeparator9" type="HSeparator" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI" unique_id=1878158080]
 layout_mode = 2
 
-[node name="Label8" type="Label" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI" unique_id=1851361205]
+[node name="Label8" type="Label" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI" unique_id=1851361205]
 layout_mode = 2
 text = "FIRST NOTE INDEX"
 label_settings = ExtResource("19_7nt27")
 
-[node name="MidiFirstNote" type="GridContainer" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI" unique_id=593177895]
+[node name="MidiFirstNote" type="GridContainer" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI" unique_id=593177895]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI/MidiFirstNote" unique_id=155634065]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI/MidiFirstNote" unique_id=155634065]
 layout_mode = 2
 text = "  NEAR"
 label_settings = ExtResource("19_7nt27")
 
-[node name="N" type="SpinBox" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI/MidiFirstNote" unique_id=323492189 node_paths=PackedStringArray("config_node")]
+[node name="N" type="SpinBox" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI/MidiFirstNote" unique_id=323492189 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
 script = ExtResource("25_pgk25")
 section = "Midi"
 key = "first-note"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 integral = true
 
-[node name="Label2" type="Label" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI/MidiFirstNote" unique_id=781762090]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI/MidiFirstNote" unique_id=781762090]
 layout_mode = 2
 text = "  MIDDLE  "
 label_settings = ExtResource("19_7nt27")
 
-[node name="M" type="SpinBox" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI/MidiFirstNote" unique_id=817068969 node_paths=PackedStringArray("config_node")]
+[node name="M" type="SpinBox" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI/MidiFirstNote" unique_id=817068969 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -1945,15 +1952,15 @@ script = ExtResource("25_pgk25")
 group = 1
 section = "Midi"
 key = "first-note"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 integral = true
 
-[node name="Label3" type="Label" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI/MidiFirstNote" unique_id=1139622390]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI/MidiFirstNote" unique_id=1139622390]
 layout_mode = 2
 text = "  FAR"
 label_settings = ExtResource("19_7nt27")
 
-[node name="F" type="SpinBox" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI/MidiFirstNote" unique_id=1512712139 node_paths=PackedStringArray("config_node")]
+[node name="F" type="SpinBox" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI/MidiFirstNote" unique_id=1512712139 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -1962,42 +1969,42 @@ script = ExtResource("25_pgk25")
 group = 2
 section = "Midi"
 key = "first-note"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 integral = true
 
-[node name="HSeparator10" type="HSeparator" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI" unique_id=1372779398]
+[node name="HSeparator10" type="HSeparator" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI" unique_id=1372779398]
 layout_mode = 2
 
-[node name="Label9" type="Label" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI" unique_id=298555584]
+[node name="Label9" type="Label" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI" unique_id=298555584]
 layout_mode = 2
 text = "LAST NOTE INDEX"
 label_settings = ExtResource("19_7nt27")
 
-[node name="MidiLastNote" type="GridContainer" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI" unique_id=1394952029]
+[node name="MidiLastNote" type="GridContainer" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI" unique_id=1394952029]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI/MidiLastNote" unique_id=1370028983]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI/MidiLastNote" unique_id=1370028983]
 layout_mode = 2
 text = "  NEAR"
 label_settings = ExtResource("19_7nt27")
 
-[node name="N" type="SpinBox" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI/MidiLastNote" unique_id=1101938873 node_paths=PackedStringArray("config_node")]
+[node name="N" type="SpinBox" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI/MidiLastNote" unique_id=1101938873 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
 script = ExtResource("25_pgk25")
 section = "Midi"
 key = "last-note"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 integral = true
 
-[node name="Label2" type="Label" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI/MidiLastNote" unique_id=358985207]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI/MidiLastNote" unique_id=358985207]
 layout_mode = 2
 text = "  MIDDLE  "
 label_settings = ExtResource("19_7nt27")
 
-[node name="M" type="SpinBox" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI/MidiLastNote" unique_id=938010414 node_paths=PackedStringArray("config_node")]
+[node name="M" type="SpinBox" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI/MidiLastNote" unique_id=938010414 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -2006,15 +2013,15 @@ script = ExtResource("25_pgk25")
 group = 1
 section = "Midi"
 key = "last-note"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 integral = true
 
-[node name="Label3" type="Label" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI/MidiLastNote" unique_id=600335739]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI/MidiLastNote" unique_id=600335739]
 layout_mode = 2
 text = "  FAR"
 label_settings = ExtResource("19_7nt27")
 
-[node name="F" type="SpinBox" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI/MidiLastNote" unique_id=712853980 node_paths=PackedStringArray("config_node")]
+[node name="F" type="SpinBox" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI/MidiLastNote" unique_id=712853980 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1000.0
@@ -2023,23 +2030,23 @@ script = ExtResource("25_pgk25")
 group = 2
 section = "Midi"
 key = "last-note"
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 integral = true
 
-[node name="HSeparator7" type="HSeparator" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI" unique_id=1866437672]
+[node name="HSeparator7" type="HSeparator" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI" unique_id=1866437672]
 layout_mode = 2
 
-[node name="MidiPort" type="HBoxContainer" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI" unique_id=1435457848]
+[node name="MidiPort" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI" unique_id=1435457848]
 layout_mode = 2
 
-[node name="Midi port" type="Label" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI/MidiPort" unique_id=2093352411]
+[node name="Midi port" type="Label" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI/MidiPort" unique_id=2093352411]
 layout_mode = 2
 tooltip_text = "Linux only"
 mouse_filter = 1
 text = "MIDI PORT (LINUX ONLY) "
 label_settings = ExtResource("19_7nt27")
 
-[node name="SpinBox" type="SpinBox" parent="UI/TabContainer/MIDI/ScrollContainer/MIDI/MidiPort" unique_id=870001265 node_paths=PackedStringArray("config_node")]
+[node name="SpinBox" type="SpinBox" parent="UI/MarginContainer/TabContainer/MIDI/ScrollContainer/MIDI/MidiPort" unique_id=870001265 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Linux only"
@@ -2047,7 +2054,7 @@ max_value = 256.0
 value = 16.0
 rounded = true
 script = ExtResource("28_02d50")
-config_node = NodePath("../../../../../../../ConfigControl")
+config_node = NodePath("../../../../../../../../ConfigControl")
 
 [node name="ConfigControl" type="Node" parent="." unique_id=846343228]
 script = ExtResource("22_adb74")
