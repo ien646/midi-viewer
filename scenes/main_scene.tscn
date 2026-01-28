@@ -249,9 +249,10 @@ theme_override_constants/margin_bottom = 8
 
 [node name="TabContainer" type="TabContainer" parent="UI/MarginContainer" unique_id=236598583]
 layout_mode = 2
-current_tab = 0
+current_tab = 4
 
 [node name="GRAPHICS" type="MarginContainer" parent="UI/MarginContainer/TabContainer" unique_id=145875210]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -407,7 +408,7 @@ layout_mode = 2
 
 [node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer" unique_id=355815883]
 layout_mode = 2
-text = "CUSTOM BRACKGROUND  "
+text = "CUSTOM BACKGROUND  "
 label_settings = ExtResource("19_7nt27")
 
 [node name="Load" type="Button" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer" unique_id=915170710 node_paths=PackedStringArray("config_node", "file_dialog")]
@@ -587,7 +588,7 @@ layout_mode = 2
 
 [node name="Label6" type="Label" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=1978783519]
 layout_mode = 2
-text = "MIN COLOR VALUE"
+text = "MINIMUM COLOR VALUE"
 label_settings = ExtResource("19_7nt27")
 
 [node name="MinColorValue" type="GridContainer" parent="UI/MarginContainer/TabContainer/APPEARANCE/ScrollContainer/Appearance" unique_id=1580496110]
@@ -1531,7 +1532,6 @@ min_value = -99999.0
 max_value = 99999.0
 
 [node name="PARTICLES" type="MarginContainer" parent="UI/MarginContainer/TabContainer" unique_id=2131962045]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 
@@ -1599,7 +1599,7 @@ layout_mode = 2
 
 [node name="Label5" type="Label" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=1443881853]
 layout_mode = 2
-text = "MINIMUM PER EMMITER COUNT"
+text = "MINIMUM PARTICLES PER EMMITER"
 label_settings = ExtResource("19_7nt27")
 
 [node name="MinimumParticles" type="GridContainer" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=1815294264]
@@ -1661,7 +1661,7 @@ layout_mode = 2
 
 [node name="Label6" type="Label" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=719514991]
 layout_mode = 2
-text = "MAXIMUM PER EMITTER COUNT"
+text = "MAXIMUM PARTICLES PER EMITTER"
 label_settings = ExtResource("19_7nt27")
 
 [node name="MaximumParticles" type="GridContainer" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=480519634]
@@ -1787,7 +1787,7 @@ layout_mode = 2
 
 [node name="Label8" type="Label" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=127766180]
 layout_mode = 2
-text = "PARTICLE SYSTEMS POOL SIZE"
+text = "PARTICLE SYSTEM POOL SIZE"
 label_settings = ExtResource("19_7nt27")
 
 [node name="MaxAliveParticleSys" type="GridContainer" parent="UI/MarginContainer/TabContainer/PARTICLES/ScrollContainer/Particles" unique_id=567620829]

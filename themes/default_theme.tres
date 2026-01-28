@@ -79,6 +79,7 @@ expand_margin_left = 2.0
 expand_margin_top = 2.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fx2g0"]
+content_margin_left = 4.0
 bg_color = Color(0, 0, 0, 1)
 border_width_left = 1
 border_width_top = 1
