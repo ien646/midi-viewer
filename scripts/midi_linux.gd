@@ -38,6 +38,7 @@ func _poll_midi_events(midi_port: int):
 	midi_poll_thread.start(_poll_thread_routine);
 
 func init(midi_port: int):
+	quit_requested = false;
 	_poll_midi_events(midi_port);
 	
 func push_events():

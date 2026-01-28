@@ -12,9 +12,9 @@
 [ext_resource type="Script" uid="uid://cu3mqqnd5yckh" path="res://scripts/main_camera.gd" id="9_7ycvg"]
 [ext_resource type="Script" uid="uid://bchqlp2vhvvr" path="res://scripts/foreground.gd" id="9_mo76n"]
 [ext_resource type="Script" uid="uid://b0b8e3bwr7n0x" path="res://scripts/subviewport_input_delegator.gd" id="10_wr18j"]
-[ext_resource type="Script" uid="uid://cmwaamldk4nsd" path="res://scripts/controls.gd" id="11_qwutr"]
+[ext_resource type="Script" uid="uid://cmwaamldk4nsd" path="res://scripts/display_controls.gd" id="11_qwutr"]
 [ext_resource type="Script" uid="uid://dacjlwcbpy5on" path="res://scripts/debug.gd" id="14_bcnxi"]
-[ext_resource type="Script" uid="uid://ciqqiwtnb1p3q" path="res://scripts/fps_label.gd" id="15_m35m6"]
+[ext_resource type="Script" uid="uid://ciqqiwtnb1p3q" path="res://scripts/ui/fps_label.gd" id="15_m35m6"]
 [ext_resource type="Script" uid="uid://bxdeg1i2t0ig3" path="res://scripts/block_debug.gd" id="16_m35m6"]
 [ext_resource type="Script" uid="uid://byueotyvmxtk0" path="res://scripts/midi.gd" id="17_6u1mn"]
 [ext_resource type="Script" uid="uid://xrx3jjbnoptb" path="res://scripts/ui.gd" id="18_58gk3"]
@@ -144,8 +144,9 @@ script = ExtResource("9_mo76n")
 [node name="SubViewportInputDelegator" type="Node" parent="." unique_id=48937761]
 script = ExtResource("10_wr18j")
 
-[node name="Controls" type="Node" parent="." unique_id=2104649688]
+[node name="DisplayControls" type="Node" parent="." unique_id=2104649688 node_paths=PackedStringArray("config_node")]
 script = ExtResource("11_qwutr")
+config_node = NodePath("../ConfigControl")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1069962827]
 position = Vector2(960, 540)
@@ -161,16 +162,6 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("14_bcnxi")
-
-[node name="FPSLabel" type="Label" parent="Debug" unique_id=1826297213]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 35.0
-offset_right = 43.0
-offset_bottom = 58.0
-text = "FPS"
-label_settings = ExtResource("19_7nt27")
-script = ExtResource("15_m35m6")
 
 [node name="BlockDebug-Near" type="RichTextLabel" parent="Debug" unique_id=176972406 node_paths=PackedStringArray("node")]
 texture_filter = 1
@@ -249,10 +240,9 @@ theme_override_constants/margin_bottom = 8
 
 [node name="TabContainer" type="TabContainer" parent="UI/MarginContainer" unique_id=236598583]
 layout_mode = 2
-current_tab = 4
+current_tab = 0
 
 [node name="GRAPHICS" type="MarginContainer" parent="UI/MarginContainer/TabContainer" unique_id=145875210]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -302,6 +292,36 @@ section = "Graphics"
 key = "fullscreen"
 config_node = NodePath("../../../../../../../../ConfigControl")
 
+[node name="Vsync" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=1354353807]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/Vsync" unique_id=131855886]
+layout_mode = 2
+text = "VSYNC         "
+label_settings = ExtResource("19_7nt27")
+
+[node name="CheckButton" type="CheckButton" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/Vsync" unique_id=1723272151 node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+script = ExtResource("21_58gk3")
+section = "Graphics"
+key = "vsync"
+config_node = NodePath("../../../../../../../../ConfigControl")
+
+[node name="ShowFPS" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=351672838]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/ShowFPS" unique_id=906098295]
+layout_mode = 2
+text = "SHOW FPS      "
+label_settings = ExtResource("19_7nt27")
+
+[node name="CheckButton" type="CheckButton" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/ShowFPS" unique_id=420176744 node_paths=PackedStringArray("config_node")]
+layout_mode = 2
+script = ExtResource("21_58gk3")
+section = "Graphics"
+key = "show-fps"
+config_node = NodePath("../../../../../../../../ConfigControl")
+
 [node name="HSeparator3" type="HSeparator" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=1169674708]
 layout_mode = 2
 
@@ -344,35 +364,35 @@ config_node = NodePath("../../../../../../../../ConfigControl")
 [node name="HSeparator2" type="HSeparator" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=1785065121]
 layout_mode = 2
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=2069448759]
+[node name="BackgroundColor" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=2069448759]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3" unique_id=539606397]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/BackgroundColor" unique_id=539606397]
 layout_mode = 2
 text = "BACKGROUND COLOR   "
 label_settings = ExtResource("19_7nt27")
 
-[node name="BGColor" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3" unique_id=788385407]
+[node name="BGColor" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/BackgroundColor" unique_id=788385407]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3/BGColor" unique_id=813342586]
+[node name="Label" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/BackgroundColor/BGColor" unique_id=813342586]
 layout_mode = 2
 text = "R"
 label_settings = ExtResource("19_7nt27")
 
-[node name="R" type="SpinBox" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3/BGColor" unique_id=1257445488 node_paths=PackedStringArray("config_node")]
+[node name="R" type="SpinBox" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/BackgroundColor/BGColor" unique_id=1257445488 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 255.0
 script = ExtResource("24_02d50")
 config_node = NodePath("../../../../../../../../../ConfigControl")
 
-[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3/BGColor" unique_id=869146805]
+[node name="Label2" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/BackgroundColor/BGColor" unique_id=869146805]
 layout_mode = 2
 text = "G"
 label_settings = ExtResource("19_7nt27")
 
-[node name="G" type="SpinBox" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3/BGColor" unique_id=861651995 node_paths=PackedStringArray("config_node")]
+[node name="G" type="SpinBox" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/BackgroundColor/BGColor" unique_id=861651995 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 255.0
@@ -380,12 +400,12 @@ script = ExtResource("24_02d50")
 component_index_rgb = 1
 config_node = NodePath("../../../../../../../../../ConfigControl")
 
-[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3/BGColor" unique_id=776872243]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/BackgroundColor/BGColor" unique_id=776872243]
 layout_mode = 2
 text = "B"
 label_settings = ExtResource("19_7nt27")
 
-[node name="B" type="SpinBox" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3/BGColor" unique_id=1966684659 node_paths=PackedStringArray("config_node")]
+[node name="B" type="SpinBox" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/BackgroundColor/BGColor" unique_id=1966684659 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 255.0
@@ -393,7 +413,7 @@ script = ExtResource("24_02d50")
 component_index_rgb = 2
 config_node = NodePath("../../../../../../../../../ConfigControl")
 
-[node name="BGColorPreview" type="ColorRect" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer3" unique_id=1107524173 node_paths=PackedStringArray("config_node")]
+[node name="BGColorPreview" type="ColorRect" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/BackgroundColor" unique_id=1107524173 node_paths=PackedStringArray("config_node")]
 custom_minimum_size = Vector2(64, 24)
 layout_mode = 2
 color = Color(0, 0, 0, 1)
@@ -403,15 +423,15 @@ config_node = NodePath("../../../../../../../../ConfigControl")
 [node name="HSeparator4" type="HSeparator" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=1284919077]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=774874411]
+[node name="CustomBackground" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=774874411]
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer" unique_id=355815883]
+[node name="Label3" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/CustomBackground" unique_id=355815883]
 layout_mode = 2
 text = "CUSTOM BACKGROUND  "
 label_settings = ExtResource("19_7nt27")
 
-[node name="Load" type="Button" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer" unique_id=915170710 node_paths=PackedStringArray("config_node", "file_dialog")]
+[node name="Load" type="Button" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/CustomBackground" unique_id=915170710 node_paths=PackedStringArray("config_node", "file_dialog")]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 text = "LOAD"
@@ -419,7 +439,7 @@ script = ExtResource("26_lhwp2")
 config_node = NodePath("../../../../../../../../ConfigControl")
 file_dialog = NodePath("FileDialog")
 
-[node name="FileDialog" type="FileDialog" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer/Load" unique_id=269973464]
+[node name="FileDialog" type="FileDialog" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/CustomBackground/Load" unique_id=269973464]
 oversampling_override = 1.0
 title = "Open a File"
 initial_position = 1
@@ -427,7 +447,7 @@ size = Vector2i(1500, 1130)
 file_mode = 0
 use_native_dialog = true
 
-[node name="Clear" type="Button" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer" unique_id=111469093 node_paths=PackedStringArray("config_node")]
+[node name="Clear" type="Button" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/CustomBackground" unique_id=111469093 node_paths=PackedStringArray("config_node")]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 disabled = true
@@ -435,15 +455,15 @@ text = "CLEAR"
 script = ExtResource("27_l40q6")
 config_node = NodePath("../../../../../../../../ConfigControl")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=558653523]
+[node name="Dark Tint" type="HBoxContainer" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics" unique_id=558653523]
 layout_mode = 2
 
-[node name="Label4" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer2" unique_id=454308834]
+[node name="Label4" type="Label" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/Dark Tint" unique_id=454308834]
 layout_mode = 2
 text = "DARK TINT     "
 label_settings = ExtResource("19_7nt27")
 
-[node name="SpinBox" type="SpinBox" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/HBoxContainer2" unique_id=1709621698 node_paths=PackedStringArray("config_node")]
+[node name="SpinBox" type="SpinBox" parent="UI/MarginContainer/TabContainer/GRAPHICS/ScrollContainer/Graphics/Dark Tint" unique_id=1709621698 node_paths=PackedStringArray("config_node")]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
@@ -1532,6 +1552,7 @@ min_value = -99999.0
 max_value = 99999.0
 
 [node name="PARTICLES" type="MarginContainer" parent="UI/MarginContainer/TabContainer" unique_id=2131962045]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 
@@ -1819,6 +1840,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 rounded = true
 script = ExtResource("25_pgk25")
+group = 1
 section = "Particles"
 key = "pool-size"
 config_node = NodePath("../../../../../../../../ConfigControl")
@@ -1834,6 +1856,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 rounded = true
 script = ExtResource("25_pgk25")
+group = 2
 section = "Particles"
 key = "pool-size"
 config_node = NodePath("../../../../../../../../ConfigControl")
@@ -2058,6 +2081,15 @@ config_node = NodePath("../../../../../../../../ConfigControl")
 
 [node name="ConfigControl" type="Node" parent="." unique_id=846343228]
 script = ExtResource("22_adb74")
+
+[node name="FPSCounter" type="Label" parent="." unique_id=1356512454 node_paths=PackedStringArray("config_node")]
+offset_left = 1683.0
+offset_top = 1043.0
+offset_right = 1903.0
+offset_bottom = 1063.0
+text = "FPS: 100000"
+script = ExtResource("15_m35m6")
+config_node = NodePath("../ConfigControl")
 
 [node name="Hint" type="Label" parent="." unique_id=714204214]
 visible = false
