@@ -151,19 +151,19 @@ func handle_config_value_changed(section: String, key: String, value: Variant):
 				Config.KEY_MIN:
 					min_particles_hit = value as int;
 					if(!particles_disabled):
-						generate_block_data();
+						generate_particle_data();
 				Config.KEY_MAX:
 					max_particles_hit = value as int;
 					if(!particles_disabled):
-						generate_block_data();
+						generate_particle_data();
 				Config.KEY_VELOCITY_CURVE_POW:
 					particle_count_curve = value as float;
 					if(!particles_disabled):
-						generate_block_data();
+						generate_particle_data();
 				Config.KEY_POOL_SIZE:
 					max_particle_systems = value as int;
 					if(!particles_disabled):
-						generate_block_data();
+						generate_particle_data();
 		if(section.begins_with(Config.SECTION_MIDI)):
 			match key:
 				Config.KEY_FIRST_NOTE:
@@ -208,6 +208,8 @@ func generate_particle_data():
 	var particle_systems = find_children("", "GPUParticles3D");
 	for s in particle_systems:
 		s.queue_free();
+		
+	particles_pool.clear();
 		
 	for i in range(0, max_particle_systems):
 		var copy = particles_instance.duplicate();
